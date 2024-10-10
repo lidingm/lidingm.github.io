@@ -606,11 +606,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 1,023 |
+            <i class="fas fa-file-text-o"></i> 字数统计: 1,017 |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 4分钟 |
+            <i class="fas fa-clock"></i> 阅读时长: 3分钟 |
           </span>
   
           
@@ -644,7 +644,7 @@ F_{ k+2}=F_{ k+1}+F_{ k} \
 \tag{ 1.1}</script><p>  将它转换为矩阵形式：</p>
 <script type="math/tex; mode=display">
 \alpha_{k+1}=A\alpha_{k}，\quad k = 0, 1, 2, \ldots\tag{2.1}</script><p>  解法一是，其中一开始对应k+1的A的值可以得到，之后进行递推，可以通过矩阵求解获得A的两个特征值，说明可以进行相似对角化，之后获得特征向量，那么$A^{k}$的值就可以得到了。通过上述公式得到$\alpha^{k}$的值，从而得到$F_{k}$的值。重点就是能够想到用公式(1.1)之后变为矩阵就行，还是比较简单，除了运算。</p>
-<p>  解法二是，在解A的特征方程的时候，得到特征根<script type="math/tex">\lambda_{1}</script>与另外一个互异的<script type="math/tex">\lambda_{2}</script>从而得到$F<em>{k}$的包含两个未知数的通解，之后带入特殊值$$F</em>{0}=1<script type="math/tex">和</script>F_{1}=1$$之后，获得解，带入可得到。</p>
+<p>  解法二是，在解A的特征方程的时候，得到特征根<script type="math/tex">\lambda_{1}</script>与另外一个互异的<script type="math/tex">\lambda_{2}</script>从而得到<script type="math/tex">F_{k}</script>的包含两个未知数的通解，之后带入特殊值<script type="math/tex">F_{0}=1</script>和<script type="math/tex">F_{1}=1</script>之后，获得解，带入可得到。</p>
 <p>  解法三是，python硬算，嗯呐。</p>
 <h4 id="莱斯利种群模型"><a href="#莱斯利种群模型" class="headerlink" title="莱斯利种群模型"></a>莱斯利种群模型</h4><p>  研究动物种群数量增长的重要模型，这一模型研究了种群中雌性动物的年龄分布和数量增长的规律。</p>
 <p>  好了线代真恶心，看线性规划去了。此处略过一千字等更新… …</p>
