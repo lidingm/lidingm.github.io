@@ -11,7 +11,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>标签 | 碎碎念的博客</title>
+  <title>论文学习：Relphormer:用于知识图谱表示的关系图Transformer | 碎碎念的博客</title>
 
   <link rel="icon" type="image/jpeg" href="/medias/head.jpg">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -560,90 +560,707 @@
 </header>
         <!-- 内容区域 -->
         
-<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"></div>
-<div class="bg-light-floor-tags" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -3;"></div>
+<!-- prismjs 代码高亮 -->
 
-<div class="tags-header" style="background-image:url('https://pic2.zhimg.com/80/v2-bf6c555e7c61a57ba4a1fd95a9a32975_1440w.jpg')">
-    <div class="tags-header-title">
-        tags
+
+
+
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
+
+
+  <!-- 文章详情页顶部图片和标题 -->
+
+
+
+
+<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;background-image:url('https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp')">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
+  
+  <div class="post-detail-header_info-box">
+    <div class="title-box">
+      <span class="title">
+        论文学习：Relphormer:用于知识图谱表示的关系图Transformer
+      </span>
     </div>
-    <div class="tags-header-desc">
     
-        <span class="title" id="tags-header-desc"></span>
-        <script>
-  function typedFn() {
-    const el = '#tags-header-desc';
-    const type = 'tag';
-    let desc = '愿你如风，被人温柔以待'
-    var typed = new Typed(el, {
-      strings: [desc],
-      startDelay: 100,
-      typeSpeed: 100,
-      loop: true,
-      backSpeed: 50,
-      showCursor: true
-    });
-  }
-  typedFn();
+    
+      
+        <span class="post-detail-header_date">
+          <i class="fas fa-calendar"></i> 发表于：2024-10-15 |
+        </span>
+      
+
+      
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> 分类：
+          
+            <a href="/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/" class="post-detail-header_category">
+              论文学习
+            </a>
+          
+        </span>
+      
+
+      
+        <div class="post-detail-header_wordcount">
+          <span class="totalcount">
+            <i class="fas fa-file-text-o"></i> 字数统计: 991 |
+          </span>
+  
+          <span class="min2read">
+            <i class="fas fa-clock"></i> 阅读时长: 3分钟 |
+          </span>
+  
+          
+        </div>
+      
+    
+  </div>
+  
+  
+    <script defer src="/js/bubble/bubble.js"></script>
+  
+</div>
+
+
+
+
+
+<div class="post-detail-content post-row" 
+  style="padding-top: 0px;">
+  <div class="main-content">
+    <article class="post post-detail">
+      <div class="post-content">
+        <h1 id="论文学习：Relphormer-用于知识图谱表示的关系图Transformer"><a href="#论文学习：Relphormer-用于知识图谱表示的关系图Transformer" class="headerlink" title="论文学习：Relphormer:用于知识图谱表示的关系图Transformer"></a>论文学习：Relphormer:用于知识图谱表示的关系图Transformer</h1><h2 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h2><blockquote>
+<p>论文：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2205.10852">Relphormer: Relational Graph Transformer for Knowledge Graph Representations</a></p>
+<p>代码：<a target="_blank" rel="noopener" href="https://github.com/zjunlp/Relphormer">zjunlp/Relphormer: [Neurocomputing 2023] Relational Graph Transformer for Knowledge Graph Representation (github.com)</a></p>
+</blockquote>
+<h2 id="大体介绍"><a href="#大体介绍" class="headerlink" title="大体介绍"></a>大体介绍</h2><p>论文介绍了一种名为Relphormer的新模型，它是基于Transformer架构的知识图谱（KG）表示方法。Relphormer通过引入Triple2Seq来动态采样上下文化的子图序列，以解决知识图谱中的异构性问题。此外，它还提出了一种新颖的结构增强自注意力机制，用于编码关系信息并保持实体和关系内的语义信息。Relphormer还利用掩码知识建模进行通用的知识图谱表示学习，可以应用于多种基于KG的任务，如知识图谱补全、问答和推荐。实验结果表明，Relphormer在六个数据集上的性能优于基线模型。</p>
+<h3 id="Relphormer模型"><a href="#Relphormer模型" class="headerlink" title="Relphormer模型"></a>Relphormer模型</h3><ul>
+<li><strong>内容</strong>: 详细介绍了Relphormer模型的三个主要组成部分：Triple2Seq、结构增强自注意力机制和掩码知识建模。</li>
+<li><strong>分析</strong>：<ul>
+<li><strong>Triple2Seq</strong>: 通过动态采样上下文化的子图序列来解决异构性问题，它将上下文子图作为输入序列进行采样。具体来说，我们将关系视为子图中的正常节点，然后将上下文子图输入Transformer模块，使用动态采样策略来最大程度地保留局部上下文信息和语义。</li>
+<li><strong>结构增强自注意力</strong>: 通过注意力偏置来捕捉子图中节点对之间的结构信息，有助于保留上下文化子图中的重要结构信息。模型可以同时编码文本特征，同时保留结构信息。不仅关注知识图谱表示，这样的机制也适用于其他类型的基于Transformer的方法，以融入任何结构偏差。</li>
+<li><strong>掩码知识建模</strong>: 受自然语言处理中掩蔽语言建模的启发，引入了一个统一的优化目标，即预测输入序列中被掩蔽的实体以及关系标记。通过这种方式，我们可以为知识图谱补全中实体和关系的预测简单地利用一个统一的优化目标。通过随机掩码输入序列中的特定标记并预测这些掩码标记来学习KG表示，这种方法不同于基于评分函数的方法，可以避免其缺陷。用于统一的KG表示学习。</li>
+</ul>
+</li>
+</ul>
+<h3 id="方法实现"><a href="#方法实现" class="headerlink" title="方法实现"></a>方法实现</h3><p><img src="https://www.helloimg.com/i/2024/10/17/671084d0363ba.png" class="lazyload placeholder" data-srcset="https://www.helloimg.com/i/2024/10/17/671084d0363ba.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt=""></p>
+<h4 id="Triple2Seq"><a href="#Triple2Seq" class="headerlink" title="Triple2Seq"></a>Triple2Seq</h4><p><img src="https://www.helloimg.com/i/2024/10/17/67108a6097861.png" class="lazyload placeholder" data-srcset="https://www.helloimg.com/i/2024/10/17/67108a6097861.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt=""></p>
+<p>​    知识图谱通常包含大量的关系事实，因此整个关系图不能直接输入Transformer。为了缓解基于全图的Transformer的限制，提出了Triple2Seq，它使用上下文的子图作为输入序列来编码局部结构信息。</p>
+<p><img src="https://www.helloimg.com/i/2024/10/17/6710881b7e5d5.png" class="lazyload placeholder" data-srcset="https://www.helloimg.com/i/2024/10/17/6710881b7e5d5.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt=""></p>
+<p>​    经过Triple2Seq的过程后，我们可以获取上下文子图$T_g $ 。同时，上下文子图的局部结构在邻接矩阵$A_g $中得以保留。通过这种方式，我们可以获取节点对信息，包括实体关系、实体-实体和关系-关系对的交互。另一个优点是，关系节点可以被视为特殊节点。由于知识图中关系的数量远小于实体的数量，因此它可以在由Triple2Seq采样的上下文子图之间保持全局语义信息。值得注意的是，我们还添加了一个全局节点来明确保持全局信息。全局节点在自然语言预训练模型中扮演着类似[CLS]标记的角色。我们通过可学习的虚拟距离或固定距离将全局节点与上下文子图中的节点联系起来。因此，我们获得了最终的输入序列，其中包含一个特殊的虚拟节点来构建节点特征。</p>
+<h4 id="结构增强自注意力"><a href="#结构增强自注意力" class="headerlink" title="结构增强自注意力"></a>结构增强自注意力</h4><p><img src="https://www.helloimg.com/i/2024/10/17/671089bb82612.png" class="lazyload placeholder" data-srcset="https://www.helloimg.com/i/2024/10/17/671089bb82612.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt=""></p>
+<p><img src="https://www.helloimg.com/i/2024/10/17/671088e3a04eb.png" class="lazyload placeholder" data-srcset="https://www.helloimg.com/i/2024/10/17/671088e3a04eb.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt=""></p>
+<h4 id="掩蔽知识建模"><a href="#掩蔽知识建模" class="headerlink" title="掩蔽知识建模"></a>掩蔽知识建模</h4><p><img src="https://www.helloimg.com/i/2024/10/17/67108969efaf4.png" class="lazyload placeholder" data-srcset="https://www.helloimg.com/i/2024/10/17/67108969efaf4.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt=""></p>
+<p><img src="https://www.helloimg.com/i/2024/10/18/6711d0e9d34ff.png" class="lazyload placeholder" data-srcset="https://www.helloimg.com/i/2024/10/18/6711d0e9d34ff.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt=""></p>
+
+      </div>
+      <div class="post-tags-categories">
+        
+        <div class="tags">
+          
+            <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/" class="">
+              知识图谱
+            </a>
+          
+            <a href="/tags/Transformer/" class="">
+              Transformer
+            </a>
+          
+        </div>
+        
+      </div>
+      
+        <div class="copyright">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+    <strong>作者:  </strong>Dingming Li</a>
+    </li>
+    <li class="post-copyright-link">
+    <strong>文章链接:  </strong>
+    <a href="/2024/10/15/论文学习：Relphormer-Relational-Graph-Transformer-for/" target="_blank" title="论文学习：Relphormer:用于知识图谱表示的关系图Transformer">http://example.com/2024/10/15/论文学习：Relphormer-Relational-Graph-Transformer-for/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明:   </strong>
+      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+      许可协议。转载请注明出处!
+    </li>
+  </ul>
+<div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      <!-- 文章详情页的上一页和下一页 -->
+<div class="post-nav">
+
+
+
+
+
+  
+  <div class="post-nav-next post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+    </div>
+    <a href="/2024/10/10/%E6%95%B0%E6%A8%A1%E5%AD%A6%E4%B9%A0%E5%8E%86%E7%A8%8B%EF%BC%88%E4%B8%80%EF%BC%89/" class="post-nav-link">
+      <div class="title">
+        下一篇: <i class="fas fa-angle-right"></i>
+        <div class="title-text">数模学习历程（一）</div>
+      </div>
+      <!-- <div class="content">
+        数模学习历程（一）  作为团队写作手，还是需要把一些基本模型与算法基础以及代码能力学一学的，只不过希望可以稍微快一点，注
+      </div> -->
+    </a>
+  </div>
+
+</div>
+
+    
+    
+
+    <!-- 打赏 -->
+    
+      <div id="appDonate" class="post-donate">
+  <div id="donate_board" class="donate_bar center" ref="donate">
+    <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏" @click="showDialogDrawer()"></a>
+  </div>
+  <transition name="fade">
+    <div 
+      class="donate-box-mask"
+      v-cloak 
+      v-show="visible"
+      @click="cancelDialogDrawer()"
+    >
+    </div>
+  </transition>
+  <transition name="bounce">
+    <div class="donate-box" v-cloak v-show="visible">
+      <div class="donate-box_close">
+        <i class="fas fa-times" aria-hidden="true" @click="cancelDialogDrawer" pointer></i>
+      </div>
+      <div class="donate-box_title">
+        <h4>
+          你的赏识是我前进的动力
+        </h4>
+      </div>
+      <div class="donate-box_tab">
+        <div class="Alipay" pointer :class="{'active': tabActive === 'Alipay'}" @click="changeTabActive('Alipay')">
+          支付宝
+        </div>
+        <div class="WeChatpay" pointer :class="{'active': tabActive === 'WeChatpay'}" @click="changeTabActive('WeChatpay')">
+          微信
+        </div>
+      </div>
+      <div class="donate-box_img">
+        <div class="AlipayImg" v-show="tabActive === 'Alipay'">
+          <img src="/medias/Alipay.jpg" class="lazyload placeholder" data-srcset="/medias/Alipay.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="支付宝打赏" />
+        </div> 
+        <div class="WeChatpayImg" v-show="tabActive === 'WeChatpay'">
+          <img src="/medias/Wechatpay.png" class="lazyload placeholder" data-srcset="/medias/Wechatpay.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="微信打赏" />
+        </div>
+      </div>
+    </div>
+  </transition>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDonate',
+    data: {
+      visible: false,
+      tabActive: 'Alipay',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        // function getScroll() {
+        //   return {
+        //     left: window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0,
+        //     top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+        //   };
+        // }
+        this.top = $(document).scrollTop() // or getScroll().top
+        // console.log('aa', $('.main-content'));
+        body.style.cssText = 'overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+      changeTabActive(name) {
+        this.tabActive = name;
+      }
+    },
+    created() {}
+  })
 </script>
     
-    </div>
-    <div class="mask-box"></div>
-</div>
+
+    <!-- 分享 -->
+    
+      <!-- https://github.com/overtrue/share.js -->
+<!-- 文章详情页的分享 -->
+<div class="social-share" data-sites="qq,qzone,wechat,weibo" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+
+<script defer src="/js/shareJs/social-share.min.js"></script>
+</script>
+
+<style>
+  .social-share {
+    margin: 20px 0;
+  }
+</style>
 
 
-<div id="tags" class="container">
-    <div class="card">
-        <div class="card-content">
-            <div class="tag-title center-align">
-                <i class="fas fa-tags"></i>&nbsp;&nbsp;文章标签
-            </div>
-            <div class="tag-chips">
-                
-                
-                <a href="/tags/%E7%94%9F%E6%B4%BB/" title="生活: 1">
-                    <span class="tag-content"
-                        title="生活" style="background-color: #FFF;">生活
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" title="线性代数: 1">
-                    <span class="tag-content"
-                        title="线性代数" style="background-color: #F8C471;">线性代数
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92/" title="线性规划: 1">
-                    <span class="tag-content"
-                        title="线性规划" style="background-color: #85C1E9;">线性规划
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/" title="知识图谱: 1">
-                    <span class="tag-content"
-                        title="知识图谱" style="background-color: #A3E4D7;">知识图谱
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Transformer/" title="Transformer: 1">
-                    <span class="tag-content"
-                        title="Transformer" style="background-color: #F5EEF8;">Transformer
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-            </div>
-        </div>
+    
+    
+    <!-- 评论 -->
+    <!-- 评论 -->
+
+  <div id="myComment">
+    
+      <div id="gitment-container"></div>
+
+    
+  </div>
+
+
+<!-- 还需要在后面这个地址里设置script, comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
+
+
+  </div>
+
+  <!-- 目录 -->
+  <aside id='l_side'>
+  
+    
+      <section class="widget side_blogger">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box rectangle' href='/about/'>
+          <img src='https://pic2.zhimg.com/80/v2-42b72d5ebee4b8d8aa70d9687effe87b_1440w.webp'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+          <h2>青墨书晚风</h2>
+        
+        
+          <p>手可摘星辰</p>
+
+        
+        
+          <p><span id="jinrishici-sentence">碎碎念的博客</span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="mailto:2068499252@qq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://github.com/lidingm"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=2068499252"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+    
+  
+  
+  
+
+  <div class="layout_sticky">    
+    
+      
+<section class="widget side_toc">
+  
+  <header>
+    
+      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
+    
+  </header>
+
+
+  <div class='content'>
+    <div class="toc-main">
+      <div class="toc-content">
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%EF%BC%9ARelphormer-%E7%94%A8%E4%BA%8E%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A8%E7%A4%BA%E7%9A%84%E5%85%B3%E7%B3%BB%E5%9B%BETransformer"><span class="toc-text">论文学习：Relphormer:用于知识图谱表示的关系图Transformer</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%84%E6%96%99"><span class="toc-text">资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%A7%E4%BD%93%E4%BB%8B%E7%BB%8D"><span class="toc-text">大体介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Relphormer%E6%A8%A1%E5%9E%8B"><span class="toc-text">Relphormer模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0"><span class="toc-text">方法实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Triple2Seq"><span class="toc-text">Triple2Seq</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E5%A2%9E%E5%BC%BA%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B"><span class="toc-text">结构增强自注意力</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A9%E8%94%BD%E7%9F%A5%E8%AF%86%E5%BB%BA%E6%A8%A1"><span class="toc-text">掩蔽知识建模</span></a></li></ol></li></ol></li></ol></li></ol> -->
+        <div class="toc"></div>
+      </div>
     </div>
+  </div>
+</section>
+<!-- 手机端目录按钮 -->
+<div id="toc-mobile-btn">
+  <i class="fas fa-list-ul" aria-hidden="true"></i>
 </div>
+
+      
+  <section class="widget side_recent_post">
+    
+  <header>
+    
+      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      
+      <!-- hash算法 -->
+      
+      <div class="aside-list">
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/10/15/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%EF%BC%9ARelphormer-Relational-Graph-Transformer-for/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">10-15</span>
+                
+              </div>
+              <a class="post-title" href="/2024/10/15/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%EF%BC%9ARelphormer-Relational-Graph-Transformer-for/">论文学习：Relphormer:用于知识图谱表示的关系图Transformer</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/10/10/%E6%95%B0%E6%A8%A1%E5%AD%A6%E4%B9%A0%E5%8E%86%E7%A8%8B%EF%BC%88%E4%B8%80%EF%BC%89/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">10-10</span>
+                
+              </div>
+              <a class="post-title" href="/2024/10/10/%E6%95%B0%E6%A8%A1%E5%AD%A6%E4%B9%A0%E5%8E%86%E7%A8%8B%EF%BC%88%E4%B8%80%EF%BC%89/">数模学习历程（一）</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/10/09/%E4%B8%80%E4%BA%9B%E7%A2%8E%E7%A2%8E%E5%BF%B5/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">10-09</span>
+                
+              </div>
+              <a class="post-title" href="/2024/10/09/%E4%B8%80%E4%BA%9B%E7%A2%8E%E7%A2%8E%E5%BF%B5/">一些碎碎念</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/09/29/hello-world/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">09-29</span>
+                
+              </div>
+              <a class="post-title" href="/2024/09/29/hello-world/">Hello World</a>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+  </section>
+
+    
+  </div>
+</aside>
+
+  <!-- 图片放大 Wrap images with fancybox support -->
+  <script defer src="/js/wrapImage.js"></script>
+</div>
+
+<!-- 文章详情页背景图 -->
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
+	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
+	<transition-group tag="ul" :name="names">
+		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+			<img :src="image" class="bg-swiper-img no-lazy">
+		</li>
+	</transition-group>
+</div>
+<script>
+	var vm = new Vue({
+		el: '#appBgSwiper',
+		data: {
+			names: '' || 'fade' || 'fade', // translate-fade fade
+			mark: 0,
+			img: [],
+			bgColor: '',
+			time: null
+		},
+		methods: {   //添加方法
+			change(i, m) {
+				if (i > m) {
+					// this.names = 'fade';
+				} else if (i < m) {
+					// this.names = 'fade';
+				} else {
+					return;
+				}
+				this.mark = i;
+			},
+			prev() {
+				// this.names = 'fade';
+				this.mark--;
+				if (this.mark === -1) {
+					this.mark = 3;
+					return
+				}
+			},
+			next() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			autoPlay() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			play() {
+				let bgImgDelay = '' || '180000'
+				let delay = parseInt(bgImgDelay) || 180000;
+				this.time = setInterval(this.autoPlay, delay);
+			},
+			enter() {
+				clearInterval(this.time);
+			},
+			leave() {
+				this.play();
+			}
+		},
+		created() {
+			this.play()
+		},
+		beforeDestroy() {
+			clearInterval(this.time);
+		},
+		mounted() {
+			let prop = '' || '';
+			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
+			if (isImg) {
+				let img = prop.split(',');
+				let configRoot = '/'
+				let arrImg = [];
+				img.forEach(el => {
+					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+					var objExp = new RegExp(Expression);
+
+					if (objExp.test(el)) {
+						// http or https
+						arrImg.push(el);
+					} else {
+						// 非http or https开头
+						// 本地文件
+						let firstStr = el.charAt(0);
+						if (firstStr == '/') {
+							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+						}
+						el = configRoot + el;
+						arrImg.push(el);
+					}
+				})
+				this.img = arrImg;
+			} else {
+				this.bgColor = prop;
+			}
+		}
+	})
+</script>
+
+<style>
+	.bg-swiper-box {
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.bg-swiper-img {
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
+
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+
+  <script>
+  function loadMermaid() {
+    if (document.getElementsByClassName('mermaid').length) {
+      if (window.mermaidJsLoad) mermaid.init()
+      else {
+        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
+          window.mermaidJsLoad = true
+          mermaid.initialize({
+            theme: 'default',
+          })
+          if ('true') {
+            mermaid.init();
+          }
+        })
+      }
+    }
+  };
+  document.addEventListener("DOMContentLoaded", function () {
+    loadMermaid();
+  })
+
+  document.addEventListener('pjax:complete', function () {
+    loadMermaid();
+  })
+  
+</script>
+
 
       </main>
     </div>
