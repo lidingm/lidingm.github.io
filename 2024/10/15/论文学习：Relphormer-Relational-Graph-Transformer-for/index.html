@@ -647,15 +647,15 @@
 </ul>
 </li>
 </ul>
-<h3 id="方法实现"><a href="#方法实现" class="headerlink" title="方法实现"></a>方法实现</h3><p><img src="https://www.helloimg.com/i/2024/10/17/671084d0363ba.png" class="lazyload placeholder" data-srcset="https://www.helloimg.com/i/2024/10/17/671084d0363ba.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt=""></p>
-<h4 id="Triple2Seq"><a href="#Triple2Seq" class="headerlink" title="Triple2Seq"></a>Triple2Seq</h4><p><img src="https://www.helloimg.com/i/2024/10/17/67108a6097861.png" class="lazyload placeholder" data-srcset="https://www.helloimg.com/i/2024/10/17/67108a6097861.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt=""></p>
+<h3 id="方法实现"><a href="#方法实现" class="headerlink" title="方法实现"></a>方法实现</h3><p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411101329856.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411101329856.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<h4 id="Triple2Seq"><a href="#Triple2Seq" class="headerlink" title="Triple2Seq"></a>Triple2Seq</h4><p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411101330172.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411101330172.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"></p>
 <p>​    知识图谱通常包含大量的关系事实，因此整个关系图不能直接输入Transformer。为了缓解基于全图的Transformer的限制，提出了Triple2Seq，它使用上下文的子图作为输入序列来编码局部结构信息。</p>
-<p><img src="https://www.helloimg.com/i/2024/10/17/6710881b7e5d5.png" class="lazyload placeholder" data-srcset="https://www.helloimg.com/i/2024/10/17/6710881b7e5d5.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt=""></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411101330989.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411101330989.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20241110133028933"></p>
 <p>​    经过Triple2Seq的过程后，我们可以获取上下文子图$T_g $ 。同时，上下文子图的局部结构在邻接矩阵$A_g $中得以保留。通过这种方式，我们可以获取节点对信息，包括实体关系、实体-实体和关系-关系对的交互。另一个优点是，关系节点可以被视为特殊节点。由于知识图中关系的数量远小于实体的数量，因此它可以在由Triple2Seq采样的上下文子图之间保持全局语义信息。值得注意的是，我们还添加了一个全局节点来明确保持全局信息。全局节点在自然语言预训练模型中扮演着类似[CLS]标记的角色。我们通过可学习的虚拟距离或固定距离将全局节点与上下文子图中的节点联系起来。因此，我们获得了最终的输入序列，其中包含一个特殊的虚拟节点来构建节点特征。</p>
-<h4 id="结构增强自注意力"><a href="#结构增强自注意力" class="headerlink" title="结构增强自注意力"></a>结构增强自注意力</h4><p><img src="https://www.helloimg.com/i/2024/10/17/671089bb82612.png" class="lazyload placeholder" data-srcset="https://www.helloimg.com/i/2024/10/17/671089bb82612.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt=""></p>
-<p><img src="https://www.helloimg.com/i/2024/10/17/671088e3a04eb.png" class="lazyload placeholder" data-srcset="https://www.helloimg.com/i/2024/10/17/671088e3a04eb.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt=""></p>
-<h4 id="掩蔽知识建模"><a href="#掩蔽知识建模" class="headerlink" title="掩蔽知识建模"></a>掩蔽知识建模</h4><p><img src="https://www.helloimg.com/i/2024/10/17/67108969efaf4.png" class="lazyload placeholder" data-srcset="https://www.helloimg.com/i/2024/10/17/67108969efaf4.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt=""></p>
-<p><img src="https://www.helloimg.com/i/2024/10/18/6711d0e9d34ff.png" class="lazyload placeholder" data-srcset="https://www.helloimg.com/i/2024/10/18/6711d0e9d34ff.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt=""></p>
+<h4 id="结构增强自注意力"><a href="#结构增强自注意力" class="headerlink" title="结构增强自注意力"></a>结构增强自注意力</h4><p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411101331145.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411101331145.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411101330363.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411101330363.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20241110133055276"></p>
+<h4 id="掩蔽知识建模"><a href="#掩蔽知识建模" class="headerlink" title="掩蔽知识建模"></a>掩蔽知识建模</h4><p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411101331785.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411101331785.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411101331734.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411101331734.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20241110133137664"></p>
 
       </div>
       <div class="post-tags-categories">
@@ -699,6 +699,25 @@
 
 
 
+  
+  <div class="post-nav-prev post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+    </div>
+    <a href="/2024/11/08/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%EF%BC%9AATTEMPT-%E9%80%9A%E8%BF%87%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%B7%B7%E5%90%88%E8%BD%AF%E6%8F%90%E7%A4%BA%E8%BF%9B%E8%A1%8C%E5%8F%82%E6%95%B0%E9%AB%98%E6%95%88%E7%9A%84%E5%A4%9A%E4%BB%BB%E5%8A%A1%E8%B0%83%E6%95%B4/" class="post-nav-link">
+      <div class="title">
+        <i class="fas fa-angle-left"></i> 上一篇:
+        <div class="title-text">ATTEMPT:通过注意力混合软提示进行参数高效的多任务调整</div>
+      </div>
+      
+      <!-- <div class="content">
+        论文学习：ATTEMPT:通过注意力混合软提示进行参数高效的多任务调整资料
+论文：ATTEMPT: Parameter-
+      </div> -->
+    </a>
+  </div>
+
 
 
   
@@ -724,89 +743,6 @@
     
 
     <!-- 打赏 -->
-    
-      <div id="appDonate" class="post-donate">
-  <div id="donate_board" class="donate_bar center" ref="donate">
-    <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏" @click="showDialogDrawer()"></a>
-  </div>
-  <transition name="fade">
-    <div 
-      class="donate-box-mask"
-      v-cloak 
-      v-show="visible"
-      @click="cancelDialogDrawer()"
-    >
-    </div>
-  </transition>
-  <transition name="bounce">
-    <div class="donate-box" v-cloak v-show="visible">
-      <div class="donate-box_close">
-        <i class="fas fa-times" aria-hidden="true" @click="cancelDialogDrawer" pointer></i>
-      </div>
-      <div class="donate-box_title">
-        <h4>
-          你的赏识是我前进的动力
-        </h4>
-      </div>
-      <div class="donate-box_tab">
-        <div class="Alipay" pointer :class="{'active': tabActive === 'Alipay'}" @click="changeTabActive('Alipay')">
-          支付宝
-        </div>
-        <div class="WeChatpay" pointer :class="{'active': tabActive === 'WeChatpay'}" @click="changeTabActive('WeChatpay')">
-          微信
-        </div>
-      </div>
-      <div class="donate-box_img">
-        <div class="AlipayImg" v-show="tabActive === 'Alipay'">
-          <img src="/medias/Alipay.jpg" class="lazyload placeholder" data-srcset="/medias/Alipay.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="支付宝打赏" />
-        </div> 
-        <div class="WeChatpayImg" v-show="tabActive === 'WeChatpay'">
-          <img src="/medias/Wechatpay.png" class="lazyload placeholder" data-srcset="/medias/Wechatpay.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="微信打赏" />
-        </div>
-      </div>
-    </div>
-  </transition>
-</div>
-
-<script>
-  var body = document.body || document.documentElement || window;
-  var vm = new Vue({
-    el: '#appDonate',
-    data: {
-      visible: false,
-      tabActive: 'Alipay',
-      top: 0,
-    },
-    computed: {
-    },
-    mounted() {
-    },
-    methods: {
-      showDialogDrawer() {
-        this.visible = true;
-        // 防止页面滚动，只能让弹框滚动
-        // function getScroll() {
-        //   return {
-        //     left: window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0,
-        //     top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
-        //   };
-        // }
-        this.top = $(document).scrollTop() // or getScroll().top
-        // console.log('aa', $('.main-content'));
-        body.style.cssText = 'overflow: hidden;';
-      },
-      cancelDialogDrawer() {
-        this.visible = false;
-        body.removeAttribute('style');
-        $(document).scrollTop(this.top)
-      },
-      changeTabActive(name) {
-        this.tabActive = name;
-      }
-    },
-    created() {}
-  })
-</script>
     
 
     <!-- 分享 -->
@@ -961,6 +897,27 @@
       <!-- hash算法 -->
       
       <div class="aside-list">
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/11/08/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%EF%BC%9AATTEMPT-%E9%80%9A%E8%BF%87%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%B7%B7%E5%90%88%E8%BD%AF%E6%8F%90%E7%A4%BA%E8%BF%9B%E8%A1%8C%E5%8F%82%E6%95%B0%E9%AB%98%E6%95%88%E7%9A%84%E5%A4%9A%E4%BB%BB%E5%8A%A1%E8%B0%83%E6%95%B4/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">11-08</span>
+                
+              </div>
+              <a class="post-title" href="/2024/11/08/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%EF%BC%9AATTEMPT-%E9%80%9A%E8%BF%87%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%B7%B7%E5%90%88%E8%BD%AF%E6%8F%90%E7%A4%BA%E8%BF%9B%E8%A1%8C%E5%8F%82%E6%95%B0%E9%AB%98%E6%95%88%E7%9A%84%E5%A4%9A%E4%BB%BB%E5%8A%A1%E8%B0%83%E6%95%B4/">ATTEMPT:通过注意力混合软提示进行参数高效的多任务调整</a>
+            </div>
+          </div>
         
           <div class="aside-list-item">
             

@@ -11,7 +11,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>数模学习历程（一） | 碎碎念的博客</title>
+  <title>ATTEMPT:通过注意力混合软提示进行参数高效的多任务调整 | 碎碎念的博客</title>
 
   <link rel="icon" type="image/jpeg" href="/medias/head.jpg">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -574,21 +574,21 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg')">
+  background-position: center center;position: relative;background-image:url('https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        数模学习历程（一）
+        ATTEMPT:通过注意力混合软提示进行参数高效的多任务调整
       </span>
     </div>
     
     
       
         <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> 发表于：2024-10-10 |
+          <i class="fas fa-calendar"></i> 发表于：2024-11-08 |
         </span>
       
 
@@ -596,8 +596,8 @@
         <span class="post-detail-header_categories">
           <i class="iconfont iconbookmark1"></i> 分类：
           
-            <a href="/categories/%E6%95%B0%E6%A8%A1/" class="post-detail-header_category">
-              数模
+            <a href="/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/" class="post-detail-header_category">
+              论文学习
             </a>
           
         </span>
@@ -606,11 +606,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 1,017 |
+            <i class="fas fa-file-text-o"></i> 字数统计: 5,342 |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 3分钟 |
+            <i class="fas fa-clock"></i> 阅读时长: 19分钟 |
           </span>
   
           
@@ -633,51 +633,260 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <h1 id="数模学习历程（一）"><a href="#数模学习历程（一）" class="headerlink" title="数模学习历程（一）"></a>数模学习历程（一）</h1><p>  作为团队写作手，还是需要把一些基本模型与算法基础以及代码能力学一学的，只不过希望可以稍微快一点，注重到好论文的写作中去。</p>
-<h2 id="线性代数模型"><a href="#线性代数模型" class="headerlink" title="线性代数模型"></a>线性代数模型</h2><h3 id="特征值与特征向量"><a href="#特征值与特征向量" class="headerlink" title="特征值与特征向量"></a>特征值与特征向量</h3><h4 id="差分方程"><a href="#差分方程" class="headerlink" title="差分方程"></a>差分方程</h4><p>  例一是求解斐波那契数列的通项：</p>
+        <h1 id="论文学习：ATTEMPT-通过注意力混合软提示进行参数高效的多任务调整"><a href="#论文学习：ATTEMPT-通过注意力混合软提示进行参数高效的多任务调整" class="headerlink" title="论文学习：ATTEMPT:通过注意力混合软提示进行参数高效的多任务调整"></a>论文学习：ATTEMPT:通过注意力混合软提示进行参数高效的多任务调整</h1><h2 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h2><blockquote>
+<p>论文：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2205.11961">ATTEMPT: Parameter-Efficient Multi-task Tuning via Attentional Mixtures of Soft Prompts</a></p>
+<p>代码：<a target="_blank" rel="noopener" href="https://github.com/AkariAsai/ATTEMPT">AkariAsai/ATTEMPT: This is the oficial repository for “Parameter-Efficient Multi-task Tuning via Attentional Mixtures of Soft Prompts”</a></p>
+</blockquote>
+<h2 id="前置知识"><a href="#前置知识" class="headerlink" title="前置知识"></a>前置知识</h2><p>由于本文研究的核心问题是如何以参数高效的方式调整预训练模型，使其能够跨任务传递知识，同时保持或提高任务性能。ATTEMPT方法即通过使用注意力机制混合软提示来实现参数高效的多任务调整。</p>
+<p>我们需要首先了解其他的参数高效微调方法，用以对比学习，并且文章也给出了ATTEMPT方法与其他微调方法的效果对比，所以我们先了解各个经典微调算法的原理用以区分学习。</p>
+<h3 id="高效参数微调"><a href="#高效参数微调" class="headerlink" title="高效参数微调"></a>高效参数微调</h3><p>参数高效微调是指微调少量或额外的模型参数，固定大部分预训练模型参数，较于全量参数微调从而大大降低了计算和存储成本，同时，也能实现与全量参数微调相当的性能。</p>
+<p>高效微调技术可以粗略分为以下三大类：增加额外参数（A）、选取一部分参数更新（S）、引入重参数化（R）。而在增加额外参数这类方法中，又主要分为类适配器（Adapter-like）方法和软提示（Soft prompts）两个小类。分类如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411081033196.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411081033196.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p>接下来我们简单介绍下BitFit、Prefix Tuning、Prompt Tuning、P-Tuning、P-tuning -v2、SPoT。</p>
+<p>在此之前我们需要理解什么是hard prompt与soft prompt：</p>
+<ul>
+<li>hard prompt (离散)：即人类写的自然语言式的prompt。</li>
+<li>soft prompt (连续)：可训练的权重，可以理解为伪prompt。（毕竟LM是连续的模型，在连续空间中优化离散的prompt， 难以优化到最佳效果。额也就是说所谓的hard prompt对于人类来说好理解，但模型不一定好理解，所以不妨丢给模型去学习处更好理解的prompt）</li>
+</ul>
+<h3 id="BitFit"><a href="#BitFit" class="headerlink" title="BitFit"></a>BitFit</h3><p><strong>原理</strong>：对微调机制的一种积极探索，也很简单，通过仅调整bias效果就能有不错的效果，但没有具体阐述原理，就是通过猜测加实验得到的结果。同时，作者提出一个观点：微调的过程不是让模型适应另外的数据分布，而是让模型更好的应用出本身的表征能力。</p>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>训练参数量极小（约0.1%）。</li>
+<li>在大部分任务上效果会差于LoRA、Adapter等方法。</li>
+</ul>
+<h3 id="Prefix-Tuning"><a href="#Prefix-Tuning" class="headerlink" title="Prefix Tuning"></a>Prefix Tuning</h3><p><strong>原理</strong>：在每一个Transformer层都带上一些virtual token作为前缀，以适应不同的任务。</p>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>前缀Token会占用序列长度，有一定的额外计算开销。</li>
+<li>Prefix Tuning的线性插值是比较复杂的。</li>
+</ul>
+<h3 id="Prompt-Tuning"><a href="#Prompt-Tuning" class="headerlink" title="Prompt Tuning"></a>Prompt Tuning</h3><p><strong>原理</strong>：该方法可以看着是Prefix Tuning的简化版本，针对不同的任务，仅在输入层引入virtual token形式的软提示（soft prompt）。</p>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>相对于Prefix Tuning，参与训练的参数量和改变的参数量更小，更节省显存。</li>
+<li>对一些简单的NLU 任务还不错，但对硬序列标记任务（即序列标注）表现欠佳。</li>
+</ul>
+<h3 id="P-Tuning"><a href="#P-Tuning" class="headerlink" title="P-Tuning"></a>P-Tuning</h3><p><strong>原理</strong>：将Prompt转换为可以学习的Embedding层，并用MLP+LSTM的方式来对Prompt Embedding进行一层处理。相比Prefix Tuning，仅在输入层加入的可微的virtual token；另外，virtual token的位置也不一定是前缀，插入的位置是可选的。</p>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>引入一个prompt encoder（由一个双向的LSTM+两层MLP组成）来建模virtual token的相互依赖会收敛更快，效果更好。</li>
+</ul>
+<h3 id="P-Tuning-v2"><a href="#P-Tuning-v2" class="headerlink" title="P-Tuning v2"></a>P-Tuning v2</h3><p><strong>原理</strong>：该方法在每一个Transformer层都加入了prompt token作为输入，引入多任务学习，针对不同任务采用不同的提示长度。并且回归传统的分类标签范式，而不是映射器。</p>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>解决了Prompt Tuning无法在小模型上有效提升的问题。</li>
+<li>移除了对模型效果改进较小的重参数化的编码器（如：Prefix Tuning中的MLP、P-Tuning中的LSTM）。</li>
+<li>对于一些复杂的硬序列标记任务（即序列标注）取得了不错的效果。</li>
+</ul>
+<h3 id="SPoT"><a href="#SPoT" class="headerlink" title="SPoT"></a>SPoT</h3><p><strong>原理</strong>：在之前P-tuning方法的基础上，提出的一种基于提示的迁移学习方法。它通过在一个或多个源任务上学习提示，然后将这些提示用于初始化目标任务的提示。具体来说，就是先为每个源任务生成提示，得到它们的任务表示，再计算这些表示与目标任务的相似度，选择最相似的k个源任务提示，将它们加权组合来初始化目标任务的提示，最后在目标任务上进行微调，以获得更适合的提示。</p>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>核心思想是在一个或多个源任务上学习提示，然后将学到的提示用于初始化目标任务的提示。</li>
+<li>进行了大规模和系统的任务迁移能力研究，展示了任务通过提示转移相互受益的条件。</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411101201928.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411101201928.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20241110120153851"></p>
+<h2 id="论文大体介绍"><a href="#论文大体介绍" class="headerlink" title="论文大体介绍"></a>论文大体介绍</h2><p>本文提出了一种名为ATTEMPT的新<strong>参数高效微调</strong>的方法，旨在通过<strong>注意力机制</strong>产生<strong>soft prompt</strong>、结合<strong>多任务学习</strong>，实现参数高效的语言模型微调。</p>
+<p>具体来说，ATTEMPT通过注意力模块来混合源任务的软提示和目标任务的新初始化提示，以生成适用于每个目标任务实例的提示，使在不同任务间传递知识，在训练过程中，只有目标任务的提示和注意力权重会被更新，而原始的语言模型和源提示保持不变。</p>
+<p>该方法不仅提高了训练效率，还能在资源有限的情况下实现高性能。且ATTEMPT通过模块化的方式，可以灵活地增加或移除源任务提示，从而有效地实现知识转移。实验表明，该方法在多项NLP任务中表现优异，尤其是在小样本学习场景下。</p>
+<h2 id="论文背景"><a href="#论文背景" class="headerlink" title="论文背景"></a>论文背景</h2><p><strong>Fine-tuning：</strong>例如全参微调，在目标任务训练数据上微调大型语言模型的所有参数，然而，这种方法计算成本高，并且可能无法充分利用其他NLP任务的大量数据。</p>
+<p><strong>参数高效的微调方法：</strong>近期的研究提出了一些参数高效的调整方法，这些方法只更新一小部分LM参数以适应目标任务。这里提到了prefix tuning、prompt tuning、in-context learning、SPoT。随着LMs的参数提升，更高的微调方法要求迫切。</p>
+<p><strong>多任务学习与知识传递：</strong>多任务学习方法试图通过更新LM参数来学习新的目标任务，这些方法在NLP中被证明是有效的。但是，这些方法缺乏添加或移除源任务的灵活性。</p>
+<p><strong>Soft Prompts：</strong>软提示是一种参数高效的方法，它通过在输入前添加可训练的提示来调整模型。这种方法保持了原始LM的冻结状态，并且可以灵活地添加或移除源提示，以实现有效的知识传递。</p>
+<h2 id="方法原理"><a href="#方法原理" class="headerlink" title="方法原理"></a>方法原理</h2><p>ATTEMPT通过注意力模块来混合源任务的软提示和目标任务的新初始化提示，以生成适用于每个目标任务实例的提示，使在不同任务间传递知识。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411091443724.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411091443724.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20241109144342646"></p>
+<p><strong>源提示预训练</strong>：ATTEMPT首先在大规模的源任务上预训练可转移的soft promp，这些提示作为小的嵌入向量，编码了源任务的知识，可能对其他任务有益，能够捕捉任务相关的知识。</p>
+<p><strong>目标提示训练</strong>：通过将注意力加权的源提示和目标提示相结合，生成适用于每个输入实例的特定提示 <script type="math/tex">P_{instance}</script>。在训练过程中，新的任务提示<script type="math/tex">P_{target}</script>和注意力模块G通过<script type="math/tex">P_{instance}</script>进行更新，而源提示和原LM的参数则不进行更新，以保存从先前任务或预训练中学习到的知识。其分为以下模块：</p>
+<ul>
+<li><p>注意力权重计算：</p>
+<p>​    为目标任务初始化一个新的 <script type="math/tex">P_{target}</script> ，之后使用注意力模块  G 计算输入 X 与提示（包括源提示和目标提示）之间的注意力权重，这个注意力模块G是一个轻量级的网络，可以在多任务训练中共享和同时训练。输入时的 X 和每个提示prompt进行最大池化操作，以获得固定长度的表示。进而利用轻量级的网络 G 对输入进行投影，生成注意力分布，提供之后使用到的注意力权重。</p>
+</li>
+<li><p>提示插值：</p>
+<p>​    利用注意力权重对源提示和目标提示进行加权平均，生成最终的实例级提示：</p>
 <script type="math/tex; mode=display">
-\begin{cases}
-F_{ k+1}=F_{ k+1},\\
-F_{ k+2}=F_{ k+1}+F_{ k} \
-\quad k = 0, 1, 2,  ...
-\end{cases}
-\tag{ 1.1}</script><p>  将它转换为矩阵形式：</p>
+P_{\text{instance}}(X) = P_{\text{target}} + \sum_{j=1}^{t+1} a_j P_j</script><p>​    其中，<script type="math/tex">a_j</script>是从注意力模块获得的权重，确保即使源任务不是很相关，也能保留目标提示的影响。</p>
+</li>
+</ul>
+<p><strong>多任务训练与推理</strong>：训练中，ATTEMPT可以在多个目标任务上联合训练共享的注意力模块 G 和多个目标任务提示，将训练数据集合并，同时保留每个实例的任务ID信息。在训练中，根据实例的任务ID，生成对应实例级提示。每个目标任务提示的损失仅在提示被使用时进行反向传播，而注意力模块的权重在每次迭代中更新；</p>
+<p>推理中，推理时仅需加载一次源提示、所有目标任务提示和共享的注意力模块 G。对于每个实例，检索对应的目标任务提示，将 <script type="math/tex">P_{instance}</script> 拼接到输入嵌入中，后续过程与prompt tuning相同。支持同时执行多个目标任务，显著减少推理时的模型加载开销。</p>
+<p><strong>ATTEMPT参数效率</strong>：ATTEMPT和提示调优的一个独特特性是参数数量独立于语言模型层数。随着LMs规模增大，Adapter和 fine-tuning的参数数量会迅速增加，而ATTEMPT只更新软提示，不修改模型高层，从而在参数增长上保持适中。</p>
+<p><strong>方法合理性评估</strong>：ATTEMPT方法合理地利用了注意力机制和软提示来实现参数高效的多任务学习，这与当前大型语言模型的发展趋势相符合。随着语言模型变得越来越大，全参数微调变得越来越不切实际，因为它需要巨大的计算资源。参数高效的微调方法如ATTEMPT，允许我们利用这些大型模型的强大能力，同时保持计算成本在可控范围内。这与当前的趋势相符，即在资源有限的情况下，尽可能地利用大型模型。</p>
+<p><strong>假设与局限性评估</strong>：</p>
+<ul>
+<li><p>假设源任务与目标任务的相关性：源任务中的软提示能够捕捉到对目标任务有益的知识。那么这意味着源任务与目标任务之间存在一定的相关性，使得源任务中的知识和模式可以迁移到目标任务中。</p>
+<p>局限性：如果源任务与目标任务之间的相关性很低，那么源任务的软提示可能不会为目标任务提供有用的信息，这可能会限制模型的性能。</p>
+</li>
+<li><p>假设注意力机制的有效性：注意力机制能够有效地从多个源提示中选择相关信息，那么其应该能够准确地识别出哪些源任务提示对当前目标任务最有帮助。</p>
+<p>局限性：如果注意力机制不能正确地评估源提示的重要性，模型可能会忽略重要的信息，从而无法构建好的<script type="math/tex">P_{instance}</script>。</p>
+</li>
+</ul>
+<h2 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h2><p><strong>源任务和目标任务</strong>：</p>
+<ul>
+<li><p>源任务：</p>
+<p>选择了6个大规模数据集作为源任务，包括MNLI、QNLI、QQP、SST-2、SQuAD和ReCoRD。这些数据集提供丰富的知识用于预训练软提示。</p>
+</li>
+<li><p>目标任务：</p>
+<p>在21个不同的目标任务上进行评估，包括GLUE和SuperGLUE中的任务（如BoolQ、CB、RTE等，来测试模型的自然语言处理能力）、问答任务（如Natural Questions、HotpotQA等），以及其他任务（如SciTail、Yelp-2等）。</p>
+</li>
+</ul>
+<p><strong>基线测试和实现细节</strong>：</p>
+<ul>
+<li><p>基线方法：</p>
+<p>比较了ATTEMPT与多种方法的性能，包括Fine tuning、prompt tuning、SPoT、Adapter、BitFit、以及多任务方法（如FT-multi-task (FT-m), Adapter-m, HyperFormerr等）。</p>
+</li>
+<li><p>实现细节：</p>
+<p>方法 ATTEMPT 和 ATTEMPT-m 使用相同的六个源任务提示， ATTEMPT-m 通过进行多任务训 练在多个目标任务上训练一个共享注意力层，而 ATTEMPT 则分别训练特定任务的注意力层，并且使用T5-base作为基础语言模型、使用公共数据集的开发集或拆分出的测试集进行评估。</p>
+</li>
+<li><p>Prompt初始化：</p>
+<p>每个源提示都是通过从顶级词汇中随机采样标记来初始化的。对于目标任务提示初始化，使用非问答任务的MNLI源提示和问答任务的SQuAD源提示，而不是用随机采样的词汇进行初始化，以保证训练的稳定性。</p>
+</li>
+</ul>
+<h2 id="实验结论"><a href="#实验结论" class="headerlink" title="实验结论"></a>实验结论</h2><p><strong>整体性能</strong>：</p>
+<ul>
+<li><p>GLUE和SuperGLUE任务：</p>
+<p>ATTEMPT - m显著优于PT、SPoT和BitFit，并与Adapter或Fine - Tuning匹配，尽管每个任务更新的参数要少得多</p>
+</li>
+<li><p>对prompt tuing进行了改进：</p>
+<p>prompt tuing对超参数或初始化很敏感，并且在 诸如 CoLA、BoolQ或 WiC 等几个数据集上的表现显著降低。ATTEMPT在较小的数据集(例如, CB , RTE等)和大规模的MRQA数据集上的性能明显优于这些方法。</p>
+</li>
+</ul>
+<p><strong>少样本域适应</strong>：通过共享注意力模块，ATTEMPT能够灵活组合不同任务的知识，提高了少样本学习的效率。在少样本任务上的表现优于其他方法，尤其是在资源受限的情况下，充分利用了源任务的知识进行有效的知识转移。在较小的数据集上具有特别强的竞争力。</p>
+<p><strong>消融实验</strong>：通过消融实验，验证了注意力机制在实例级提示生成中的重要性，证明了其在提升模型性能上的关键作用；另外通过多任务共享注意力模块，显著提高了小样本任务的性能，展示了其在知识转移中的有效性。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>提出了一种新的参数高效微调方法 ATTEMPT，它通过在源任务上训练的多个可重用的软提示和一个新的特定任务提示之间进行插值来学习生成实例级提示，同时保持原始的语言模型冻结。大规模实验表明， ATTEMPT 在任务性能和效率之间实现了很好的平衡，引入了一种可解释且模块化的任务迁移。</p>
+<p>以下是ATTEMPT方法与各微调方法之间的对比：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>特征</th>
+<th>ATTEMPT</th>
+<th>BitFit</th>
+<th>Prefix Tuning</th>
+<th>Prompt Tuning</th>
+<th>P-Tuning</th>
+<th>P-tuning-v2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>参数更新</strong></td>
+<td>仅更新目标任务的prompt和注意力权重</td>
+<td>仅更新模型的偏置参数</td>
+<td>更新prompt，但保持模型参数不变</td>
+<td>更新soft prompt，保持模型参数不变</td>
+<td>更新prompt，保持模型参数不变</td>
+<td>更新prompt，保持模型参数不变</td>
+</tr>
+<tr>
+<td><strong>多任务学习能力</strong></td>
+<td>支持模块化多任务学习</td>
+<td>不支持多任务学习</td>
+<td>支持多任务学习</td>
+<td>支持多任务学习</td>
+<td>支持多任务学习</td>
+<td>支持多任务学习</td>
+</tr>
+<tr>
+<td><strong>知识迁移</strong></td>
+<td>通过注意力机制有效整合多个任务的知识</td>
+<td>无法进行知识迁移</td>
+<td>可以实现知识迁移</td>
+<td>可以实现知识迁移</td>
+<td>通过任务间的迁移能力实现</td>
+<td>通过任务间的迁移能力实现</td>
+</tr>
+<tr>
+<td><strong>参数效率</strong></td>
+<td>更新少量参数（约0.4%）</td>
+<td>更新约280k参数</td>
+<td>更新少量参数（约77k）</td>
+<td>更新少量参数（约77k，0.01% ）</td>
+<td>更新参数较少，具体依赖于使用的模型（0.01% ）</td>
+<td>更新参数较少，具体依赖于使用的模型（0. 1%-3%）</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>适合少量样本的任务及需要灵活组合知识的场景</td>
+<td>适用于只需微调偏置的小规模任务</td>
+<td>适用于快速任务适应</td>
+<td>适用于任务的快速适应</td>
+<td>适用于需要跨任务迁移学习的场景</td>
+<td>适用于需要跨任务迁移学习的场景</td>
+</tr>
+<tr>
+<td><strong>任务间相似性分析能力</strong></td>
+<td>可生成注意力分布以理解任务间的相似性</td>
+<td>无法分析任务间相似性</td>
+<td>无法分析任务间相似性</td>
+<td>无法分析任务间相似性</td>
+<td>可通过分析prompt权重了解任务间相似性</td>
+<td>可通过分析prompt权重了解任务间相似性</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>SPoT</th>
+<th>ATTEMPT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>知识迁移</strong></td>
+<td>是</td>
+<td>是</td>
+</tr>
+<tr>
+<td><strong>方法原理</strong></td>
+<td>通过相似度与加权结合源任务提示初始化目标任务提示</td>
+<td>引入注意力模块，动态结合源提示和目标提示</td>
+</tr>
+<tr>
+<td><strong>多任务学习</strong></td>
+<td>支持</td>
+<td>支持，且使用共享的注意力模块</td>
+</tr>
+<tr>
+<td><strong>参数更新</strong></td>
+<td>更新目标任务提示</td>
+<td>更新目标任务提示和注意力权重，保留原始模型和源提示</td>
+</tr>
+<tr>
+<td><strong>模块化和灵活性</strong></td>
+<td>一般</td>
+<td>高，可通过预训练的软提示灵活添加或移除源提示</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p><strong>参数效率与高性能</strong>：ATTEMPT通过仅更新目标任务的提示和注意力权重，显著减少了需要更新的参数数量，相比全参数微调，极大地降低了计算和存储成本。同时其在在多项NLP任务中表现优异，尤其是在小样本学习场景下，能够与全参数微调相媲美或超越。</p>
+<p><strong>多任务学习与模块化</strong>：通过共享注意力模块，ATTEMPT能够同时处理多个目标任务，提高了小样本任务的性能，尤其是在资源受限的情况下。同时其允许灵活地添加或移除源任务提示，使得知识转移更加灵活和模块化，有助于构建强大的多任务模型。</p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p><strong>内存占用与计算成本</strong>：但由于ATTEMPT方法通过在输入前添加soft prompt来调整模型，这个提示调整增加了输入标记的长度，从而增加了内存占用，可能会带来额外的计算成本。</p>
+<p><strong>任务类型的限制</strong>：ATTEMPT方法主要针对分类和问答任务进行了评估，并没有涉及到需要长序列生成的任务。这意味着ATTEMPT在这些类型的任务上的有效性尚未得到验证。此外ATTEMPT在非英语任务上的有效性尚未得到测试。</p>
+<p><strong>源任务组合的限制</strong>：虽然ATTEMPT展示了通过软提示传递知识的能力，但论文中的实验主要基于有限数量的源任务。对于更广泛的源任务组合，ATTEMPT的效果如何，还需要进一步的研究和实验来探索。</p>
+<h3 id="改进"><a href="#改进" class="headerlink" title="改进"></a>改进</h3><p><strong>不同的注意力机制</strong>：对于注意力模块中注意力权重的计算，原公式如下：</p>
 <script type="math/tex; mode=display">
-\alpha_{k+1}=A\alpha_{k}，\quad k = 0, 1, 2, \ldots\tag{2.1}</script><p>  解法一是，其中一开始对应k+1的A的值可以得到，之后进行递推，可以通过矩阵求解获得A的两个特征值，说明可以进行相似对角化，之后获得特征向量，那么$A^{k}$的值就可以得到了。通过上述公式得到$\alpha^{k}$的值，从而得到$F_{k}$的值。重点就是能够想到用公式(1.1)之后变为矩阵就行，还是比较简单，除了运算。</p>
-<p>  解法二是，在解A的特征方程的时候，得到特征根<script type="math/tex">\lambda_{1}</script>与另外一个互异的<script type="math/tex">\lambda_{2}</script>从而得到<script type="math/tex">F_{k}</script>的包含两个未知数的通解，之后带入特殊值<script type="math/tex">F_{0}=1</script>和<script type="math/tex">F_{1}=1</script>之后，获得解，带入可得到。</p>
-<p>  解法三是，python硬算，嗯呐。</p>
-<h4 id="莱斯利种群模型"><a href="#莱斯利种群模型" class="headerlink" title="莱斯利种群模型"></a>莱斯利种群模型</h4><p>  研究动物种群数量增长的重要模型，这一模型研究了种群中雌性动物的年龄分布和数量增长的规律。</p>
-<p>  好了线代真恶心，看线性规划去了。此处略过一千字等更新… …</p>
-<h2 id="线性规划和整数规划模型"><a href="#线性规划和整数规划模型" class="headerlink" title="线性规划和整数规划模型"></a>线性规划和整数规划模型</h2><h3 id="线性规划模型"><a href="#线性规划模型" class="headerlink" title="线性规划模型"></a>线性规划模型</h3><h4 id="线性规划模型以及概念"><a href="#线性规划模型以及概念" class="headerlink" title="线性规划模型以及概念"></a>线性规划模型以及概念</h4><p>  这个很简单吧，就是在<script type="math/tex">z = ax_{1}+bx_{2}+cx_{3}</script>在变量的约束条件下，获取z的最大值，当然同样适用于最小值，加个负号就行。规划问题的数学模型由3个要素好，了我要引用原文了：</p>
-<p>①决策变量,是问题中要确定的未知量,用于表明规划问题中的用数量表示的方案、措施等,可由决策者决定和控制。</p>
-<p>②目标函数,是决策变量的丽数,优化目标通常是求该函数的最大值或最小值。</p>
-<p>③约束条件,是决策变量的取值所受到的约束和限制条件,通常用含有决策变量的等式或不等式表示。</p>
-<p>  就是找到用决策变量，也就是$x$表示出来$z$，之后找出全部的不等式，之后再不等式成立的情况下，获得$z$的最大或最小值。</p>
-<p>  之后重点我认为是灵敏度分析，分析不同的决策变量的变化导致的目标值的最优变化，看看这些参数变化限制在那些范围之内保证最优解不变，或者看看决策变量变化之后最优值怎么变化。</p>
-<p>  对于数学规划模型,-定要做灵敏度分析。</p>
-<h4 id="模型求解及应用"><a href="#模型求解及应用" class="headerlink" title="模型求解及应用"></a>模型求解及应用</h4><p>  重点还是列出来不等式，代码利用python的cvxpy库，这个好说。</p>
-<h3 id="整数规划"><a href="#整数规划" class="headerlink" title="整数规划"></a>整数规划</h3><p>  上面的线性规划求出来的解可能会带小数点，但是实际应用中，我们获得的解都是整数，所以应该利用整数规划。整数规划的一般形式：</p>
+a_j = \frac{e^{\hat{\mathbf{P}}_j \mathbf{H}_{\text{out}} / T}}{\sum_{k=1}^{t+1} e^{\hat{\mathbf{P}}_k \mathbf{H}_{\text{out}} / T}}</script><p>可以改为：</p>
 <script type="math/tex; mode=display">
-max(或min)z=\sum_{j=1}^{n}{c_{j}x_{j}}</script><script type="math/tex; mode=display">
-\begin{cases}
-\sum_{j=1}^{n}{a_{ij}}\leq(或=,\geq)b_{ij}, \quad i =1, 2,  ...\\
-x_{j}\geq0, \quad j =  1, 2,  ...\\
-x_{1},x_{2}...x_{n}中部分或者全部取整数
-\end{cases}
-\tag{2.1}</script><p>从决策变量的取值范围来看,整数规划通常可以分为以下几种类型:<br>(1)纯整数规划:全部决策变量都必须取整数值的整数规划模型。<br>(2)混合整数规划:决策变量中有一-部分必须取整数值,另一部分可以不取整数值的整数规划模型。<br>(3) 0-1整数规划:决策变量只能取0或1的整数规划。（还是挺常用的：指派问题（n个人，m个工作，n与m相等时是标准的指派问题）、旅行问题（从a走到z，最后回到a，怎么走旅行费用最少）、）该说不说，有点难。</p>
-<p>之后举了投资的收益与风险、比赛项目排序问题两个大问题来实战，去看！</p>
+a_{lj} = \frac{e^{\hat{\mathbf{P}}_{lj} \mathbf{H}_{\text{out}}}}{\sum_{k=1}^{t+1} e^{\hat{\mathbf{P}}_{lk} \mathbf{H}_{\text{out}}}}</script><p>即这里，不是计算<script type="math/tex">H_{out}</script>的摘要表示与提示<script type="math/tex">P_j</script> 之间的相似度，而是计算<script type="math/tex">H_{out}</script>与第<script type="math/tex">l</script>个提示令牌之间的相似度，对于提示token级别的注意力，在右边的第二项中，将摘要表示中的每一个第<script type="math/tex">l</script>个提示令牌计算为第<script type="math/tex">l</script>个提示令牌的加权摘要。即其原计算使用最大池化来统一计算注意力分数，之后可以利用token级别的注意力计算，另外可以考虑引入更复杂的注意力机制用以捕捉不通任务的prompt之间的关系。</p>
+<p><strong>深度提示优化</strong>：从文章中可以看出，生成的实例化软提示<script type="math/tex">P_{instance}</script>只是被插入到transformer第一层的输入embedding序列的前端，那么在接下来的transformer层中，插入连续提示的位置的embedding是由之前的transformer层计算出来的，会导致序列长度限制可调参数的数量，另外的输入embedding对模型预测只有相对间接的影响，所以可以在每一层都加入了实例化软提示<script type="math/tex">P_{instance}</script>作为输入。·</p>
+<p><strong>重参数化的编码器</strong>：利用重参数化功能来提高训练速度和鲁棒性，如加入MLP与LSTM，查看效果的变化。</p>
+<p><strong>扩展任务类型和源任务组合</strong>：由于其实验主要基于有限数量的源任务，那么我们可以通过增加更多的源任务类型和组合来提高模型的泛化能力，另外在其他语言任务上也可以做尝试。</p>
 
       </div>
       <div class="post-tags-categories">
         
         <div class="tags">
           
-            <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" class="">
-              线性代数
+            <a href="/tags/%E5%8F%82%E6%95%B0%E9%AB%98%E6%95%88%E5%BE%AE%E8%B0%83/" class="">
+              参数高效微调
             </a>
           
-            <a href="/tags/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92/" class="">
-              线性规划
+            <a href="/tags/LLM/" class="">
+              LLM
             </a>
           
         </div>
@@ -691,7 +900,7 @@ x_{1},x_{2}...x_{n}中部分或者全部取整数
     </li>
     <li class="post-copyright-link">
     <strong>文章链接:  </strong>
-    <a href="/2024/10/10/数模学习历程（一）/" target="_blank" title="数模学习历程（一）">http://example.com/2024/10/10/数模学习历程（一）/</a>
+    <a href="/2024/11/08/论文学习：ATTEMPT-通过注意力混合软提示进行参数高效的多任务调整/" target="_blank" title="ATTEMPT:通过注意力混合软提示进行参数高效的多任务调整">http://example.com/2024/11/08/论文学习：ATTEMPT-通过注意力混合软提示进行参数高效的多任务调整/</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明:   </strong>
@@ -709,40 +918,22 @@ x_{1},x_{2}...x_{n}中部分或者全部取整数
 
 
 
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-    </div>
-    <a href="/2024/10/15/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%EF%BC%9ARelphormer-Relational-Graph-Transformer-for/" class="post-nav-link">
-      <div class="title">
-        <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text">论文学习：Relphormer:用于知识图谱表示的关系图Transformer</div>
-      </div>
-      
-      <!-- <div class="content">
-        论文学习：Relphormer:用于知识图谱表示的关系图Transformer资料
-论文：Relphormer: Rel
-      </div> -->
-    </a>
-  </div>
-
 
 
   
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
     </div>
-    <a href="/2024/10/09/%E4%B8%80%E4%BA%9B%E7%A2%8E%E7%A2%8E%E5%BF%B5/" class="post-nav-link">
+    <a href="/2024/10/15/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%EF%BC%9ARelphormer-Relational-Graph-Transformer-for/" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text">一些碎碎念</div>
+        <div class="title-text">论文学习：Relphormer:用于知识图谱表示的关系图Transformer</div>
       </div>
       <!-- <div class="content">
-        冲冲冲​                转眼就是大三学生了，回过头来看我大一入学为自己的高中写的文章，只能说感慨万千了。
+        论文学习：Relphormer:用于知识图谱表示的关系图Transformer资料
+论文：Relphormer: Rel
       </div> -->
     </a>
   </div>
@@ -881,7 +1072,7 @@ x_{1},x_{2}...x_{n}中部分或者全部取整数
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%A8%A1%E5%AD%A6%E4%B9%A0%E5%8E%86%E7%A8%8B%EF%BC%88%E4%B8%80%EF%BC%89"><span class="toc-text">数模学习历程（一）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E6%A8%A1%E5%9E%8B"><span class="toc-text">线性代数模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E5%80%BC%E4%B8%8E%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F"><span class="toc-text">特征值与特征向量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%AE%E5%88%86%E6%96%B9%E7%A8%8B"><span class="toc-text">差分方程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8E%B1%E6%96%AF%E5%88%A9%E7%A7%8D%E7%BE%A4%E6%A8%A1%E5%9E%8B"><span class="toc-text">莱斯利种群模型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E5%92%8C%E6%95%B4%E6%95%B0%E8%A7%84%E5%88%92%E6%A8%A1%E5%9E%8B"><span class="toc-text">线性规划和整数规划模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E6%A8%A1%E5%9E%8B"><span class="toc-text">线性规划模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E6%A8%A1%E5%9E%8B%E4%BB%A5%E5%8F%8A%E6%A6%82%E5%BF%B5"><span class="toc-text">线性规划模型以及概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E6%B1%82%E8%A7%A3%E5%8F%8A%E5%BA%94%E7%94%A8"><span class="toc-text">模型求解及应用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B4%E6%95%B0%E8%A7%84%E5%88%92"><span class="toc-text">整数规划</span></a></li></ol></li></ol></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%EF%BC%9AATTEMPT-%E9%80%9A%E8%BF%87%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%B7%B7%E5%90%88%E8%BD%AF%E6%8F%90%E7%A4%BA%E8%BF%9B%E8%A1%8C%E5%8F%82%E6%95%B0%E9%AB%98%E6%95%88%E7%9A%84%E5%A4%9A%E4%BB%BB%E5%8A%A1%E8%B0%83%E6%95%B4"><span class="toc-text">论文学习：ATTEMPT:通过注意力混合软提示进行参数高效的多任务调整</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%84%E6%96%99"><span class="toc-text">资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86"><span class="toc-text">前置知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E6%95%88%E5%8F%82%E6%95%B0%E5%BE%AE%E8%B0%83"><span class="toc-text">高效参数微调</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BitFit"><span class="toc-text">BitFit</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Prefix-Tuning"><span class="toc-text">Prefix Tuning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Prompt-Tuning"><span class="toc-text">Prompt Tuning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#P-Tuning"><span class="toc-text">P-Tuning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#P-Tuning-v2"><span class="toc-text">P-Tuning v2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SPoT"><span class="toc-text">SPoT</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BA%E6%96%87%E5%A4%A7%E4%BD%93%E4%BB%8B%E7%BB%8D"><span class="toc-text">论文大体介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BA%E6%96%87%E8%83%8C%E6%99%AF"><span class="toc-text">论文背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E5%8E%9F%E7%90%86"><span class="toc-text">方法原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE"><span class="toc-text">实验设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E7%BB%93%E8%AE%BA"><span class="toc-text">实验结论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E7%82%B9"><span class="toc-text">优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-text">缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E8%BF%9B"><span class="toc-text">改进</span></a></li></ol></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
