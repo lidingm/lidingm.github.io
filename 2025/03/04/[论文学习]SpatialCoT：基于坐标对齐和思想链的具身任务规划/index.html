@@ -90,7 +90,7 @@
     <!-- 判断是否为暗黑风格 -->
     <!-- 判断是否为黑夜模式 -->
 <script defer>
-  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
 
   if (isDark) {
     $(document.body).addClass('darkModel');
@@ -190,7 +190,7 @@
   </transition>
   <div class="drawer-box" :class="{'active': visible}">
     <div class="drawer-box-head bg-color">
-      <img class="drawer-box-head_logo lazyload placeholder" src="/medias/head.jpg" class="lazyload placeholder" data-srcset="/medias/head.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+      <img class="drawer-box-head_logo" src="/medias/head.jpg" alt="logo">
       <h3 class="drawer-box-head_title">碎碎念的博客</h3>
       <h5 class="drawer-box-head_desc"></h5>
     </div>
@@ -350,7 +350,7 @@
     <div class="blog-title" id="author-avatar">
       
         <div class="avatar">
-          <img src="/medias/head.jpg" class="lazyload placeholder" data-srcset="/medias/head.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+          <img src="/medias/head.jpg" alt="logo">
         </div>
       
       <a href="/" class="logo">碎碎念的博客</a>
@@ -639,7 +639,7 @@
 </blockquote>
 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>​        文章提出了一种名为SpatialCoT的方法，旨在通过空间坐标对齐和思维链CoT推理来显著提升VLMs的空间推理能力，从而更好地完成复杂的具身任务规划。论文指出，尽管现有的VLMs在语言和视觉理解方面取得了显著进展，但它们在处理复杂空间关系和生成精细动作时仍存在局限性。SpatialCoT通过两个核心阶段——空间坐标双向对齐和思维链空间锚定——解决了这一问题。该方法不仅在模拟环境中表现出色，还在真实世界任务中展现了强大的适应性。通过实验验证，SpatialCoT在导航和操作任务上均取得了优于现有最先进方法的结果，为具身AI领域的发展提供了新的思路和解决方案。</p>
 <p>​        其方法分为两步：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041906026.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041906026.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250304190618926"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041906026.png" alt="image-20250304190618926"></p>
 <h2 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h2><h3 id="空间推理"><a href="#空间推理" class="headerlink" title="空间推理"></a>空间推理</h3><ul>
 <li>空间推理是视觉语言模型（VLMs）的关键能力之一，已被纳入多个视觉问答（VQA）基准测试中。</li>
 <li>大多数VLMs主要在仅包含2D图像和文本的数据集上进行训练，这些数据集缺乏足够的空间信息，从而限制了它们的空间推理能力。</li>
@@ -653,7 +653,7 @@
 </ul>
 <h2 id="空间坐标双向对齐"><a href="#空间坐标双向对齐" class="headerlink" title="空间坐标双向对齐"></a>空间坐标双向对齐</h2><p>​        之前的研究试图利用其他VQA数据，例如对象引用作为协同训练数据。而这些工作中的数据组织通常缺乏，其增强模型空间推理能力的潜力仍未得到充分利用。</p>
 <p>​        所以在本文中，提出了视觉语言数据与坐标的显式对齐，这将显著帮助模型理解和生成基于坐标的输入和输出。即目标是使视觉语言模型能够理解和生成坐标。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041909280.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041909280.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250304190920239"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041909280.png" alt="image-20250304190920239"></p>
 <p>​        论文引入了双向对齐框架来强化这一过程。具体来说，模型需要处理两种类型的数据：</p>
 <ul>
 <li><strong>坐标理解（Coordinates Understanding）：</strong>给定一个图像和一个包含坐标的文本指令，模型应输出关于指令中描述坐标的相应信息。例如，识别图像中特定坐标位置的对象。、</li>
@@ -667,7 +667,7 @@
 <li><strong>空间兼容性（Spatial Compatibility）：</strong>增强模型理解和预测对象之间兼容性的能力。</li>
 </ul>
 <h2 id="空间定位思维链"><a href="#空间定位思维链" class="headerlink" title="空间定位思维链"></a>空间定位思维链</h2><p>​        该阶段的目标是利用VLMs的自然语言处理能力，通过生成理由（rationale）来指导空间推理任务。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041910400.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041910400.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250304191044368"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041910400.png" alt="image-20250304191044368"></p>
 <p>通过这种方式，模型能够在复杂的任务中进行更细致的推理，并将其转化为基于坐标的动作。</p>
 <ul>
 <li><strong>理由生成（Rationale）</strong>：模型首先生成一个理由，即对任务的思考过程。在这个过程中，模型利用其空间和常识推理能力来提供完成任务所需的指导。</li>
@@ -679,7 +679,7 @@
 <li><strong>图像标注</strong>：将真实动作标注在输入图像上，可以是轨迹或子目标点，具体取决于任务。</li>
 <li><strong>理由生成</strong>：使用强大的视觉语言模型根据动作标注的图像和任务指令生成理由。为了避免信息泄露，引入了一个额外的约束提示，确保生成的理由不包含真实动作的信息。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041914010.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041914010.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250304191403966"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041914010.png" alt="image-20250304191403966"></p>
 <h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><p><strong>实验任务</strong></p>
 <p>导航任务</p>
 <ul>
@@ -711,7 +711,7 @@
 <li>在导航任务中，使用距离增益（DG）和成功率（SR）作为指标。结果显示，GPT-4o ICL和LLama3.2V 11B Zero-shot的表现较差，而RoboPoint的表现稍好。直接动作调优的基线方法提高了DG到2.28，结合空间坐标双向对齐后提高到3.23，引入链式推理后提高到2.83，两者结合提高到3.33，显示出显著提升。</li>
 <li>在操作任务中，碰撞率（CR）和成功率（SR）是评估指标。直接动作调优显著降低了碰撞率到21.3%，成功率提高到75.8%。SpatialCoT进一步提高了这些指标，碰撞率为15.6%，成功率为82.6%。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041921091.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041921091.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250304192101019"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041921091.png" alt="image-20250304192101019"></p>
 <p><strong>问题B</strong></p>
 <ul>
 <li><p>通过将任务按难度级别分类，分析结果表明，操作任务中大多数失败来自于非唯一对象和高数量对象的情况。SpatialCoT在这些任务中表现出显著改进，成功率分别提高了8.68%和20.00%。</p>
@@ -719,7 +719,7 @@
 <li><p>在导航任务中，SpatialCoT在所有难度级别上都表现出色，尤其是在最具有挑战性的级别（目标较少且距离较远）上，成功率提高了8.66%。</p>
 </li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041921657.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041921657.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250304192141613"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041921657.png" alt="image-20250304192141613"></p>
 <p><strong>问题C</strong></p>
 <ul>
 <li><p>评估结果表明，SpatialCoT在所有基本能力类别中均优于其他模型。</p>
@@ -727,13 +727,13 @@
 <li><p>通过分析每个基本能力类别与下游性能之间的相关性，发现对象理解和空间关系之间存在明显的正相关关系，表明基本能力与下游任务性能之间存在正相关。</p>
 </li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041922120.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041922120.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250304192220070"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041922120.png" alt="image-20250304192220070"></p>
 <p><strong>问题D</strong></p>
 <ul>
 <li>实验结果显示，链式推理过程显著增强了模型利用空间和上下文信息的能力，如房间布局和常识知识，以得出正确答案。</li>
 <li>通过案例研究展示，SpatialCoT模型能够更好地考虑典型位置和当前布局，从而产生更准确的结果，而基线模型则生成了混乱的结果。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041922053.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041922053.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250304192254953"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041922053.png" alt="image-20250304192254953"></p>
 <h2 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h2><p>​        SpatialCoT采用基于坐标的动作进行具身任务规划；然而，它没有考虑旋转等复杂的操作，使得它无法管理需要对象旋转的任务。此外，SpatialCoT作为一种视觉语言模型，依赖于2D图像进行视觉输入，因此需要未来的研究来探索3D输入的潜力，特别是在大空间中。</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>​        本文提出了一种名为SpatialCoT的新方法，旨在通过空间坐标对齐和CoT推理显著提升VLMs在具身任务规划中的空间推理能力。该方法包含两个阶段：<strong>空间坐标双向对齐</strong>，使模型能够更好地理解和生成坐标信息；以及<strong>思维链空间锚定</strong>，利用VLMs的语言推理能力生成精细动作。实验表明，SpatialCoT在导航和操作任务中均优于现有方法，展现出强大的复杂任务处理能力。</p>
 
@@ -750,23 +750,6 @@
         
       </div>
       
-        <div class="copyright">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-    <strong>作者:  </strong>Dingming Li</a>
-    </li>
-    <li class="post-copyright-link">
-    <strong>文章链接:  </strong>
-    <a href="/2025/03/04/[论文学习]SpatialCoT：基于坐标对齐和思想链的具身任务规划/" target="_blank" title="[论文学习]SpatialCoT：基于坐标对齐和思想链的具身任务规划">http://example.com/2025/03/04/[论文学习]SpatialCoT：基于坐标对齐和思想链的具身任务规划/</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>版权声明:   </strong>
-      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
-      许可协议。转载请注明出处!
-    </li>
-  </ul>
-<div>
-      
     </article>
     <!-- 上一篇文章和下一篇文章 -->
     
@@ -779,7 +762,7 @@
   <div class="post-nav-prev post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+      <img class="lazyload" src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" alt="">
     </div>
     <a href="/2025/03/04/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5D%E5%A4%A7%E5%9E%8B%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%9F%BA%E5%87%86%E8%AF%84%E4%BC%B0%E3%80%81%E5%BA%94%E7%94%A8%E4%B8%8E%E6%8C%91%E6%88%98%EF%BC%9A%E7%BB%BC%E8%BF%B0/" class="post-nav-link">
       <div class="title">
@@ -800,7 +783,7 @@
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" src="" alt="">
     </div>
     <a href="/2025/03/04/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DLLMs%E7%9A%84%E5%BF%83%E7%81%B5%E4%B9%8B%E7%9C%BC%EF%BC%9A%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E4%B8%AD%E6%80%9D%E7%BB%B4%E8%AF%B1%E5%AF%BC%E7%A9%BA%E9%97%B4%E6%8E%A8%E7%90%86%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96/" class="post-nav-link">
       <div class="title">
@@ -983,7 +966,7 @@
             <div class="post-img-box">
               <a href="/2025/03/07/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DMM-EGO%EF%BC%9A%E8%BF%88%E5%90%91%E6%9E%84%E5%BB%BA%E4%BB%A5%E8%87%AA%E6%88%91%E4%B8%BA%E4%B8%AD%E5%BF%83%E7%9A%84%E5%A4%9A%E6%A8%A1%E6%80%81LLMS/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1004,7 +987,7 @@
             <div class="post-img-box">
               <a href="/2025/03/06/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSCoRe%EF%BC%9A%E9%80%9A%E8%BF%87%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%AE%A9LLM%E5%AD%A6%E4%BC%9A%E8%87%AA%E6%88%91%E7%BA%A0%E6%AD%A3/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1025,7 +1008,7 @@
             <div class="post-img-box">
               <a href="/2025/03/06/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DS%C2%B2R%EF%BC%9A%E9%80%9A%E8%BF%87%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%95%99%E4%BC%9A%20LLM%20%E8%87%AA%E6%88%91%E9%AA%8C%E8%AF%81%E5%92%8C%E8%87%AA%E6%88%91%E4%BF%AE%E6%AD%A3/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1046,7 +1029,7 @@
             <div class="post-img-box">
               <a href="/2025/03/05/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSpatialRGPT%EF%BC%9A%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E4%B8%AD%E8%90%BD%E5%9C%B0%E7%A9%BA%E9%97%B4%E6%8E%A8%E7%90%86/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1067,7 +1050,7 @@
             <div class="post-img-box">
               <a href="/2025/03/05/%5B%E6%A6%82%E8%BF%B0%E5%AD%A6%E4%B9%A0%5D%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%9C%A8%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E5%8D%9A%E5%BC%88%E4%B8%AD%E7%9A%84%E6%8E%A8%E7%90%86%E8%83%BD%E5%8A%9B/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1317,7 +1300,7 @@
       this.setFishColor(); this.setParameters(), this.reconstructMethods(), this.setup(), this.bindEvent(), this.render()
     },
     setFishColor: function () {
-      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
       if (isDark) {
         this.FISH_COLOR = '#222'; // 暗黑色，有时间把这整成一个变量
       } else {
@@ -1502,7 +1485,7 @@
 <script defer>
   $(function() {
     // 初始化暗黑模式状态
-    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
     updateDarkModeIcon(isDark);
   });
 
@@ -1938,7 +1921,7 @@
   var utteranceComment = {};
 
   function check_utterance() {
-    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
     if (isDark) {
       utteranceComment.Theme = 'github-dark';
     } else {

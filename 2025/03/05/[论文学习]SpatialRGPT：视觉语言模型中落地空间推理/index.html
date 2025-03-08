@@ -90,7 +90,7 @@
     <!-- 判断是否为暗黑风格 -->
     <!-- 判断是否为黑夜模式 -->
 <script defer>
-  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
 
   if (isDark) {
     $(document.body).addClass('darkModel');
@@ -190,7 +190,7 @@
   </transition>
   <div class="drawer-box" :class="{'active': visible}">
     <div class="drawer-box-head bg-color">
-      <img class="drawer-box-head_logo lazyload placeholder" src="/medias/head.jpg" class="lazyload placeholder" data-srcset="/medias/head.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+      <img class="drawer-box-head_logo" src="/medias/head.jpg" alt="logo">
       <h3 class="drawer-box-head_title">碎碎念的博客</h3>
       <h5 class="drawer-box-head_desc"></h5>
     </div>
@@ -350,7 +350,7 @@
     <div class="blog-title" id="author-avatar">
       
         <div class="avatar">
-          <img src="/medias/head.jpg" class="lazyload placeholder" data-srcset="/medias/head.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+          <img src="/medias/head.jpg" alt="logo">
         </div>
       
       <a href="/" class="logo">碎碎念的博客</a>
@@ -645,7 +645,7 @@
 </ul>
 <p>​        该模型能够在推理过程中准确感知用户指定区域的相对方向和距离。并且研究者还提出了SpatialRGPT-Bench，这是一个包含真实3D标注的基准数据集，涵盖室内、室外和模拟环境，以评估VLMs的3D空间认知能力。实验结果表明，SpatialRGPT显著提升了VLMs在空间推理任务中的表现，并具备良好的泛化能力，可应用于复杂空间关系推理和机器人任务的奖励标注。</p>
 <h2 id="单个二维图像构建-3D-场景图"><a href="#单个二维图像构建-3D-场景图" class="headerlink" title="单个二维图像构建 3D 场景图"></a>单个二维图像构建 3D 场景图</h2><p>​        如图，其场景图的构建管道从过滤过程开始，删除任何不适合的图像。使用<strong>开放词汇</strong>模型，识别并定位候选对象，然后通过<strong>度量深度</strong>估计和<strong>相机标定</strong>将其提升到三维空间。之后通过处理点云，以<strong>构造三维场景图</strong>。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503052236211.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503052236211.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250305223644688"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503052236211.png" alt="image-20250305223644688"></p>
 <ul>
 <li><strong>开放词汇检测和分割</strong>。分割目标是构建场景图的初始阶段。首先采用开放词汇图像标记模型 来识别图像中存在的所有目标类。接下来，用 一种开放词汇 2D 检测器来确定相应的目标边框。最后，应用分割模型将这些边框细化为精确的掩码。不使用现有的数据集注释，因为它们要么由于词汇限制而不足，要么使用多边形注释或压缩掩码进行分割。</li>
 <li><strong>度量深度估计</strong>。最近，Metric3Dv2 将焦距作为输入，并进行端到端训练以预测度量深度和表面法线。该模型在不同的室内和室外场景上联合训练，使其不太容易过拟合特定数据集的深度分布。采用 Metric3Dv2 作为度量深度估计器，Metric3Dv2 与 WildCamera的相机内参相结合，对于在真实世界环境中拍摄的图像具有鲁棒性。此外，由于 Metric3Dv2 中的联合深度法线优化训练，恢复的几何形状得到了改善，尤其是在目标边缘周围。</li>
@@ -654,11 +654,11 @@
 </ul>
 <h2 id="从3D场景图中学习空间-觉察-VLM"><a href="#从3D场景图中学习空间-觉察-VLM" class="headerlink" title="从3D场景图中学习空间-觉察 VLM"></a>从3D场景图中学习空间-觉察 VLM</h2><p>​        文章通过将构建的三维场景图转换为文本表示以进行VLM训练。一种简单的方法是通过基于模板的方法和预先定义的手工指令。然而，这种方法限制了指令的多样性，并阻碍模型的推理能力。因此，文章采用额外复杂的问答来增强模型的推理能力。</p>
 <p><strong>基于模板的问答</strong>。这些 QA 是学习基本空间知识的基础。从边缘属性中提取有关节点属性（如宽度和高度）以及相对和度量关系的信息。用 Region [X] 形式的实体，创建定性和定量模板来为每种类型的属性生成问题和答案。这种方法产生的示例如图第一行所示，第二行是基于LLM进行回答的QA。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503052244739.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503052244739.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250305224445451"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503052244739.png" alt="image-20250305224445451"></p>
 <p><strong>基于 LLM 的复杂推理问答</strong>。采用 Llama3-70B 生成复杂的空间推理问题，以增强模型的空间推理能力。一种方法是将场景图直接输入 LLM。然而，LLM 很难有效地利用 3D 坐标信息，因此文章选择了另一种方法。首先以语言格式构建空间描述。与基于模板的方法类似，从场景图中提取属性，然后根据这些属性构建基于模板的空间描述。将空间描述和区域标签组合作为 LLM 的输入。然后，LLM 的任务是创建一个基于描述并与上下文匹配的复杂推理问题和答案。上图的第二行显示 LLM 生成的 QA 示例。</p>
 <p>​        产生的开放空间数据集包含 100 万张独特图像和 500 万张开放词汇区域。并且该数据集还包括 800 万个基于模板 QA 和 70 万个基于 LLM QA。</p>
 <h2 id="VLM的架构"><a href="#VLM的架构" class="headerlink" title="VLM的架构"></a>VLM的架构</h2><p>​        SpatialRGPT 由一个视觉编码器组成，用于对视觉特征进行编码，一个区域特征提取器，用于获得区域级嵌入，线性连接器用于将多模态嵌入投影到词嵌入空间，以及一个使用 LLaMA2-7B 进行语言处理的大语言模型。如图所示：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503052252100.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503052252100.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250305225243044"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503052252100.png" alt="image-20250305225243044"></p>
 <p><strong>相对-深度输入的插件模块</strong>。仅从 RGB 像素学习的 VLM 对于 3D 感知任务无效。为了弥补这一差距，使用相对深度图，以在 RGB 图像之外提供额外的深度信息作为网络的输入。目标是通过深度引导来引出几何推理能力。而大多数 VLM 的视觉编码器通常只使用文本和 2D 图像进行训练，简单地连接 RGB 和深度特征可能会对性能产生负面影响。所以文章引入一个无缝整合深度信息的附加模块。用相同的图像编码器来处理深度图并生成深度特征图。然后，用一个额外的深度-到-语言连接器将特征投射到语言域中。深度连接器的权重从 RGB 连接器初始化，并仅在与空间相关的 QA 上进行训练。这种灵活的设计，允许 2D 视觉编码器利用额外的深度表示，同时在没有深度输入时仍能正常工作，从而避免了对大量训练数据的需求。</p>
 <p><strong>token化和提示格式</strong>。为每个图像生成多轮对话数据，并将图像作为第一条指令的初始输入，提供上下文信息。具体来说，加入了一个前缀提示：“<image>\n”。<image> 是一个充当占位符的特殊token，它将被视觉编码器中的图像级嵌入替换。当用户输入中提到特定的掩码区域时，我们使用特殊tokens <region> 和 <depth> 作为占位符。每个区域token将替换为相应的区域 RGB 嵌入和深度嵌入。所有图像级、区域级 RGB/深度token和文本 token都交错在一起，并作为 LLM 的输入进行自回归生成。</p>
 <h2 id="训练和推理流程"><a href="#训练和推理流程" class="headerlink" title="训练和推理流程"></a>训练和推理流程</h2><p>​        SpatialRGPT 训练包括三个阶段：</p>
@@ -695,21 +695,21 @@
 <p>​        SpatialRGPT在所有类别上均显著优于其他基线，特别是在定量推理上误差最小。</p>
 <p>​        盲目LLMs（GPT-4）在某些定量问题上表现良好（例如宽度和高度），表明LLMs的世界知识可以在一定程度上进行空间推理。</p>
 <p>​        相比RGB-only版本，带深度信息的SpatialRGPT表现更好，尤其是在区分前后、宽窄等方面，说明深度信息对于3D推理至关重要。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503052309809.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503052309809.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250305230954631"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503052309809.png" alt="image-20250305230954631"></p>
 <h4 id="公共视觉语言基准"><a href="#公共视觉语言基准" class="headerlink" title="公共视觉语言基准"></a><strong>公共视觉语言基准</strong></h4><p>​        本实验评估SpatialRGPT是否在提升空间推理能力的同时，仍能保持在通用VQA任务上的竞争力。</p>
 <p><strong>VQA 任务</strong>：SpatialRGPT的性能与VILA-1.5-3B接近或略有提高，表明空间推理训练不会降低模型的通用VQA能力。</p>
 <p><strong>区域分类任务</strong>：SpatialRGPT在COCO-2017上表现优于RegionGPT，显示其域级空间感知能力更强。</p>
 <p><strong>深度推理任务</strong>：SpatialRGPT在BLINK Relative Depth Benchmark上比GPT-4V-Turbo高出20%准确率，表明其在新任务上的泛化能力较强。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503052311629.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503052311629.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250305231117560"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503052311691.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503052311691.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250305231135626"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503052311629.png" alt="image-20250305231117560"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503052311691.png" alt="image-20250305231135626"></p>
 <h4 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a><strong>实际应用</strong></h4><h5 id="复杂空间推理"><a href="#复杂空间推理" class="headerlink" title="复杂空间推理"></a>复杂空间推理</h5><p>​        SpatialRGPT能够直接处理复杂空间推理任务，而无需借助GPT-4进行额外的逻辑推理（与SpatialVLM不同），如图展示了模型在真实场景下推理：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503052313529.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503052313529.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250305231317257"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503052313529.png" alt="image-20250305231317257"></p>
 <p>​        GPT-4V在这些任务上表现较差，而SpatialRGPT能够结合视觉信息和空间知识提供精准答案。</p>
 <h5 id="多跳（Multi-hop）推理"><a href="#多跳（Multi-hop）推理" class="headerlink" title="多跳（Multi-hop）推理"></a>多跳（Multi-hop）推理</h5><p>​        如图所示，即使数据集中未明确包含“多跳推理”任务，SpatialRGPT仍然能够在推理过程中逐步推导复杂空间关系，这表明其学习到了深层次的空间认知。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503052314504.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503052314504.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250305231407359"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503052314504.png" alt="image-20250305231407359"></p>
 <h5 id="作为区域级奖励标注器"><a href="#作为区域级奖励标注器" class="headerlink" title="作为区域级奖励标注器"></a>作为区域级奖励标注器</h5><p>​        最近已经表明，VLMs可以作为机器人任务的密集奖励注释器，通过用自然语言指定任务，并让模型为轨迹中的每一帧注释奖励。</p>
 <p>​        为了研究这个应用，研究人员进行了一个真实的机器人实验。具体来说，使用边界框定义了两个区域 (一个用于指尖，一个用于绿色立方体)，并使用两个区域之间的距离来注释奖励。结果如下图所示，表明指尖与目标立方体之间的估计距离随着指尖向目标方向移动而单调减小。此外，我们的深度变体性能略高于RGB变体。这表明了SpatialRGPT作为区域感知的密集奖励注释器的有效性，为纯语言方法提供了更精确和有效的替代方案。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503052314497.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503052314497.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250305231455363"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503052314497.png" alt="image-20250305231455363"></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>​        文章提出了SpatialRGPT，其通过引入区域表示模块和灵活的深度信息插件，大幅提升了VLMs的空间推理能力，在3D空间理解、复杂空间关系推理和机器人应用等方面展现出卓越的表现。实验结果表明，该模型在SpatialRGPT-Bench基准测试中远超现有方法，并在通用VQA任务中保持竞争力，能够支持多跳推理和区域级奖励标注等实际应用。</p>
 
       </div>
@@ -725,23 +725,6 @@
         
       </div>
       
-        <div class="copyright">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-    <strong>作者:  </strong>Dingming Li</a>
-    </li>
-    <li class="post-copyright-link">
-    <strong>文章链接:  </strong>
-    <a href="/2025/03/05/[论文学习]SpatialRGPT：视觉语言模型中落地空间推理/" target="_blank" title="[论文学习]SpatialRGPT：视觉语言模型中落地空间推理">http://example.com/2025/03/05/[论文学习]SpatialRGPT：视觉语言模型中落地空间推理/</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>版权声明:   </strong>
-      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
-      许可协议。转载请注明出处!
-    </li>
-  </ul>
-<div>
-      
     </article>
     <!-- 上一篇文章和下一篇文章 -->
     
@@ -754,7 +737,7 @@
   <div class="post-nav-prev post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+      <img class="lazyload" src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" alt="">
     </div>
     <a href="/2025/03/06/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DS%C2%B2R%EF%BC%9A%E9%80%9A%E8%BF%87%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%95%99%E4%BC%9A%20LLM%20%E8%87%AA%E6%88%91%E9%AA%8C%E8%AF%81%E5%92%8C%E8%87%AA%E6%88%91%E4%BF%AE%E6%AD%A3/" class="post-nav-link">
       <div class="title">
@@ -775,7 +758,7 @@
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" src="" alt="">
     </div>
     <a href="/2025/03/05/%5B%E6%A6%82%E8%BF%B0%E5%AD%A6%E4%B9%A0%5D%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%9C%A8%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E5%8D%9A%E5%BC%88%E4%B8%AD%E7%9A%84%E6%8E%A8%E7%90%86%E8%83%BD%E5%8A%9B/" class="post-nav-link">
       <div class="title">
@@ -961,7 +944,7 @@
             <div class="post-img-box">
               <a href="/2025/03/07/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DMM-EGO%EF%BC%9A%E8%BF%88%E5%90%91%E6%9E%84%E5%BB%BA%E4%BB%A5%E8%87%AA%E6%88%91%E4%B8%BA%E4%B8%AD%E5%BF%83%E7%9A%84%E5%A4%9A%E6%A8%A1%E6%80%81LLMS/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -982,7 +965,7 @@
             <div class="post-img-box">
               <a href="/2025/03/06/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSCoRe%EF%BC%9A%E9%80%9A%E8%BF%87%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%AE%A9LLM%E5%AD%A6%E4%BC%9A%E8%87%AA%E6%88%91%E7%BA%A0%E6%AD%A3/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1003,7 +986,7 @@
             <div class="post-img-box">
               <a href="/2025/03/06/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DS%C2%B2R%EF%BC%9A%E9%80%9A%E8%BF%87%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%95%99%E4%BC%9A%20LLM%20%E8%87%AA%E6%88%91%E9%AA%8C%E8%AF%81%E5%92%8C%E8%87%AA%E6%88%91%E4%BF%AE%E6%AD%A3/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1024,7 +1007,7 @@
             <div class="post-img-box">
               <a href="/2025/03/05/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSpatialRGPT%EF%BC%9A%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E4%B8%AD%E8%90%BD%E5%9C%B0%E7%A9%BA%E9%97%B4%E6%8E%A8%E7%90%86/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1045,7 +1028,7 @@
             <div class="post-img-box">
               <a href="/2025/03/05/%5B%E6%A6%82%E8%BF%B0%E5%AD%A6%E4%B9%A0%5D%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%9C%A8%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E5%8D%9A%E5%BC%88%E4%B8%AD%E7%9A%84%E6%8E%A8%E7%90%86%E8%83%BD%E5%8A%9B/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1295,7 +1278,7 @@
       this.setFishColor(); this.setParameters(), this.reconstructMethods(), this.setup(), this.bindEvent(), this.render()
     },
     setFishColor: function () {
-      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
       if (isDark) {
         this.FISH_COLOR = '#222'; // 暗黑色，有时间把这整成一个变量
       } else {
@@ -1480,7 +1463,7 @@
 <script defer>
   $(function() {
     // 初始化暗黑模式状态
-    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
     updateDarkModeIcon(isDark);
   });
 
@@ -1916,7 +1899,7 @@
   var utteranceComment = {};
 
   function check_utterance() {
-    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
     if (isDark) {
       utteranceComment.Theme = 'github-dark';
     } else {

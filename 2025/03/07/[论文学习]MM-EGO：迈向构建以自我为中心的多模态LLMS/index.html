@@ -90,7 +90,7 @@
     <!-- 判断是否为暗黑风格 -->
     <!-- 判断是否为黑夜模式 -->
 <script defer>
-  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
 
   if (isDark) {
     $(document.body).addClass('darkModel');
@@ -190,7 +190,7 @@
   </transition>
   <div class="drawer-box" :class="{'active': visible}">
     <div class="drawer-box-head bg-color">
-      <img class="drawer-box-head_logo lazyload placeholder" src="/medias/head.jpg" class="lazyload placeholder" data-srcset="/medias/head.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+      <img class="drawer-box-head_logo" src="/medias/head.jpg" alt="logo">
       <h3 class="drawer-box-head_title">碎碎念的博客</h3>
       <h5 class="drawer-box-head_desc"></h5>
     </div>
@@ -350,7 +350,7 @@
     <div class="blog-title" id="author-avatar">
       
         <div class="avatar">
-          <img src="/medias/head.jpg" class="lazyload placeholder" data-srcset="/medias/head.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+          <img src="/medias/head.jpg" alt="logo">
         </div>
       
       <a href="/" class="logo">碎碎念的博客</a>
@@ -645,10 +645,10 @@
 <p>​        实验表明，MM-EGO在第一人称视频理解任务中表现出色，同时在去偏评估中展现出更强的真实理解能力。该研究为第一人称视频理解领域提供了重要的数据资源、评估标准和模型架构，推动了多模态大语言模型在该方向的发展。</p>
 <h2 id="“以自我为中心的QA”数据引擎"><a href="#“以自我为中心的QA”数据引擎" class="headerlink" title="“以自我为中心的QA”数据引擎"></a>“以自我为中心的QA”数据引擎</h2><p>​        目前由于缺乏高质量的以自我为中心的QA对来训练具有以自我为中心的视频理解能力的MLLM。为了解决这一差距，我们开发了一个创新的“叙述到以自我为中心的QA”的数据引擎，该引擎可以根据Ego4D数据集中的人标注视频剪辑叙述自动生成与事件记忆相关的QA样本，而无需额外的手动注释。</p>
 <p>​        数据引擎的工作流程如图所示。通过按正确的顺序组织连续的视频片段{剪辑1，剪辑2，…，剪辑N}及其相应的叙述{叙述1，叙述2，…，叙述N}，我们创建了描述整个视频序列的综合叙述段落。然后，使用强大的纯文本语言模型，即GPT4-o，根据这些叙述段落生成与情节记忆相关的多样且自信的QA对。语言模型被指示附加每个QA对所基于的叙述句子的索引。这种索引允许我们将每个QA对映射回原始视频中的相应时间范围，从而提取出后续模型训练中至关重要的关键帧信息。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503071913435.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503071913435.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250307191343126"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503071913435.png" alt="image-20250307191343126"></p>
 <p>​        将这个数据引擎应用于广泛的Ego4D数据集，能够有效地扩展以自我为中心的QA数据的创建。我们根据官方的Ego4D情景记忆任务将数据集划分为训练集和测试集。自我中心的QA数据集在938k多轮对话中提供了超过700万个QA样本。</p>
 <p>​        数据包含持续时间不同的视频，范围从30秒到1小时，如图所示。为了确保全面覆盖并防止偏向较短的视频，我们在训练中平衡不同视频长度之间的对话数量。这是第一个大规模的以自我为中心的QA数据集，其中包括持续时间范围如此延长的视频。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503071915501.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503071915501.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250307191502380"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503071915501.png" alt="image-20250307191502380"></p>
 <h2 id="MM-EGO模型"><a href="#MM-EGO模型" class="headerlink" title="MM-EGO模型"></a>MM-EGO模型</h2><p>​        文章目标是开发一个用于处理自我中心视频的MLM，这些视频冗长且视觉细节丰富。一方面，帧级信息对于捕获视频的完整内容是必要的，因为在采样期间跳过帧可能会导致视觉细节的显著损失。另一方面，处理由视觉编码器生成的所有视觉标记对于转换器模型来说在计算上是具有挑战性的。例如，如果每张图像被编码为729个视觉嵌入 (标记)，那么一个300帧视频的视觉嵌入总数将为218，700个。然而，大多数MLLMs的训练上下文长度小于10，000令牌。</p>
 <p>​        考虑到这些因素，文章引入了mm-ego模型，该模型用于处理大量以自我为中心的视频帧，同时在变压器主干网内保持可管理的计算成本。Mm-ego引入了一种创新的<strong>记忆指针提示机制</strong>，其操作分为两个主要步骤: global glimpse和fallback。</p>
 <h4 id="视觉和文本嵌入"><a href="#视觉和文本嵌入" class="headerlink" title="视觉和文本嵌入"></a>视觉和文本嵌入</h4><p>​        给出一个输入视频和问题，第一步是将它们分别嵌入到视觉和文本嵌入层中，以便后续处理。首先将视频均匀采样到最多N帧，其中N可以在数百个范围内。</p>
@@ -656,13 +656,13 @@
 <p>​        对于文本嵌入，研究员使用Qwen2作为LLM，使用其分词器和嵌入层将输入文本转换为文本嵌入。对于问题q，我们将相应的文本问题嵌入表示为 {$\mathbf{E}_{\text{que}}^q \in \mathbb{R}^{T_q \times C}$，q ∈[1，Q]} 其中Q是问题的总数，$T_q$是问题q的嵌入长度。</p>
 <h4 id="记忆指针提示"><a href="#记忆指针提示" class="headerlink" title="记忆指针提示"></a>记忆指针提示</h4><p>​        因为使用LLM处理所有N个高分辨率视觉嵌入在计算上是困难的，建议以问题感知的方式识别关键视觉嵌入，并仅将这些选定的嵌入发送到后续的llm。</p>
 <p>​        受以前关于指针网络工作的工作启发，研究人员提出了一种内存指针提示机制，如下图所示。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503072333880.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503072333880.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250307233304682"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503072333880.png" alt="image-20250307233304682"></p>
 <p>​        在推理过程中，内存指针提示包括两个步骤: Global Glimpse Step和Fallback Step.。在Global Glimpse Step步骤中，关键的视觉嵌入被从所有的框架级嵌入中识别出来，由问题的上下文引导。在随后的Fallback Step中，选择了重要的视觉嵌入，并将其更高分辨率的版本提供给LLM转换器骨干，以便进一步处理和生成语言响应。</p>
 <p><strong>Global Glimpse Step</strong></p>
 <p>​        首先通过沿嵌入长度维度的平均池化压缩视觉嵌入，得到一组压缩后的视觉嵌入{$\mathbf{E}_{\text{vsi}}^i \in \mathbb{R}^{1 \times C}$, i∈[1,N]}。接下来，我们引入一个可学习的记忆指针提示嵌入$P \in \mathbb{R}^{1 \times C}$，在这里，Q = 1，因为MLLMs一次只生成一个问题的答案。这样，问题嵌入后跟着一个指针嵌入，它将用于根据问题嵌入的知识识别关键视觉嵌入。然后整个嵌入序列被输入到LLM中，得到最终层的输出嵌入序列：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503072313353.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503072313353.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250307231350296"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503072313353.png" alt="image-20250307231350296"></p>
 <p>​        提取并堆叠处理过的视觉嵌入{$\mathbf{E}<em>{\text{vsi}}^{‘i }\in \mathbb{R}^{1 \times C}$，i∈[1,N]}以获得矩阵$\mathbf{E}</em>{\text{vsi}}^i \in \mathbb{R}^{N \times C}$。我们在$E_{vis}$和$P^{‘1}$之间进行softmax点积操作：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503072321111.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503072321111.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250307232126071"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503072321111.png" alt="image-20250307232126071"></p>
 <p>​        这里是一个相关性分数向量，表示问题与每个帧之间的相关性。</p>
 <ul>
 <li>该步骤首先对视频的所有帧进行压缩，生成低分辨率的视觉嵌入。</li>
@@ -676,7 +676,7 @@
 </ul>
 <p><strong>Training Procedure</strong></p>
 <p>​        鉴于mm-ego的新颖设计，其训练过程与流行的MLLMs不同 。具体来说，让问题q ∈[1，Q] 的答案嵌入表示为$E_{ans}^q$，然后训练过程中的输入嵌入序列表示为:</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503072331080.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503072331080.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250307233159024"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503072331080.png" alt="image-20250307233159024"></p>
 <p>即输入序列的构建逻辑：</p>
 <ul>
 <li>输入所有帧的 压缩视觉嵌入（N 个），这些嵌入可以帮助模型形成全局理解。</li>
@@ -720,7 +720,7 @@
 <li>基于 Ego4D 数据集的验证集构建，确保数据质量。</li>
 <li>采用 “叙述转 Egocentric QA” 数据引擎自动生成问题和答案。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503072343649.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503072343649.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250307234337363"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503072343649.png" alt="image-20250307234337363"></p>
 <p><strong>训练模型</strong></p>
 <p>1、训练数据：</p>
 <ul>
@@ -741,7 +741,7 @@
 <li>lllava-OV+使用论文的MM-Ego SFT数据混合 (称为 “Ego SFT”) </li>
 <li>lllava-OV+论文的MM-Ego模型进行微调版本</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503072359990.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503072359990.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250307235935898"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503072359990.png" alt="image-20250307235935898"></p>
 <p><strong>采样帧数影响（Table 5）</strong></p>
 <p>减少输入帧数（32 → 4）</p>
 <ul>
@@ -749,7 +749,7 @@
 <li>MM-Ego：仅下降 4.59%</li>
 <li>说明 MM-Ego 关键帧选择更有效，即使采样帧数减少，性能下降较少。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503072359397.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503072359397.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250307235949290"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503072359397.png" alt="image-20250307235949290"></p>
 <p><strong>关键帧选择可视化（Figure 6）</strong></p>
 <ul>
 <li>全局概览步骤（Global Glimpse） 可有效选出最相关的关键帧，提升模型回答的精准度。</li>
@@ -765,7 +765,7 @@
 <li>设定 α=0.1\alpha = 0.1α=0.1 时，<strong>模型性能最佳</strong>。</li>
 <li>说明适度的探索机制有助于提高模型对未知情况的适应能力。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503080000515.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503080000515.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250308000013450"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503080000515.png" alt="image-20250308000013450"></p>
 <p><strong>真实世界示例（Figure 8）</strong></p>
 <p>测试一个 2 分钟的 egocentric 佩戴式摄像机视频</p>
 <ul>
@@ -778,7 +778,7 @@
 <li><p>说明 MM-Ego 具备现实应用价值。</p>
 </li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503080000050.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503080000050.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250308000034779"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503080000050.png" alt="image-20250308000034779"></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>​        本论文提出了 MM-Ego，一种专为 Egocentric（自我中心）视频理解 设计的MLLM，并在数据、基准测试、模型架构 方面做出重要贡献。研究者构建了 700 万条 Egocentric QA 数据集，提出 EgoMemoria 基准测试 以评估模型的 情景记忆能力，并引入去偏均值准确率（MDA） 以消除语言偏差影响。同时，创新性地提出 Memory Pointer Prompting 机制，通过 “全局概览 + 关键帧回退” 方法高效筛选视频关键信息，提升长时视频理解能力。</p>
 <p>​        实验结果表明，MM-Ego 在 EgoMemoria 上超越所有基线模型，去偏准确率（MDA）达 61.27%，且即使减少输入帧数仍能保持较高性能，证明其在 Egocentric 任务** 上的高效性与鲁棒性。MM-Ego 的研究填补了 Egocentric MLLMs 领域的空白，为 AR/VR、可穿戴设备、机器人感知 等应用场景提供了有力的技术支撑。</p>
 
@@ -795,23 +795,6 @@
         
       </div>
       
-        <div class="copyright">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-    <strong>作者:  </strong>Dingming Li</a>
-    </li>
-    <li class="post-copyright-link">
-    <strong>文章链接:  </strong>
-    <a href="/2025/03/07/[论文学习]MM-EGO：迈向构建以自我为中心的多模态LLMS/" target="_blank" title="[论文学习]MM-EGO：迈向构建以自我为中心的多模态LLMS">http://example.com/2025/03/07/[论文学习]MM-EGO：迈向构建以自我为中心的多模态LLMS/</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>版权声明:   </strong>
-      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
-      许可协议。转载请注明出处!
-    </li>
-  </ul>
-<div>
-      
     </article>
     <!-- 上一篇文章和下一篇文章 -->
     
@@ -826,7 +809,7 @@
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload" src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" src="" alt="">
     </div>
     <a href="/2025/03/06/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSCoRe%EF%BC%9A%E9%80%9A%E8%BF%87%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%AE%A9LLM%E5%AD%A6%E4%BC%9A%E8%87%AA%E6%88%91%E7%BA%A0%E6%AD%A3/" class="post-nav-link">
       <div class="title">
@@ -1009,7 +992,7 @@
             <div class="post-img-box">
               <a href="/2025/03/07/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DMM-EGO%EF%BC%9A%E8%BF%88%E5%90%91%E6%9E%84%E5%BB%BA%E4%BB%A5%E8%87%AA%E6%88%91%E4%B8%BA%E4%B8%AD%E5%BF%83%E7%9A%84%E5%A4%9A%E6%A8%A1%E6%80%81LLMS/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1030,7 +1013,7 @@
             <div class="post-img-box">
               <a href="/2025/03/06/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSCoRe%EF%BC%9A%E9%80%9A%E8%BF%87%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%AE%A9LLM%E5%AD%A6%E4%BC%9A%E8%87%AA%E6%88%91%E7%BA%A0%E6%AD%A3/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1051,7 +1034,7 @@
             <div class="post-img-box">
               <a href="/2025/03/06/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DS%C2%B2R%EF%BC%9A%E9%80%9A%E8%BF%87%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%95%99%E4%BC%9A%20LLM%20%E8%87%AA%E6%88%91%E9%AA%8C%E8%AF%81%E5%92%8C%E8%87%AA%E6%88%91%E4%BF%AE%E6%AD%A3/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1072,7 +1055,7 @@
             <div class="post-img-box">
               <a href="/2025/03/05/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSpatialRGPT%EF%BC%9A%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E4%B8%AD%E8%90%BD%E5%9C%B0%E7%A9%BA%E9%97%B4%E6%8E%A8%E7%90%86/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1093,7 +1076,7 @@
             <div class="post-img-box">
               <a href="/2025/03/05/%5B%E6%A6%82%E8%BF%B0%E5%AD%A6%E4%B9%A0%5D%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%9C%A8%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E5%8D%9A%E5%BC%88%E4%B8%AD%E7%9A%84%E6%8E%A8%E7%90%86%E8%83%BD%E5%8A%9B/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1343,7 +1326,7 @@
       this.setFishColor(); this.setParameters(), this.reconstructMethods(), this.setup(), this.bindEvent(), this.render()
     },
     setFishColor: function () {
-      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
       if (isDark) {
         this.FISH_COLOR = '#222'; // 暗黑色，有时间把这整成一个变量
       } else {
@@ -1528,7 +1511,7 @@
 <script defer>
   $(function() {
     // 初始化暗黑模式状态
-    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
     updateDarkModeIcon(isDark);
   });
 
@@ -1964,7 +1947,7 @@
   var utteranceComment = {};
 
   function check_utterance() {
-    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
     if (isDark) {
       utteranceComment.Theme = 'github-dark';
     } else {

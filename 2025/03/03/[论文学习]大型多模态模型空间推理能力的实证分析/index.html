@@ -90,7 +90,7 @@
     <!-- 判断是否为暗黑风格 -->
     <!-- 判断是否为黑夜模式 -->
 <script defer>
-  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
 
   if (isDark) {
     $(document.body).addClass('darkModel');
@@ -190,7 +190,7 @@
   </transition>
   <div class="drawer-box" :class="{'active': visible}">
     <div class="drawer-box-head bg-color">
-      <img class="drawer-box-head_logo lazyload placeholder" src="/medias/head.jpg" class="lazyload placeholder" data-srcset="/medias/head.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+      <img class="drawer-box-head_logo" src="/medias/head.jpg" alt="logo">
       <h3 class="drawer-box-head_title">碎碎念的博客</h3>
       <h5 class="drawer-box-head_desc"></h5>
     </div>
@@ -350,7 +350,7 @@
     <div class="blog-title" id="author-avatar">
       
         <div class="avatar">
-          <img src="/medias/head.jpg" class="lazyload placeholder" data-srcset="/medias/head.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+          <img src="/medias/head.jpg" alt="logo">
         </div>
       
       <a href="/" class="logo">碎碎念的博客</a>
@@ -643,13 +643,13 @@
 <h3 id="Spatial-Obj"><a href="#Spatial-Obj" class="headerlink" title="Spatial-Obj"></a>Spatial-Obj</h3><p>​        Spatial-Obj是一个精心策划的基准，包含2000个多项选择题，旨在评估LMM在给定图像中对一个或两个对象的空间推理能力。</p>
 <p>​        数据集由两轮注释构成。在第一轮注释中，我们将图像分成三个注释者，并要求他们在每张图像中选择一个或两个对象，并组成一个问答 (QA)。对，包括空间关系。为注释者提供了带有ob-jects占位符的问题模板，他们可以根据自己的喜好使用或进行自定义。在第二轮注释中，我们发布了200QA对的批次及其相应图像。另外10个注释者的任务是审查这些QA对，以验证它们是否正确或不正确/不明确。根据他们的反馈进行了更正。</p>
 <p>​        这个数据集涵盖了36个最常用的空间关系，包括右、左、附着、触摸、后、下、前、后，朝下，朝外，顶部，下面，旁边，后面，下面，上，里，正面、下方、上方、中间、内部、外部、右下角、左下角、右上方、左上方、角落、靠近、旁边、靠近。此外，我们使用GPT-4o将空间对象分类为视觉模式，例如 “对象定位” 、 “方向和方向” 、 “视点” 和 “位置和关系上下文”。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031607781.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031607781.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250303160709687"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031607781.png" alt="image-20250303160709687"></p>
 <h3 id="Spatial-CoT"><a href="#Spatial-CoT" class="headerlink" title="Spatial-CoT"></a>Spatial-CoT</h3><p>​        Cot已被证明可以显著提高LLMs的推理能力。然而，最近的研究表明，在通过CoT提示回答问题时存在不一致性。也就是说，在使用CoT生成推理路径时，LLM可以产生正确的答案，但生成的推理路径并不总是正确的。这种差异是一种幻觉形式，并使LLMs的推理变得不可靠。</p>
 <p>​        为了研究lmm在Cot下的空间推理的可信度，我们策划了一个多跳问答对数据集Spatial-CoT。QA对是通过提示GPT-4o给定图像和一组上下文相关的示例生成的。总共生成了800个多跳QA对，我们筛选出了178个不包括上一节中列出的36个空间关系中的至少一个的QA对。然后人来选择合理且有意义的多跳QA对，这些QA对至少需要两个推理步骤才能达到最终答案。最终，空间CoT包括310个空间感知的多跳QA对。</p>
 <p>​        在知识图谱问题回答中，三元组被认为是推理步骤。利用这个想法，在VQA任务中，我们利用场景图，包括对象关系或属性，作为导致答案的推理步骤。重要的是要注意当前的VQA基准测试使用地面真实场景图，缺乏多样化的视角信息，只从相机的角度考虑空间关系。对于空间Cot，由于不存在真实路径 (或场景图)，为了评估LMMs的空间推理能力，我们为每个问题生成推理路径。通过一组上下文相关的例子仔细地指导GPT-4o生成空间感知推理路径的初稿。随后，三名调查员被指派进行评估 (即保留、删除、添加或修改) 每个问题的生成步骤。空间跳跃的步骤标记为S，例如 “车前的人”，非空间跳跃的步骤标记为S，例如 “拿叉子的女人”。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031615733.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031615733.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250303161548586"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031615733.png" alt="image-20250303161548586"></p>
 <p>​        每个推理路径包括两个或多个跳，至少有一个是空间跳跃。如上图显示了一些具有相应推理路径的多跳QA示例。如下表所示，在问题中，34％的问题有两个跳的推理路径，39％有三个跳，27％需要四个或更多个跳来回答。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031616710.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031616710.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250303161602655"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031616710.png" alt="image-20250303161602655"></p>
 <h2 id="丰富数据以提高空间推理能力"><a href="#丰富数据以提高空间推理能力" class="headerlink" title="丰富数据以提高空间推理能力"></a>丰富数据以提高空间推理能力</h2><p>​        直观地说，为LMMs提供额外的空间感知视觉基础数据将有助于提高他们的空间推理性能。</p>
 <p>​        为了测试这一假设，我们描述了两个生成不同类型的可视化地面数据的管道。</p>
 <p>​        第一个管道包括两个阶段 : (I) 关键对象提取和 (II) 边界框生成。</p>
@@ -657,8 +657,8 @@
 <p>​        此外，我们描述推理多跳问题的路径生成。</p>
 <p><strong>边界框生成</strong>。管道的输入是我与多项选择题Q配对的图像。我们首先从给定的问题中提取关键的对象 [$object<em>1$，$object_2$，..]。接下来，我们提示GPT-4o提供图像中关键对象的绑定框。每个边界框具体表示为一个元组 [$x</em>{min}$，$y<em>{min}$，$x</em>{max}$，$y<em>{max}$]，其中$x</em>{min}$和$y<em>{min}$是左上角的坐标，$x</em>{max}$和$y_{max}$是右下角的坐标。</p>
 <p><strong>场景图生成</strong>。类似于边界框生成的第一阶段，我们从给定的问题中提取关键对象。然后，我们会提示GPT-4o通过考虑图像中关键物体的位置、方向和空间关系来生成空间感知标题。最后，针对空间感知标题、关键对象和图像，提示GPT-4o提取图像中关键对象的空间关系、方向和方向。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031625337.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031625337.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250303162546142"></p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031627059.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031627059.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250303162717928"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031625337.png" alt="image-20250303162546142"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031627059.png" alt="image-20250303162717928"></p>
 <p><strong>推理路径生成</strong>。之前关于评估LMMs的研究只关注最终答案的准确性，而忽略了生成的推理路径的正确性。在这项工作中，我们通过利用为多跳问题生成的真实推理步骤，深入研究了多跳VQA中LMMs的空间推理路径。为了应对评估非结构化推理步骤的挑战，我们仔细设计了一个提示策略，指示LMMs以场景图格式输出推理步骤。这使我们能够验证地面真理推理步骤。</p>
 <h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>主要围绕新构建的Spatial-MM数据集以及GQA-spatial数据集展开。实验涉及多个方面，包括边界框和场景图对模型性能的影响、视角（人类视角与相机视角）对推理能力的影响，以及多跳推理任务中的模型表现。</p>
 <h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><p><strong>数据集</strong></p>
@@ -695,35 +695,35 @@
 <li><strong>obj_change</strong>：将选项中的关键物体替换为图像中不存在的物体。</li>
 <li><strong>obj_change_a</strong>：仅在正确选项中替换关键物体。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031652993.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031652993.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250303165258787"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031652993.png" alt="image-20250303165258787"></p>
 <h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a><strong>实验结果</strong></h3><p><strong>边界框和场景图的作用</strong></p>
 <ul>
 <li>边界框和场景图显著提升了LMMs的空间推理能力，尤其是合成场景图在多跳推理任务中效果显著。</li>
 <li>在Spatial-Obj数据集上，GPT-4 Vision使用合成场景图后，准确率从51.23%提升至66.0%。</li>
 <li>在GQA-spatial数据集上，合成边界框使模型性能平均提升33个百分点。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031634178.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031634178.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250303163451135"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031634178.png" alt="image-20250303163451135"></p>
 <p><strong>视角的影响</strong></p>
 <ul>
 <li>LMMs在处理从人类视角提出的问题时表现较差，准确率显著低于从相机视角提出的问题。</li>
 <li>例如，GPT-4o在人类视角下的准确率为43.75%，而在相机视角下为73.6%。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031635973.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031635973.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250303163547930"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031635973.png" alt="image-20250303163547930"></p>
 <p><strong>多跳推理的挑战</strong></p>
 <ul>
 <li>链式推理（CoT）提示在多跳空间推理任务中效果有限，而场景图能够显著提升模型在多跳问题上的表现。</li>
 <li>随着推理步骤数量的增加，模型的最终答案准确率显著下降。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031636665.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031636665.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250303163636613"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031636665.png" alt="image-20250303163636613"></p>
 <p>​        表4列出了所有空间和非空间推理步骤在Spatial-CoT问题中的平均分数，这表明空间和非空间推理步骤的F1得分之间的平均差距显著为stan上的21分和stan + SGsynth提示下的19分。、</p>
 <p>​        表5给出了分析LMMs无法通过斯坦提示正确回答的问题的推理路径的结果。不正确的推理路径可能由于不正确的空间步骤、不正确的非空间步骤或两者的结合而发生。平均而言，只有1% 的问题的推理路径正确，但最终答案不正确。此外，91% 的问题包含至少一个错误的空间推理步骤，而只有9.75% 包含至少一个错误的非空间推理步骤。请注意，当推理步骤在语义上与基本事实推理步骤不匹配，或者生成的路径中缺少基本事实路径的推理步骤时，会发生不正确的推理步骤。</p>
-<p><img src="C:/Users/李鼎铭/AppData/Roaming/Typora/typora-user-images/image-20250303170243825.png" class="lazyload placeholder" data-srcset="C:/Users/李鼎铭/AppData/Roaming/Typora/typora-user-images/image-20250303170243825.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250303170243825"></p>
+<p><img src="C:/Users/李鼎铭/AppData/Roaming/Typora/typora-user-images/image-20250303170243825.png" alt="image-20250303170243825"></p>
 <p><strong>扰动分析</strong></p>
 <ul>
 <li>LMMs在基本物体检测任务中表现较强，但在复杂空间关系理解方面表现较弱。</li>
 <li>在扰动设置中，模型在处理“obj_change”（物体替换为不存在的物体）时表现最好，而在处理“rel_swap”（关系交换）时表现最差。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031652167.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031652167.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250303165218105"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503031652167.png" alt="image-20250303165218105"></p>
 <h2 id="发现"><a href="#发现" class="headerlink" title="发现"></a>发现</h2><div class="table-container">
 <table>
 <thead>
@@ -768,23 +768,6 @@
         
       </div>
       
-        <div class="copyright">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-    <strong>作者:  </strong>Dingming Li</a>
-    </li>
-    <li class="post-copyright-link">
-    <strong>文章链接:  </strong>
-    <a href="/2025/03/03/[论文学习]大型多模态模型空间推理能力的实证分析/" target="_blank" title="[论文学习]大型多模态模型空间推理能力的实证分析">http://example.com/2025/03/03/[论文学习]大型多模态模型空间推理能力的实证分析/</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>版权声明:   </strong>
-      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
-      许可协议。转载请注明出处!
-    </li>
-  </ul>
-<div>
-      
     </article>
     <!-- 上一篇文章和下一篇文章 -->
     
@@ -797,7 +780,7 @@
   <div class="post-nav-prev post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+      <img class="lazyload" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" alt="">
     </div>
     <a href="/2025/03/04/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DLLMs%E7%9A%84%E5%BF%83%E7%81%B5%E4%B9%8B%E7%9C%BC%EF%BC%9A%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E4%B8%AD%E6%80%9D%E7%BB%B4%E8%AF%B1%E5%AF%BC%E7%A9%BA%E9%97%B4%E6%8E%A8%E7%90%86%E7%9A%84%E5%8F%AF%E8%A7%86%E5%8C%96/" class="post-nav-link">
       <div class="title">
@@ -818,7 +801,7 @@
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload" src="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" src="" alt="">
     </div>
     <a href="/2025/03/03/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5D%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%B9%BB%E8%A7%89%E7%BB%BC%E8%BF%B0/" class="post-nav-link">
       <div class="title">
@@ -1001,7 +984,7 @@
             <div class="post-img-box">
               <a href="/2025/03/07/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DMM-EGO%EF%BC%9A%E8%BF%88%E5%90%91%E6%9E%84%E5%BB%BA%E4%BB%A5%E8%87%AA%E6%88%91%E4%B8%BA%E4%B8%AD%E5%BF%83%E7%9A%84%E5%A4%9A%E6%A8%A1%E6%80%81LLMS/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1022,7 +1005,7 @@
             <div class="post-img-box">
               <a href="/2025/03/06/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSCoRe%EF%BC%9A%E9%80%9A%E8%BF%87%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%AE%A9LLM%E5%AD%A6%E4%BC%9A%E8%87%AA%E6%88%91%E7%BA%A0%E6%AD%A3/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1043,7 +1026,7 @@
             <div class="post-img-box">
               <a href="/2025/03/06/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DS%C2%B2R%EF%BC%9A%E9%80%9A%E8%BF%87%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%95%99%E4%BC%9A%20LLM%20%E8%87%AA%E6%88%91%E9%AA%8C%E8%AF%81%E5%92%8C%E8%87%AA%E6%88%91%E4%BF%AE%E6%AD%A3/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1064,7 +1047,7 @@
             <div class="post-img-box">
               <a href="/2025/03/05/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSpatialRGPT%EF%BC%9A%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E4%B8%AD%E8%90%BD%E5%9C%B0%E7%A9%BA%E9%97%B4%E6%8E%A8%E7%90%86/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1085,7 +1068,7 @@
             <div class="post-img-box">
               <a href="/2025/03/05/%5B%E6%A6%82%E8%BF%B0%E5%AD%A6%E4%B9%A0%5D%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%9C%A8%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E5%8D%9A%E5%BC%88%E4%B8%AD%E7%9A%84%E6%8E%A8%E7%90%86%E8%83%BD%E5%8A%9B/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1335,7 +1318,7 @@
       this.setFishColor(); this.setParameters(), this.reconstructMethods(), this.setup(), this.bindEvent(), this.render()
     },
     setFishColor: function () {
-      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
       if (isDark) {
         this.FISH_COLOR = '#222'; // 暗黑色，有时间把这整成一个变量
       } else {
@@ -1520,7 +1503,7 @@
 <script defer>
   $(function() {
     // 初始化暗黑模式状态
-    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
     updateDarkModeIcon(isDark);
   });
 
@@ -1956,7 +1939,7 @@
   var utteranceComment = {};
 
   function check_utterance() {
-    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
     if (isDark) {
       utteranceComment.Theme = 'github-dark';
     } else {

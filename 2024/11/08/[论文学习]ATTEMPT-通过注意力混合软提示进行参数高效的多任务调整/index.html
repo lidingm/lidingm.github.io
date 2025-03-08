@@ -90,7 +90,7 @@
     <!-- 判断是否为暗黑风格 -->
     <!-- 判断是否为黑夜模式 -->
 <script defer>
-  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
 
   if (isDark) {
     $(document.body).addClass('darkModel');
@@ -190,7 +190,7 @@
   </transition>
   <div class="drawer-box" :class="{'active': visible}">
     <div class="drawer-box-head bg-color">
-      <img class="drawer-box-head_logo lazyload placeholder" src="/medias/head.jpg" class="lazyload placeholder" data-srcset="/medias/head.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+      <img class="drawer-box-head_logo" src="/medias/head.jpg" alt="logo">
       <h3 class="drawer-box-head_title">碎碎念的博客</h3>
       <h5 class="drawer-box-head_desc"></h5>
     </div>
@@ -350,7 +350,7 @@
     <div class="blog-title" id="author-avatar">
       
         <div class="avatar">
-          <img src="/medias/head.jpg" class="lazyload placeholder" data-srcset="/medias/head.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+          <img src="/medias/head.jpg" alt="logo">
         </div>
       
       <a href="/" class="logo">碎碎念的博客</a>
@@ -641,7 +641,7 @@
 <p>我们需要首先了解其他的参数高效微调方法，用以对比学习，并且文章也给出了ATTEMPT方法与其他微调方法的效果对比，所以我们先了解各个经典微调算法的原理用以区分学习。</p>
 <h3 id="高效参数微调"><a href="#高效参数微调" class="headerlink" title="高效参数微调"></a>高效参数微调</h3><p>参数高效微调是指微调少量或额外的模型参数，固定大部分预训练模型参数，较于全量参数微调从而大大降低了计算和存储成本，同时，也能实现与全量参数微调相当的性能。</p>
 <p>高效微调技术可以粗略分为以下三大类：增加额外参数（A）、选取一部分参数更新（S）、引入重参数化（R）。而在增加额外参数这类方法中，又主要分为类适配器（Adapter-like）方法和软提示（Soft prompts）两个小类。分类如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411081033196.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411081033196.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411081033196.png" alt="img"></p>
 <p>接下来我们简单介绍下BitFit、Prefix Tuning、Prompt Tuning、P-Tuning、P-tuning -v2、SPoT。</p>
 <p>在此之前我们需要理解什么是hard prompt与soft prompt：</p>
 <ul>
@@ -684,7 +684,7 @@
 <li>核心思想是在一个或多个源任务上学习提示，然后将学到的提示用于初始化目标任务的提示。</li>
 <li>进行了大规模和系统的任务迁移能力研究，展示了任务通过提示转移相互受益的条件。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411101201928.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411101201928.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20241110120153851"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411101201928.png" alt="image-20241110120153851"></p>
 <h2 id="论文大体介绍"><a href="#论文大体介绍" class="headerlink" title="论文大体介绍"></a>论文大体介绍</h2><p>本文提出了一种名为ATTEMPT的新<strong>参数高效微调</strong>的方法，旨在通过<strong>注意力机制</strong>产生<strong>soft prompt</strong>、结合<strong>多任务学习</strong>，实现参数高效的语言模型微调。</p>
 <p>具体来说，ATTEMPT通过注意力模块来混合源任务的软提示和目标任务的新初始化提示，以生成适用于每个目标任务实例的提示，使在不同任务间传递知识，在训练过程中，只有目标任务的提示和注意力权重会被更新，而原始的语言模型和源提示保持不变。</p>
 <p>该方法不仅提高了训练效率，还能在资源有限的情况下实现高性能。且ATTEMPT通过模块化的方式，可以灵活地增加或移除源任务提示，从而有效地实现知识转移。实验表明，该方法在多项NLP任务中表现优异，尤其是在小样本学习场景下。</p>
@@ -693,7 +693,7 @@
 <p><strong>多任务学习与知识传递：</strong>多任务学习方法试图通过更新LM参数来学习新的目标任务，这些方法在NLP中被证明是有效的。但是，这些方法缺乏添加或移除源任务的灵活性。</p>
 <p><strong>Soft Prompts：</strong>软提示是一种参数高效的方法，它通过在输入前添加可训练的提示来调整模型。这种方法保持了原始LM的冻结状态，并且可以灵活地添加或移除源提示，以实现有效的知识传递。</p>
 <h2 id="方法原理"><a href="#方法原理" class="headerlink" title="方法原理"></a>方法原理</h2><p>ATTEMPT通过注意力模块来混合源任务的软提示和目标任务的新初始化提示，以生成适用于每个目标任务实例的提示，使在不同任务间传递知识。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411091443724.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411091443724.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20241109144342646"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202411091443724.png" alt="image-20241109144342646"></p>
 <p><strong>源提示预训练</strong>：ATTEMPT首先在大规模的源任务上预训练可转移的soft promp，这些提示作为小的嵌入向量，编码了源任务的知识，可能对其他任务有益，能够捕捉任务相关的知识。</p>
 <p><strong>目标提示训练</strong>：通过将注意力加权的源提示和目标提示相结合，生成适用于每个输入实例的特定提示 <script type="math/tex">P_{instance}</script>。在训练过程中，新的任务提示<script type="math/tex">P_{target}</script>和注意力模块G通过<script type="math/tex">P_{instance}</script>进行更新，而源提示和原LM的参数则不进行更新，以保存从先前任务或预训练中学习到的知识。其分为以下模块：</p>
 <ul>
@@ -897,23 +897,6 @@ a_{lj} = \frac{e^{\hat{\mathbf{P}}_{lj} \mathbf{H}_{\text{out}}}}{\sum_{k=1}^{t+
         
       </div>
       
-        <div class="copyright">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-    <strong>作者:  </strong>Dingming Li</a>
-    </li>
-    <li class="post-copyright-link">
-    <strong>文章链接:  </strong>
-    <a href="/2024/11/08/[论文学习]ATTEMPT-通过注意力混合软提示进行参数高效的多任务调整/" target="_blank" title="[论文学习]ATTEMPT:通过注意力混合软提示进行参数高效的多任务调整">http://example.com/2024/11/08/[论文学习]ATTEMPT-通过注意力混合软提示进行参数高效的多任务调整/</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>版权声明:   </strong>
-      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
-      许可协议。转载请注明出处!
-    </li>
-  </ul>
-<div>
-      
     </article>
     <!-- 上一篇文章和下一篇文章 -->
     
@@ -926,7 +909,7 @@ a_{lj} = \frac{e^{\hat{\mathbf{P}}_{lj} \mathbf{H}_{\text{out}}}}{\sum_{k=1}^{t+
   <div class="post-nav-prev post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+      <img class="lazyload" src="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" alt="">
     </div>
     <a href="/2025/01/22/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DVSI-Bench%E5%A4%9A%E6%A8%A1%E6%80%81%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%A6%82%E4%BD%95%E8%A7%82%E5%AF%9F%E3%80%81%E8%AE%B0%E5%BF%86%E5%92%8C%E5%9B%9E%E5%BF%86%E7%A9%BA%E9%97%B4/" class="post-nav-link">
       <div class="title">
@@ -947,7 +930,7 @@ a_{lj} = \frac{e^{\hat{\mathbf{P}}_{lj} \mathbf{H}_{\text{out}}}}{\sum_{k=1}^{t+
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload" src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" src="" alt="">
     </div>
     <a href="/2024/10/09/%E4%B8%80%E4%BA%9B%E7%A2%8E%E7%A2%8E%E5%BF%B5/" class="post-nav-link">
       <div class="title">
@@ -1129,7 +1112,7 @@ a_{lj} = \frac{e^{\hat{\mathbf{P}}_{lj} \mathbf{H}_{\text{out}}}}{\sum_{k=1}^{t+
             <div class="post-img-box">
               <a href="/2025/03/07/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DMM-EGO%EF%BC%9A%E8%BF%88%E5%90%91%E6%9E%84%E5%BB%BA%E4%BB%A5%E8%87%AA%E6%88%91%E4%B8%BA%E4%B8%AD%E5%BF%83%E7%9A%84%E5%A4%9A%E6%A8%A1%E6%80%81LLMS/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1150,7 +1133,7 @@ a_{lj} = \frac{e^{\hat{\mathbf{P}}_{lj} \mathbf{H}_{\text{out}}}}{\sum_{k=1}^{t+
             <div class="post-img-box">
               <a href="/2025/03/06/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSCoRe%EF%BC%9A%E9%80%9A%E8%BF%87%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%AE%A9LLM%E5%AD%A6%E4%BC%9A%E8%87%AA%E6%88%91%E7%BA%A0%E6%AD%A3/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1171,7 +1154,7 @@ a_{lj} = \frac{e^{\hat{\mathbf{P}}_{lj} \mathbf{H}_{\text{out}}}}{\sum_{k=1}^{t+
             <div class="post-img-box">
               <a href="/2025/03/06/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DS%C2%B2R%EF%BC%9A%E9%80%9A%E8%BF%87%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%95%99%E4%BC%9A%20LLM%20%E8%87%AA%E6%88%91%E9%AA%8C%E8%AF%81%E5%92%8C%E8%87%AA%E6%88%91%E4%BF%AE%E6%AD%A3/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1192,7 +1175,7 @@ a_{lj} = \frac{e^{\hat{\mathbf{P}}_{lj} \mathbf{H}_{\text{out}}}}{\sum_{k=1}^{t+
             <div class="post-img-box">
               <a href="/2025/03/05/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSpatialRGPT%EF%BC%9A%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E4%B8%AD%E8%90%BD%E5%9C%B0%E7%A9%BA%E9%97%B4%E6%8E%A8%E7%90%86/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1213,7 +1196,7 @@ a_{lj} = \frac{e^{\hat{\mathbf{P}}_{lj} \mathbf{H}_{\text{out}}}}{\sum_{k=1}^{t+
             <div class="post-img-box">
               <a href="/2025/03/05/%5B%E6%A6%82%E8%BF%B0%E5%AD%A6%E4%B9%A0%5D%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%9C%A8%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E5%8D%9A%E5%BC%88%E4%B8%AD%E7%9A%84%E6%8E%A8%E7%90%86%E8%83%BD%E5%8A%9B/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1463,7 +1446,7 @@ a_{lj} = \frac{e^{\hat{\mathbf{P}}_{lj} \mathbf{H}_{\text{out}}}}{\sum_{k=1}^{t+
       this.setFishColor(); this.setParameters(), this.reconstructMethods(), this.setup(), this.bindEvent(), this.render()
     },
     setFishColor: function () {
-      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
       if (isDark) {
         this.FISH_COLOR = '#222'; // 暗黑色，有时间把这整成一个变量
       } else {
@@ -1648,7 +1631,7 @@ a_{lj} = \frac{e^{\hat{\mathbf{P}}_{lj} \mathbf{H}_{\text{out}}}}{\sum_{k=1}^{t+
 <script defer>
   $(function() {
     // 初始化暗黑模式状态
-    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
     updateDarkModeIcon(isDark);
   });
 
@@ -2084,7 +2067,7 @@ a_{lj} = \frac{e^{\hat{\mathbf{P}}_{lj} \mathbf{H}_{\text{out}}}}{\sum_{k=1}^{t+
   var utteranceComment = {};
 
   function check_utterance() {
-    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
     if (isDark) {
       utteranceComment.Theme = 'github-dark';
     } else {

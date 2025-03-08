@@ -90,7 +90,7 @@
     <!-- 判断是否为暗黑风格 -->
     <!-- 判断是否为黑夜模式 -->
 <script defer>
-  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
 
   if (isDark) {
     $(document.body).addClass('darkModel');
@@ -190,7 +190,7 @@
   </transition>
   <div class="drawer-box" :class="{'active': visible}">
     <div class="drawer-box-head bg-color">
-      <img class="drawer-box-head_logo lazyload placeholder" src="/medias/head.jpg" class="lazyload placeholder" data-srcset="/medias/head.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+      <img class="drawer-box-head_logo" src="/medias/head.jpg" alt="logo">
       <h3 class="drawer-box-head_title">碎碎念的博客</h3>
       <h5 class="drawer-box-head_desc"></h5>
     </div>
@@ -350,7 +350,7 @@
     <div class="blog-title" id="author-avatar">
       
         <div class="avatar">
-          <img src="/medias/head.jpg" class="lazyload placeholder" data-srcset="/medias/head.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+          <img src="/medias/head.jpg" alt="logo">
         </div>
       
       <a href="/" class="logo">碎碎念的博客</a>
@@ -655,13 +655,13 @@
 <li><strong>VLMs的应用（Applications of VLMs）</strong>则侧重于将VLM模型部署到现实场景中。虚拟应用通常涉及控制个人设备屏幕或模拟agent游戏。同时，VLMs的物理应用则主要关注与现实世界中物理对象的交互，如机器人与人交互或自动驾驶。</li>
 </ul>
 <p>这三个方向为分析、比较和指导视觉语言建模这一快速发展领域的未来进步提供了结构化框架。根据以上三个主要研究方向，2019年至2024年底的SoTA VLMs被列在下表中。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503042351648.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503042351648.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250304235104504"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503042351648.png" alt="image-20250304235104504"></p>
 <h2 id="积木搭建与训练方法"><a href="#积木搭建与训练方法" class="headerlink" title="积木搭建与训练方法"></a>积木搭建与训练方法</h2><p>​        视觉语言模型的架构正在从从头开始预训练转变为使用预先训练好的LLM作为主干来对齐视觉和文本信息（如上表）。然而，基本组件仍然大体不变。文章总结了VLM中最基础且广泛采用的架构组件，并解释了流行的预训练和对齐方法。</p>
 <h3 id="通用架构组件"><a href="#通用架构组件" class="headerlink" title="通用架构组件"></a>通用架构组件</h3><p>​        视觉编码器在将视觉组件投影为与来自大语言模型（LLMs）的嵌入特征相匹配的嵌入特征方面发挥着至关重要的作用，这对于文本或图像生成等任务至关重要。它被训练用于从图像或视频数据中提取丰富的视觉特征，从而实现与语言表示的融合。</p>
 <p>​        许多视觉语言模型（VLMs）中使用的视觉编码器是在大规模多模态或图像数据上进行预训练的：这些编码器在图像-文本对上进行联合训练，使它们能够有效地捕捉视觉和语言之间的关系。典型的例子包括CLIP，它通过对比学习将图像和文本嵌入进行对齐，以及BLIP，它利用自举预训练来实现稳健的语言-图像对齐。在大规模ImageNet或类似数据集上进行预训练：这些编码器在大量标记的视觉数据上进行训练或通过自监督训练，使它们能够捕捉特定领域的视觉特征。虽然这些编码器最初是单模态的，如ResNet或视觉Transformer（ViTs），但它们可以适应多模态任务。它们擅长提取有意义的对象级特征，并为视觉语言模型提供了坚实的基础。许多当前最优的视觉语言模型（SoTA VLMs），如Qwen2-VL和LLaVA，通常都融入了预训练的视觉编码器。这些编码器不仅提供了稳健且有意义的视觉表示，而且在迁移学习方面也非常有效。它们通过利用在其训练领域学到的视觉知识，优于随机初始化的编码器。</p>
 <p>​        文本编码器将分词后的文本序列投影到嵌入空间中，这与视觉编码器处理图像的方式类似。CLIP、BLIP和ALIGN等模型既使用图像编码器也使用文本编码器。这些模型利用对比学习在共享潜在空间中对齐图像和文本的嵌入，有效地捕捉跨模态关系。然而，更新的模型，如LLaVA，通常不包括专门的文本编码器。相反，它们依赖大型语言模型（LLMs）（如LLaMA、Vicuna）进行文本理解，并通过投影层或交叉注意力机制整合视觉输入。这一转变表明，在更多样化和更高级的多模态推理和生成任务中，使用LLMs的能力正逐渐超过视觉组件。</p>
 <p>​        文本解码器利用LLMs作为主要文本生成器，同时使用视觉编码器投影图像特征。GPT-4V、Flamingo和Kosmos-2采用了这种方法。这些模型通常使用最小的视觉投影机制，从而允许强大的语言解码器生成上下文丰富的输出。VisualBERT和VilBERT为多模态预训练的解码器架构提供了基础。从头开始训练VLMs通常需要单独的文本解码器，而使用LLMs作为主干时，则通常使用LLM的原始解码器（如图）。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503042358193.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503042358193.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250304235837024"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503042358193.png" alt="image-20250304235837024"></p>
 <p>​        交叉注意力机制允许一种模态（视觉）中的token影响另一种模态（文本）中的token，从而实现视觉和文本特征之间的动态交互。交叉注意力层通常通过计算每对视觉和文本token之间的注意力得分来整合跨模态的信息。并非所有模型都使用交叉注意力机制。例如，VisualBERT和Flamingo都具备交叉注意力机制，而CLIP则没有。</p>
 <h3 id="构建从零开始训练的模块"><a href="#构建从零开始训练的模块" class="headerlink" title="构建从零开始训练的模块"></a>构建从零开始训练的模块</h3><p>​        与以大型语言模型（LLM）为骨干相比，从零开始训练视觉语言模型（VLM）通常使用不同的训练目标和方法。自监督学习（SSL）可以在不需要人类标注数据的情况下进行预训练，从而实现预训练规模的扩大。SSL技术的变种包括掩码图像建模、对比学习和图像变换预测。这里我们将深入探讨对比学习，这是一种常见的预训练过程，用于扩大从零开始训练VLM的规模。</p>
 <p>​        对比学习涉及为视觉和文本输入使用单独的编码器，这些编码器被训练成将各自模态映射到一个共享的嵌入空间。视觉编码器处理图像，从卷积神经网络（CNN）或视觉transformer（ViT）等模型中生成特征嵌入。文本编码器将文本输入处理成嵌入。对比学习通过最小化相关图像-文本对在共享空间中视觉和文本嵌入之间的距离，同时最大化不相关对嵌入之间的距离，来对齐这些对。CLIP、BLIP和ALIGN等开创性模型利用这种方法，在大规模图像-文本数据集上进行预训练，从而为下游任务开发稳健、可迁移的表示。</p>
@@ -673,15 +673,15 @@
 <p>​        它仍然保留了如Llama等大型语言模型（LLMs）的架构，但扩展了嵌入层，以适应离散的视觉token（均方根层归一化层和多查询注意力）。此外，它将视觉和文本输出的生成视为统一多模态表示中的token预测任务。</p>
 <p>​        Transfusion在一个单一的Transformer架构内同时处理不同的模态。该方法通过引入策略断点，并行处理离散的文本token和连续的图像向量。尽管尚未完善，但这种方法显示出开发能够处理多种输入类型的更统一的多模态模型的潜力。</p>
 <h2 id="基准与评估"><a href="#基准与评估" class="headerlink" title="基准与评估"></a>基准与评估</h2><p>​        自2022年以来，随着新型视觉语言模型（VLMs）的快速发展，VLM基准测试的数量也迅速增长。全面基准测试对于评估模型性能以及确保在不同能力（如数学推理、场景识别等方面）上的稳健训练至关重要。现代VLM基准测试已经超越了基本视觉问答等简单任务，纳入了更广泛的测试，以从更多方面更好地评估模型的多模态能力。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503050001070.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503050001070.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250305000122009"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503050001070.png" alt="image-20250305000122009"></p>
 <p>​        这里我们总结和分类了现有的38个用于评估VLMs的视觉语言基准测试，包括图像-文本和视频-文本基准测试。然后，总结了这些基准测试常用的评价指标、创建基准数据集的典型方法，以及当前基准测试和评估实践的优缺点。我们强调了大多数基准测试如何优先考虑数据的多样性和数量，而往往忽视了评估质量的提升，这阻碍了对VLMs的有效评估。基准测试分类。基准测试是根据特定的测试目标设计的，我们将其分为十大类（如下表）。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503050002214.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503050002214.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250305000202151"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503050002214.png" alt="image-20250305000202151"></p>
 <h3 id="基准数据是如何收集的"><a href="#基准数据是如何收集的" class="headerlink" title="基准数据是如何收集的"></a>基准数据是如何收集的</h3><p>​        基准数据集通常通过以下三种常见的数据收集流程之一来创建：完全由人类标注的数据集；通过合成数据生成进行扩展并部分由人类验证的部分人类标注数据集；以及通过合成数据进行扩展并完全由人类验证的部分人类标注数据集。</p>
 <h3 id="Evaluation-Metrics"><a href="#Evaluation-Metrics" class="headerlink" title="Evaluation Metrics"></a>Evaluation Metrics</h3><p>基准测试（Benchmarks）旨在进行评估，并在其创建过程中建立相应的评估指标。视觉语言模型（VLM）的评估指标是自动化的，以支持大规模重复使用，并且它们通常会影响基准测试中采用的问题格式。我们展示了在我们调查的基准测试中常用的评估指标（如图2b、3所示）。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503050003896.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503050003896.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250305000312797"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503050003896.png" alt="image-20250305000312797"></p>
 <p>​        答案匹配被广泛应用于开放式和封闭式问题类型，这两类问题的答案可以是短格式的实体、长格式的答案、数字或是是非题。与抽取式大型语言模型（LLMs）和视觉语言模型（VLMs）相比，生成式VLMs更加冗长，它们通常会生成冗长但正确的答案。在评估中，更常用且更实用的版本是包含精确匹配（containment exact match），这种方法包括去除预测答案中的冠词和空格，并检查规范化后的预测答案是否被包含在规范化后的标准答案中。然而，精确匹配往往召回率较高，这常常无法体现出标准答案和预测答案之间的语义等价性，因此经常误判人类可接受的正确答案为错误答案，并且对于寻求长格式答案的基准测试来说，精确匹配变得不再适用。在LLM时代指令遵循成功之前，人们使用标准令牌重叠分数（如F1、ROUGE、BLEU）来衡量标准答案和预测答案之间的相似度分数，但当生成模型生成更复杂多样但正确的答案时，这些方法就开始失效了。</p>
 <p>​        因此，当答案是长格式且需要语义理解来判断正确性时，一些基准测试（如MM-Vet）采用LLMs来评估生成的回答。研究表明，LLM评估与人类评估的相关性最高，但它们也面临着随着模型内部更新或提示指令改变而产生一致输出的挑战。虽然目前没有完美的答案匹配评估方法，但与开放式问题相比，是非题最容易评估。因此，大多数基准测试都依赖于多项选择题的形式来评估VLMs（如图2b所示）。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503050004292.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503050004292.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250305000452233"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503050004292.png" alt="image-20250305000452233"></p>
 <p>​        多项选择题格式涉及从包括干扰项在内的一组选项中选择一个答案来回答给定的视觉问题。这种格式提供了确定的答案，并且评估起来相对容易，因为它衡量的是视觉语言模型（VLM）正确回答问题的百分比。然而，大语言模型（LLMs）已经展现出一种不同寻常的能力，即使无法访问实际问题，也能选择出正确答案。由于VLM包含用于生成响应的LLM组件，因此需要进一步的研究来评估当前VLM基准测试的稳健性和可靠性。</p>
 <p>​        在图像生成基准测试（如T2ICompBench、GenEval）中，图像/文本相似度分数常用于评估生成的图像与其对应的文本描述之间的一致性。它们通常依赖于诸如CLIPScore（用于图像-文本对齐）或ROUGE（用于字幕匹配）等指标来评估输出与参考之间的语义和词汇相似性。</p>
 <p>​        综上所述，VLM基准测试涵盖了广泛的问题类型、专业领域和任务，仅MMLU就涵盖了57个不同的任务。然而，流行的评估方法仍然主要局限于简单的答案匹配或多项选择题格式，远未达到图灵测试对通用智能的广义定义。</p>
@@ -721,23 +721,6 @@
         
       </div>
       
-        <div class="copyright">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-    <strong>作者:  </strong>Dingming Li</a>
-    </li>
-    <li class="post-copyright-link">
-    <strong>文章链接:  </strong>
-    <a href="/2025/03/04/[论文学习]大型视觉语言模型的基准评估、应用与挑战：综述/" target="_blank" title="[论文学习]大型视觉语言模型的基准评估、应用与挑战：综述">http://example.com/2025/03/04/[论文学习]大型视觉语言模型的基准评估、应用与挑战：综述/</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>版权声明:   </strong>
-      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
-      许可协议。转载请注明出处!
-    </li>
-  </ul>
-<div>
-      
     </article>
     <!-- 上一篇文章和下一篇文章 -->
     
@@ -750,7 +733,7 @@
   <div class="post-nav-prev post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+      <img class="lazyload" src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" alt="">
     </div>
     <a href="/2025/03/05/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5D%E8%AF%AD%E8%A8%80%E7%AD%96%E7%95%A5%E7%9A%84%E5%8D%9A%E5%BC%88%E8%AE%BA%E6%96%B0%E5%A2%83%E7%95%8C%EF%BC%9A%E4%BB%8E%E5%AF%B9%E8%AF%9D%E5%88%B0%E5%B9%B3%E8%A1%A1%E2%80%94%E2%80%94%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%8D%9A%E5%BC%88%E8%A7%A3%E6%9E%84%E4%B8%8E%E5%89%8D%E7%9E%BB/" class="post-nav-link">
       <div class="title">
@@ -771,7 +754,7 @@
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" src="" alt="">
     </div>
     <a href="/2025/03/04/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSpatialCoT%EF%BC%9A%E5%9F%BA%E4%BA%8E%E5%9D%90%E6%A0%87%E5%AF%B9%E9%BD%90%E5%92%8C%E6%80%9D%E6%83%B3%E9%93%BE%E7%9A%84%E5%85%B7%E8%BA%AB%E4%BB%BB%E5%8A%A1%E8%A7%84%E5%88%92/" class="post-nav-link">
       <div class="title">
@@ -954,7 +937,7 @@
             <div class="post-img-box">
               <a href="/2025/03/07/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DMM-EGO%EF%BC%9A%E8%BF%88%E5%90%91%E6%9E%84%E5%BB%BA%E4%BB%A5%E8%87%AA%E6%88%91%E4%B8%BA%E4%B8%AD%E5%BF%83%E7%9A%84%E5%A4%9A%E6%A8%A1%E6%80%81LLMS/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -975,7 +958,7 @@
             <div class="post-img-box">
               <a href="/2025/03/06/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSCoRe%EF%BC%9A%E9%80%9A%E8%BF%87%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%AE%A9LLM%E5%AD%A6%E4%BC%9A%E8%87%AA%E6%88%91%E7%BA%A0%E6%AD%A3/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -996,7 +979,7 @@
             <div class="post-img-box">
               <a href="/2025/03/06/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DS%C2%B2R%EF%BC%9A%E9%80%9A%E8%BF%87%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%95%99%E4%BC%9A%20LLM%20%E8%87%AA%E6%88%91%E9%AA%8C%E8%AF%81%E5%92%8C%E8%87%AA%E6%88%91%E4%BF%AE%E6%AD%A3/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1017,7 +1000,7 @@
             <div class="post-img-box">
               <a href="/2025/03/05/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSpatialRGPT%EF%BC%9A%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E4%B8%AD%E8%90%BD%E5%9C%B0%E7%A9%BA%E9%97%B4%E6%8E%A8%E7%90%86/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1038,7 +1021,7 @@
             <div class="post-img-box">
               <a href="/2025/03/05/%5B%E6%A6%82%E8%BF%B0%E5%AD%A6%E4%B9%A0%5D%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%9C%A8%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E5%8D%9A%E5%BC%88%E4%B8%AD%E7%9A%84%E6%8E%A8%E7%90%86%E8%83%BD%E5%8A%9B/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1288,7 +1271,7 @@
       this.setFishColor(); this.setParameters(), this.reconstructMethods(), this.setup(), this.bindEvent(), this.render()
     },
     setFishColor: function () {
-      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
       if (isDark) {
         this.FISH_COLOR = '#222'; // 暗黑色，有时间把这整成一个变量
       } else {
@@ -1473,7 +1456,7 @@
 <script defer>
   $(function() {
     // 初始化暗黑模式状态
-    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
     updateDarkModeIcon(isDark);
   });
 
@@ -1909,7 +1892,7 @@
   var utteranceComment = {};
 
   function check_utterance() {
-    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
     if (isDark) {
       utteranceComment.Theme = 'github-dark';
     } else {

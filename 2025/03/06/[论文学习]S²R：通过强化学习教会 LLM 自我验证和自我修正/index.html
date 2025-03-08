@@ -90,7 +90,7 @@
     <!-- 判断是否为暗黑风格 -->
     <!-- 判断是否为黑夜模式 -->
 <script defer>
-  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
 
   if (isDark) {
     $(document.body).addClass('darkModel');
@@ -190,7 +190,7 @@
   </transition>
   <div class="drawer-box" :class="{'active': visible}">
     <div class="drawer-box-head bg-color">
-      <img class="drawer-box-head_logo lazyload placeholder" src="/medias/head.jpg" class="lazyload placeholder" data-srcset="/medias/head.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+      <img class="drawer-box-head_logo" src="/medias/head.jpg" alt="logo">
       <h3 class="drawer-box-head_title">碎碎念的博客</h3>
       <h5 class="drawer-box-head_desc"></h5>
     </div>
@@ -350,7 +350,7 @@
     <div class="blog-title" id="author-avatar">
       
         <div class="avatar">
-          <img src="/medias/head.jpg" class="lazyload placeholder" data-srcset="/medias/head.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+          <img src="/medias/head.jpg" alt="logo">
         </div>
       
       <a href="/" class="logo">碎碎念的博客</a>
@@ -652,7 +652,7 @@
 <li><strong>自我验证</strong>：模型在推理过程中检查自己的答案是否正确。</li>
 <li><strong>自我纠正</strong>：模型在发现错误后，自主改正答案。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503062300243.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503062300243.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250306230046048"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503062300243.png" alt="image-20250306230046048"></p>
 <h3 id="自我验证和自我纠正行为的初始化"><a href="#自我验证和自我纠正行为的初始化" class="headerlink" title="自我验证和自我纠正行为的初始化"></a>自我验证和自我纠正行为的初始化</h3><h4 id="自我验证"><a href="#自我验证" class="headerlink" title="自我验证"></a>自我验证</h4><ul>
 <li><strong>问题求解型验证</strong>：通过重新求解问题来验证答案。“问题解决式”验证直观上并非所期望的理想验证行为。</li>
 <li><strong>确认型验证</strong>：通过替代方法验证答案的正确性。理想情况下，希望模型能够跳出固有思维模式，从新的视角重新审视解决方案，而非仅仅思考 从同样的问题解决视角进行验证。通过提示现有的大型语言模型“在不 重新解决问题的情况下验证答案的正确性”来 构建“确认式”验证，并使用大型语言模型作为裁判来过滤掉无效的验证。</li>
@@ -663,7 +663,7 @@
 <li>为了确保LLMs学会验证和纠正自己的错误，我们通过从LLMs的响应中进行抽样和筛选来构建每个轨迹中的失败试验。</li>
 <li>合理的测试时间缩放方法将合理的工作分配给不同级别的问题，具体来说，在达到正确答案之前，更困难的问题需要更多的试错迭代次数。因此根据每个基础模型采样响应的准确性来确定每条轨迹的长度。</li>
 </ul>
-<h4 id="监督微调以初始化思维行为"><a href="#监督微调以初始化思维行为" class="headerlink" title="监督微调以初始化思维行为"></a>监督微调以初始化思维行为</h4><p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503062351013.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503062351013.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250306235106945"></p>
+<h4 id="监督微调以初始化思维行为"><a href="#监督微调以初始化思维行为" class="headerlink" title="监督微调以初始化思维行为"></a>监督微调以初始化思维行为</h4><p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503062351013.png" alt="image-20250306235106945"></p>
 <p>在训练过程中，通过使用掩码来优化所有验证的概率，而仅对最后一个正确 的解 $s_N$进行优化。</p>
 <h3 id="通过强化学习提升思维能力"><a href="#通过强化学习提升思维能力" class="headerlink" title="通过强化学习提升思维能力"></a>通过强化学习提升思维能力</h3><h4 id="结果级强化学习RLOO"><a href="#结果级强化学习RLOO" class="headerlink" title="结果级强化学习RLOO"></a>结果级强化学习RLOO</h4><ul>
 <li>目标是提升最终答案的正确率。</li>
@@ -717,17 +717,17 @@
 <li>过程级强化学习（Process-level RL）更适用于初始推理能力较弱的模型，而结果级强化学习（Outcome-level RL）更能提升较强模型的推理能力。</li>
 <li>S²R 泛化能力强，在跨领域任务（如逻辑推理、代码推理）中也表现良好。</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503062333294.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503062333294.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250306233344147"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503062333294.png" alt="image-20250306233344147"></p>
 <h2 id="分析自我验证和自我纠正能力"><a href="#分析自我验证和自我纠正能力" class="headerlink" title="分析自我验证和自我纠正能力"></a>分析自我验证和自我纠正能力</h2><p>​        首先对问题解决法和确认性验证法进行比较。如图表格展示 了不同方法在 Math500 测试集上的验证结果。 其指出总体而言，问题解决验证的总体准确率通常优于确认性验证。之后在所有实验中，都使用了确认性验证来进行行为初始化。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503062343620.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503062343620.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250306234320521"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503062343620.png" alt="image-20250306234320521"></p>
 <p>​        之后研究强化学习训练对模型自我验证和自我修正能力的影响。如图中，我们展示了行为初始化模型 （SFT）以及从 Qwen2.5-Math-7B 获得的不同强化学习模型的结果。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503062344645.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503062344645.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250306234436566"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503062344645.png" alt="image-20250306234436566"></p>
 <ul>
 <li>两种强化学习方法均能有效提高自我验证的准确 性。过程级强化学习在准确性方面表现出更大 的提升，而结果级强化学习则持续提高了错误 召回率和正确精度。这可能是因为过程级监督不加区分地促进了中间步骤的验证准确性，而 结果级监督允许策略模型在中间步骤自由探索， 仅提升最终答案的准确性，从而主要增强了错误召回率和正确精度。</li>
 <li>两种强化学习方法都能成功提升模型的自我纠正能力。值得注意的是， 经过强化学习训练后，模型纠正错误答案的能 力显著提高，模型错误修改正确答案的比率也 显著降低。这一比较表明，S2R 能够显著增强 模型自我纠正能力的有效性。</li>
 </ul>
 <p>​        之后为了进一步说明 S2R 训练的效果，如图展示了  SFT 和 SFT+RL 模型在不同难度水平下的答案准确率和平均试验次数。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503062347343.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503062347343.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250306234715217"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503062347343.png" alt="image-20250306234715217"></p>
 <ul>
 <li>通过在推理过程中学习自我验证和自我纠正，模型学会了动态分配测试时的努力。对于较容易的问题，模型可以用较少的试验次数得出有把握的 答案，而对于较难的问题，则需要更多的试验次 数才能得出有把握的答案。</li>
 <li>强化学习进一步改善了测试时的努力分配，特别是对于能力较弱的模型。</li>
@@ -752,23 +752,6 @@
         
       </div>
       
-        <div class="copyright">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-    <strong>作者:  </strong>Dingming Li</a>
-    </li>
-    <li class="post-copyright-link">
-    <strong>文章链接:  </strong>
-    <a href="/2025/03/06/[论文学习]S²R：通过强化学习教会 LLM 自我验证和自我修正/" target="_blank" title="[论文学习]S²R：通过强化学习教会 LLM 自我验证和自我修正">http://example.com/2025/03/06/[论文学习]S²R：通过强化学习教会 LLM 自我验证和自我修正/</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>版权声明:   </strong>
-      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
-      许可协议。转载请注明出处!
-    </li>
-  </ul>
-<div>
-      
     </article>
     <!-- 上一篇文章和下一篇文章 -->
     
@@ -781,7 +764,7 @@
   <div class="post-nav-prev post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+      <img class="lazyload" src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" alt="">
     </div>
     <a href="/2025/03/06/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSCoRe%EF%BC%9A%E9%80%9A%E8%BF%87%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%AE%A9LLM%E5%AD%A6%E4%BC%9A%E8%87%AA%E6%88%91%E7%BA%A0%E6%AD%A3/" class="post-nav-link">
       <div class="title">
@@ -802,7 +785,7 @@
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" src="" alt="">
     </div>
     <a href="/2025/03/05/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSpatialRGPT%EF%BC%9A%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E4%B8%AD%E8%90%BD%E5%9C%B0%E7%A9%BA%E9%97%B4%E6%8E%A8%E7%90%86/" class="post-nav-link">
       <div class="title">
@@ -985,7 +968,7 @@
             <div class="post-img-box">
               <a href="/2025/03/07/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DMM-EGO%EF%BC%9A%E8%BF%88%E5%90%91%E6%9E%84%E5%BB%BA%E4%BB%A5%E8%87%AA%E6%88%91%E4%B8%BA%E4%B8%AD%E5%BF%83%E7%9A%84%E5%A4%9A%E6%A8%A1%E6%80%81LLMS/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1006,7 +989,7 @@
             <div class="post-img-box">
               <a href="/2025/03/06/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSCoRe%EF%BC%9A%E9%80%9A%E8%BF%87%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%AE%A9LLM%E5%AD%A6%E4%BC%9A%E8%87%AA%E6%88%91%E7%BA%A0%E6%AD%A3/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1027,7 +1010,7 @@
             <div class="post-img-box">
               <a href="/2025/03/06/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DS%C2%B2R%EF%BC%9A%E9%80%9A%E8%BF%87%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%95%99%E4%BC%9A%20LLM%20%E8%87%AA%E6%88%91%E9%AA%8C%E8%AF%81%E5%92%8C%E8%87%AA%E6%88%91%E4%BF%AE%E6%AD%A3/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1048,7 +1031,7 @@
             <div class="post-img-box">
               <a href="/2025/03/05/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSpatialRGPT%EF%BC%9A%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E4%B8%AD%E8%90%BD%E5%9C%B0%E7%A9%BA%E9%97%B4%E6%8E%A8%E7%90%86/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1069,7 +1052,7 @@
             <div class="post-img-box">
               <a href="/2025/03/05/%5B%E6%A6%82%E8%BF%B0%E5%AD%A6%E4%B9%A0%5D%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%9C%A8%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E5%8D%9A%E5%BC%88%E4%B8%AD%E7%9A%84%E6%8E%A8%E7%90%86%E8%83%BD%E5%8A%9B/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1319,7 +1302,7 @@
       this.setFishColor(); this.setParameters(), this.reconstructMethods(), this.setup(), this.bindEvent(), this.render()
     },
     setFishColor: function () {
-      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
       if (isDark) {
         this.FISH_COLOR = '#222'; // 暗黑色，有时间把这整成一个变量
       } else {
@@ -1504,7 +1487,7 @@
 <script defer>
   $(function() {
     // 初始化暗黑模式状态
-    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
     updateDarkModeIcon(isDark);
   });
 
@@ -1940,7 +1923,7 @@
   var utteranceComment = {};
 
   function check_utterance() {
-    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
     if (isDark) {
       utteranceComment.Theme = 'github-dark';
     } else {

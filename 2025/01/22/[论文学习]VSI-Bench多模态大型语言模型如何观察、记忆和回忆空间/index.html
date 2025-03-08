@@ -90,7 +90,7 @@
     <!-- 判断是否为暗黑风格 -->
     <!-- 判断是否为黑夜模式 -->
 <script defer>
-  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
 
   if (isDark) {
     $(document.body).addClass('darkModel');
@@ -190,7 +190,7 @@
   </transition>
   <div class="drawer-box" :class="{'active': visible}">
     <div class="drawer-box-head bg-color">
-      <img class="drawer-box-head_logo lazyload placeholder" src="/medias/head.jpg" class="lazyload placeholder" data-srcset="/medias/head.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+      <img class="drawer-box-head_logo" src="/medias/head.jpg" alt="logo">
       <h3 class="drawer-box-head_title">碎碎念的博客</h3>
       <h5 class="drawer-box-head_desc"></h5>
     </div>
@@ -350,7 +350,7 @@
     <div class="blog-title" id="author-avatar">
       
         <div class="avatar">
-          <img src="/medias/head.jpg" class="lazyload placeholder" data-srcset="/medias/head.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+          <img src="/medias/head.jpg" alt="logo">
         </div>
       
       <a href="/" class="logo">碎碎念的博客</a>
@@ -654,31 +654,31 @@
 </ul>
 <h3 id="VSI-Bench评估与结果展示"><a href="#VSI-Bench评估与结果展示" class="headerlink" title="VSI-Bench评估与结果展示"></a>VSI-Bench评估与结果展示</h3><p>​        在VSI-Bench上，研究人员评估了15种不同的MLLMs，包括Gemini和GPT-4o等专有模型以及InternVL2和LLaVA-NeXT等开源模型。</p>
 <p>​        其中对于度量设计，其分为多项选择题（<strong>MCA</strong>）、数值题（<strong>NA</strong>）。对于MCA问题，采用基于精确匹配的准确率作为主要度量标准。对于 NA 任务，由于模型预测的是连续值，不能采用精确匹配计算，所以引入平均相对准确率（MRA）。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501250000743.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501250000743.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250125000042526"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501250000743.png" alt="image-20250125000042526"></p>
 <p>​        结果显示，尽管MLLMs在某些任务上表现出色，但与人类水平相比仍有较大差距。例如，在物体计数和相对方向任务上，人类的准确率接近95%，而最佳模型的准确率仅为45%-68%。此外，研究还发现，MLLMs在需要精确估计的任务（如绝对距离和物体大小）上表现稍好，但在需要全局空间推理的任务（如路线规划和相对方向）上表现较差。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501261403662.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501261403662.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250126140344432"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501261403662.png" alt="image-20250126140344432"></p>
 <h2 id="VSI-Bench探索提高"><a href="#VSI-Bench探索提高" class="headerlink" title="VSI-Bench探索提高"></a>VSI-Bench探索提高</h2><h3 id="自我解释推理（Self-Explanations）"><a href="#自我解释推理（Self-Explanations）" class="headerlink" title="自我解释推理（Self-Explanations）"></a>自我解释推理（Self-Explanations）</h3><p>​        为了更好地理解MLLMs的空间推理过程，研究人员通过自我解释推理来分析模型的行为。他们让模型在回答问题后提供逐步解释，发现MLLMs在视频理解方面表现出色，但在空间推理方面仍存在不足。</p>
 <p>​        此外，其带有时间戳的描述令人印象深刻，准确度极高。该模型还能形成正确的分步推理过程，例如在相对方向任务中， 会列出“确定自身位置”“找到洗碗机”和“想象象限”等 步骤。并且其构建全局坐标系表明，多模态大模型可能拥有或能够构建隐式的世界模型。该模型并非依靠孤立的帧、短片段或随机猜测，而是利用全局空间背景和推理来正确推断。</p>
 <p>​        举一个例子，在一个相对方向的任务中，模型能够准确描述物体的位置，但在转换视角时却出现了错误。这表明，尽管MLLMs能够理解视频内容，但在构建全局空间模型时仍面临挑战（理解为自我中心和环境中心视角转换的能力不行）。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501250001041.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501250001041.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250125000150627"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501250001041.png" alt="image-20250125000150627"></p>
 <h3 id="思维链（Cot）"><a href="#思维链（Cot）" class="headerlink" title="思维链（Cot）"></a>思维链（Cot）</h3><p>​        研究人员尝试采用三种方式：Zero-Shot CoT、Cot与Self-Consistency、ToT来提升MLLMs的空间智能。发现其三种方法在VSI-Bench上反而导致了性能下降。这表明，语言提示技术虽然在语言推理和一般视觉任务中效果显著，但对空间推理却有害无益。仅仅通过语言推理技巧无法有效提升MLLMs的空间智能，空间推理需要更深层次的视觉和空间理解。</p>
 <p>​        零样本Cot：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501242259216.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501242259216.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250124225931711"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501242259216.png" alt="image-20250124225931711"></p>
 <p>​        Cot与Self-Consistency：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501242300499.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501242300499.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250124230029135"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501242300499.png" alt="image-20250124230029135"></p>
 <p>​        ToT：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501242301361.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501242301361.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250124230103890"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501242301361.png" alt="image-20250124230103890"></p>
 <h3 id="认知地图（Cognitive-Maps）"><a href="#认知地图（Cognitive-Maps）" class="headerlink" title="认知地图（Cognitive Maps）"></a>认知地图（Cognitive Maps）</h3><p>​        研究人员提示MLLM使用认知地图来表达它们对所见空间的内部表征，认知地图是一种用于在特定环境中记住物体位置的成熟框架。让模型根据视频输入预测 10×10 网格中的物体中心位置，如图展示由此产生的认知地图示例。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501242245634.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501242245634.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250124224525980"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501242245634.png" alt="image-20250124224525980"></p>
 <p>​        实验发现 MLLM 在其认知地图中定位相邻对象的准确率达到了很高的 64%，这表明其具有很强的局部空间感知能力。如图：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501242307385.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501242307385.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250124230756169"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501242307385.png" alt="image-20250124230756169"></p>
 <p>​        然而，随着两个对象之间距离的增加，这一准确率显著下降。这表表明，在记忆空间时，MLLM会从给定的视 频中在脑海中构建一系列局部世界模型，而非一个统一的全局模型。</p>
 <p>​        其构建地图的Prompt是：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">这段视频记录了一个室内场景。您的任务是识别视频中的特定物体，理解场景的空间布局，并估算每个物体的中心点，假设整个场景由一个 10×10 的网格来表示。[规则]</span><br><span class="line">我们在此场景中提供需要关注的类别：&#123;categories_of_interest&#125;。仅关注这些类别。</span><br><span class="line">假设整个场景由一个 10×10 的网格表示，请估算所提供类别中每个实例的中心位置。</span><br><span class="line">如果一个类别包含多个实例，请将它们全部列出。</span><br><span class="line">每个对象的估计位置应准确反映其在场景中的实际位置，保持所有对象之间的相对空间关系。[输出]以字典中的列表形式呈现每个对象的估计中心位置。严格遵循此 JSON 格式：&#123;“类别名称”：[(x_1,y_1),...], ...&#125;</span><br></pre></td></tr></table></figure>
 <p>其中，categories_of_interest包括如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501242308113.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501242308113.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250124230857076"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501242308113.png" alt="image-20250124230857076"></p>
 <h4 id="通过认知地图实现更优的距离推理"><a href="#通过认知地图实现更优的距离推理" class="headerlink" title="通过认知地图实现更优的距离推理"></a>通过认知地图实现更优的距离推理</h4><p>​        研究人员尝试让模型显式生成“认知地图”，即通过视频输入预测物体的中心位置。结果显示，这种方法显著提升了模型在空间距离任务上的表现。例如，当模型使用生成的认知地图回答问题时，其相对距离任务的准确率从46%提升到56%，在使用真实认知地图的情况下准确率提高了 46% 至 66%。这表明，认知地图能够帮助MLLMs更好地理解和回忆空间布局，是提升空间智能的一个有效途径。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501261442350.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501261442350.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250126144253255"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501261442350.png" alt="image-20250126144253255"></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>​        VSI-Bench为评估和改进MLLMs的视觉空间智能提供了一个全新的视角。通过这项研究，我们不仅看到了MLLMs在视觉空间智能方面的 现有优势（例如，突出的感知、时间和语言能力）以及瓶颈（例如，自我中心-他者中心转换和关系推理）。</p>
 <p>​        未来的研究可以进一步探索如何通过任务特定的微调、自监督学习目标或专门的视觉空间提示技术来提升MLLMs的空间智能。</p>
 
@@ -703,23 +703,6 @@
         
       </div>
       
-        <div class="copyright">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-    <strong>作者:  </strong>Dingming Li</a>
-    </li>
-    <li class="post-copyright-link">
-    <strong>文章链接:  </strong>
-    <a href="/2025/01/22/[论文学习]VSI-Bench多模态大型语言模型如何观察、记忆和回忆空间/" target="_blank" title="[论文学习]VSI-Bench:多模态大型语言模型如何观察、记忆和回忆空间">http://example.com/2025/01/22/[论文学习]VSI-Bench多模态大型语言模型如何观察、记忆和回忆空间/</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>版权声明:   </strong>
-      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
-      许可协议。转载请注明出处!
-    </li>
-  </ul>
-<div>
-      
     </article>
     <!-- 上一篇文章和下一篇文章 -->
     
@@ -732,7 +715,7 @@
   <div class="post-nav-prev post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+      <img class="lazyload" src="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" alt="">
     </div>
     <a href="/2025/03/03/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5D%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%B9%BB%E8%A7%89%E7%BB%BC%E8%BF%B0/" class="post-nav-link">
       <div class="title">
@@ -753,7 +736,7 @@
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload" src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" src="" alt="">
     </div>
     <a href="/2024/11/08/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DATTEMPT-%E9%80%9A%E8%BF%87%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%B7%B7%E5%90%88%E8%BD%AF%E6%8F%90%E7%A4%BA%E8%BF%9B%E8%A1%8C%E5%8F%82%E6%95%B0%E9%AB%98%E6%95%88%E7%9A%84%E5%A4%9A%E4%BB%BB%E5%8A%A1%E8%B0%83%E6%95%B4/" class="post-nav-link">
       <div class="title">
@@ -936,7 +919,7 @@
             <div class="post-img-box">
               <a href="/2025/03/07/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DMM-EGO%EF%BC%9A%E8%BF%88%E5%90%91%E6%9E%84%E5%BB%BA%E4%BB%A5%E8%87%AA%E6%88%91%E4%B8%BA%E4%B8%AD%E5%BF%83%E7%9A%84%E5%A4%9A%E6%A8%A1%E6%80%81LLMS/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -957,7 +940,7 @@
             <div class="post-img-box">
               <a href="/2025/03/06/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSCoRe%EF%BC%9A%E9%80%9A%E8%BF%87%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%AE%A9LLM%E5%AD%A6%E4%BC%9A%E8%87%AA%E6%88%91%E7%BA%A0%E6%AD%A3/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -978,7 +961,7 @@
             <div class="post-img-box">
               <a href="/2025/03/06/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DS%C2%B2R%EF%BC%9A%E9%80%9A%E8%BF%87%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%95%99%E4%BC%9A%20LLM%20%E8%87%AA%E6%88%91%E9%AA%8C%E8%AF%81%E5%92%8C%E8%87%AA%E6%88%91%E4%BF%AE%E6%AD%A3/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -999,7 +982,7 @@
             <div class="post-img-box">
               <a href="/2025/03/05/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSpatialRGPT%EF%BC%9A%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E4%B8%AD%E8%90%BD%E5%9C%B0%E7%A9%BA%E9%97%B4%E6%8E%A8%E7%90%86/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1020,7 +1003,7 @@
             <div class="post-img-box">
               <a href="/2025/03/05/%5B%E6%A6%82%E8%BF%B0%E5%AD%A6%E4%B9%A0%5D%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%9C%A8%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E5%8D%9A%E5%BC%88%E4%B8%AD%E7%9A%84%E6%8E%A8%E7%90%86%E8%83%BD%E5%8A%9B/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1270,7 +1253,7 @@
       this.setFishColor(); this.setParameters(), this.reconstructMethods(), this.setup(), this.bindEvent(), this.render()
     },
     setFishColor: function () {
-      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
       if (isDark) {
         this.FISH_COLOR = '#222'; // 暗黑色，有时间把这整成一个变量
       } else {
@@ -1455,7 +1438,7 @@
 <script defer>
   $(function() {
     // 初始化暗黑模式状态
-    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
     updateDarkModeIcon(isDark);
   });
 
@@ -1891,7 +1874,7 @@
   var utteranceComment = {};
 
   function check_utterance() {
-    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
     if (isDark) {
       utteranceComment.Theme = 'github-dark';
     } else {

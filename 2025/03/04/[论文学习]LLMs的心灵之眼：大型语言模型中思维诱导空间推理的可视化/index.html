@@ -90,7 +90,7 @@
     <!-- 判断是否为暗黑风格 -->
     <!-- 判断是否为黑夜模式 -->
 <script defer>
-  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
 
   if (isDark) {
     $(document.body).addClass('darkModel');
@@ -190,7 +190,7 @@
   </transition>
   <div class="drawer-box" :class="{'active': visible}">
     <div class="drawer-box-head bg-color">
-      <img class="drawer-box-head_logo lazyload placeholder" src="/medias/head.jpg" class="lazyload placeholder" data-srcset="/medias/head.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+      <img class="drawer-box-head_logo" src="/medias/head.jpg" alt="logo">
       <h3 class="drawer-box-head_title">碎碎念的博客</h3>
       <h5 class="drawer-box-head_desc"></h5>
     </div>
@@ -350,7 +350,7 @@
     <div class="blog-title" id="author-avatar">
       
         <div class="avatar">
-          <img src="/medias/head.jpg" class="lazyload placeholder" data-srcset="/medias/head.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+          <img src="/medias/head.jpg" alt="logo">
         </div>
       
       <a href="/" class="logo">碎碎念的博客</a>
@@ -644,18 +644,18 @@
 <p>​        为了评估LLM的空间意识和空间推理能力，该选择了测试导航和几何推理技能的任务，包括自然语言导航、视觉导航和视觉拼图。</p>
 <h3 id="自然语言导航"><a href="#自然语言导航" class="headerlink" title="自然语言导航"></a>自然语言导航</h3><p>​        自然语言导航任务是基于先前研究人类认知，为参与者提供从图结构中采样的顺序转换。</p>
 <p>​        在这种情况下，一个正方形地图由每个位置的随机行走指令和关联对象序列定义，并用W = {(l1, o1)，(l2, o2)… (ln, on)}表示。给定一个正方形地图W以及导航指令序列I={i1,…,ik}，模型的任务是识别指定位置l上的关联对象o∈W，该位置是由导航指令确定的。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041717025.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041717025.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250304171723849"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041717025.png" alt="image-20250304171723849"></p>
 <h3 id="视觉导航"><a href="#视觉导航" class="headerlink" title="视觉导航"></a>视觉导航</h3><p>​        视觉导航任务向LLM呈现一个合成的二维网格世界，挑战它使用视觉线索进行导航。模型必须生成导航指令以在四个方向（左、右、上、下）移动，从起点到达目的地的同时避开障碍物。这涉及两个子任务：路线规划和下一步预测，需要多跳空间推理，而前者更加复杂。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041721866.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041721866.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250304172159700"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041721866.png" alt="image-20250304172159700"></p>
 <h3 id="视觉拼图"><a href="#视觉拼图" class="headerlink" title="视觉拼图"></a>视觉拼图</h3><p>​        多面体镶嵌是一种经典的空间推理挑战。文章扩展了这一概念来测试LLM理解、组织和在受限区域进行形状推理的能力，从而增强了对空间推理技能的评估。如图所示，任务涉及一个未填充单元格的矩形以及各种多面体块，例如四个正方形排列而成的I型四宫格。模型必须选择合适的多面体变种，比如选择I型四宫格的方向，以解决QA谜题。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041724870.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041724870.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250304172408831"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041724870.png" alt="image-20250304172408831"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">Task: given a set of polyominoes and corresponding variations of each polyomino, fit them into the empty squares (⬜) in the target rectangle without overlapping any existing polyominoes or going outside the rectangle. The variations allow only translation, not rotation or reflection. It&#x27;s guaranteed that there always exists a solution.</span><br><span class="line">-------------------------</span><br><span class="line">Target rectangle with 8 empty squares:</span><br><span class="line">```</span><br><span class="line">🟥🟥🟥🟪</span><br><span class="line">⬜🟥⬜🟪</span><br><span class="line">⬜⬜⬜🟪</span><br><span class="line">⬜🟨⬜🟪</span><br><span class="line">⬜🟨🟨🟨</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">Provided polyominoes:</span><br><span class="line">1. Tetromino I (🟩)</span><br><span class="line">2. Tetromino T (🟦)</span><br><span class="line">-------------------------</span><br><span class="line">Variations for Tetromino I:</span><br><span class="line">Variation 1 fitting into its bounding box:</span><br><span class="line">```</span><br><span class="line">🟩</span><br><span class="line">🟩</span><br><span class="line">🟩</span><br><span class="line">🟩</span><br><span class="line">```</span><br><span class="line">Variation 2 fitting into its bounding box:</span><br><span class="line">```</span><br><span class="line">🟩🟩🟩🟩</span><br><span class="line">```</span><br><span class="line">-------------------------</span><br><span class="line">Variations for Tetromino T:</span><br><span class="line">Variation 2 fitting into its bounding box:</span><br><span class="line">```</span><br><span class="line">🟦⬜</span><br><span class="line">🟦🟦</span><br><span class="line">🟦⬜</span><br><span class="line">```</span><br><span class="line">Variation 3 fitting into its bounding box:</span><br><span class="line">```</span><br><span class="line">⬜🟦</span><br><span class="line">🟦🟦</span><br><span class="line">⬜🟦</span><br><span class="line">```</span><br><span class="line">-------------------------</span><br><span class="line"></span><br><span class="line">To fit all the provided polyominoes into the empty squares (⬜), what&#x27;s the correct variation of Tetromino T?</span><br><span class="line">A. 2</span><br><span class="line">B. 3</span><br><span class="line">C. Neither</span><br><span class="line"></span><br><span class="line">Visualize the state after each reasoning step.</span><br></pre></td></tr></table></figure>
 <h2 id="Visualization-of-Thought（VoT）"><a href="#Visualization-of-Thought（VoT）" class="headerlink" title="Visualization-of-Thought（VoT）"></a>Visualization-of-Thought（VoT）</h2><p>​        人类在导航等任务中处理空间信息的方式，诸如创建地图之类的心理图像以增强空间意识或模拟运动来告知决策是很常见的。现目标则是激发LLM的空间意识，并通过可视化其中间推理步骤的结果来为其推理提供基础。</p>
 <p>​        文章重点，即介绍了<strong>Visualization-of-Thought（VoT）</strong>：<strong>“Visualize the state after each reasoning step.”</strong></p>
 <p>​        VoT在三个任务中的应用：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041733492.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041733492.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250304173319432"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041733492.png" alt="image-20250304173319432"></p>
 <p>​        VoT和CoT的比较：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041732636.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041732636.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250304173219592"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041732636.png" alt="image-20250304173219592"></p>
 <h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><h4 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h4><ul>
 <li>GPT-4 CoT: Let’s think step by step.  </li>
 <li>GPT-4 w/o Viz: Don’t use visualization. Let’s think step by step.  </li>
@@ -670,7 +670,7 @@
 <h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>​        如表所示，GPT-4 VoT 在所有指标的所有任务中都明显优于其他设置。将 GPT-4 VoT 与 GPT-4V CoT 和 GPT-4 w/o Viz 进行比较时，存在显着差距，这表明了视觉状态跟踪的有效性，它允许 LLM 直观地解释他们在接地世界中的行为。</p>
 <p>​        在自然语言导航任务中，GPT-4 VoT 比 GPT-4 （不带可视化）高出 27%。在视觉任务中，GPT-4 CoT 和 GPT-4V CoT 之间的明显性能差距表明，在具有挑战性的空间推理任务中，以 2D 网格为基础的 LLM 可能优于 MLLM。</p>
 <p>​        另一方面，GPT-4 VoT 在所有任务中的性能仍远非完美，尤其是在最具挑战性的路线规划任务中。尽管这些任务对人类来说相对容易，但随着任务复杂性的增加，LLM 的性能会显著下降。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041738872.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041738872.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250304173852841"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041738872.png" alt="image-20250304173852841"></p>
 <h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p><strong>不同提示方法下的视觉状态跟踪行为是否有所不同？</strong></p>
 <p>​        作者通过分析模型输出中的可视化序列与推理步骤的关系，发现GPT-4在CoT提示下已经表现出一定的视觉状态跟踪能力，尤其是在需要时空模拟的任务中。然而，这种能力对提示非常敏感。VoT提示明确要求模型在推理过程中生成可视化内容，从而显著提高了视觉跟踪率，进而增强了模型的整体性能。例如，在视觉导航和拼图任务中，GPT-4 VoT的完整跟踪率和部分跟踪率均显著高于其他设置。这表明明确的可视化提示可以有效引导LLMs进行更连贯的视觉状态跟踪。</p>
 <p><strong>可视化如何增强最终答案的准确性？</strong></p>
@@ -680,7 +680,7 @@
 <p>​        为了评估VoT方法的普适性，作者在不同规模的模型（如GPT-3.5和LLAMA3系列）上进行了实验。结果表明，VoT方法在较大模型（如LLAMA3-70B）上表现出显著的性能提升，但在较小模型（如GPT-3.5和LLAMA3-8B）上效果有限。较小模型在复杂任务中更容易依赖随机猜测，导致性能波动较大。这表明VoT方法更适合于具有较强推理能力的大型模型，而对于较小模型，其效益可能受到模型基础能力的限制。</p>
 <p><strong>限制</strong></p>
 <p>·        此外，当前的可视化能力主要局限于2D网格，而更复杂的空间结构（如3D语义或复杂几何形状）尚未得到充分探索。由于LLMs的可视化能力是通过预训练中隐含的编码能力（如ASCI）获得的，因此其对提示的敏感性较高。例如，当明确提示使用ASCII时，模型的跟踪率和性能显著提升，而移除“推理”相关词汇则会导致跟踪率下降。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041753614.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041753614.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250304175309576"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503041753614.png" alt="image-20250304175309576"></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>​        这篇论文提出了Visualization-of-Thought（VoT）方法，旨在通过可视化中间推理步骤来提升LLM的空间推理能力。研究设计了自然语言导航、视觉导航和视觉拼图三项任务进行实验。结果表明，VoT方法显著增强了LLMs的空间推理性能，甚至超越了现有的多模态模型。</p>
 <p>​        并且进一步探讨了VoT对模型视觉状态跟踪和空间理解能力的影响，发现其对大型模型效果显著，但对较小模型提升有限，且对提示敏感。论文指出，尽管VoT在2D任务中表现出潜力，但其在更复杂的空间结构和3D语义中的应用仍需进一步探索。</p>
 
@@ -697,23 +697,6 @@
         
       </div>
       
-        <div class="copyright">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-    <strong>作者:  </strong>Dingming Li</a>
-    </li>
-    <li class="post-copyright-link">
-    <strong>文章链接:  </strong>
-    <a href="/2025/03/04/[论文学习]LLMs的心灵之眼：大型语言模型中思维诱导空间推理的可视化/" target="_blank" title="[论文学习]LLMs的心灵之眼：大型语言模型中思维诱导空间推理的可视化">http://example.com/2025/03/04/[论文学习]LLMs的心灵之眼：大型语言模型中思维诱导空间推理的可视化/</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>版权声明:   </strong>
-      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
-      许可协议。转载请注明出处!
-    </li>
-  </ul>
-<div>
-      
     </article>
     <!-- 上一篇文章和下一篇文章 -->
     
@@ -726,7 +709,7 @@
   <div class="post-nav-prev post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+      <img class="lazyload" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" alt="">
     </div>
     <a href="/2025/03/04/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSpatialCoT%EF%BC%9A%E5%9F%BA%E4%BA%8E%E5%9D%90%E6%A0%87%E5%AF%B9%E9%BD%90%E5%92%8C%E6%80%9D%E6%83%B3%E9%93%BE%E7%9A%84%E5%85%B7%E8%BA%AB%E4%BB%BB%E5%8A%A1%E8%A7%84%E5%88%92/" class="post-nav-link">
       <div class="title">
@@ -747,7 +730,7 @@
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload" src="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" src="" alt="">
     </div>
     <a href="/2025/03/03/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5D%E5%A4%A7%E5%9E%8B%E5%A4%9A%E6%A8%A1%E6%80%81%E6%A8%A1%E5%9E%8B%E7%A9%BA%E9%97%B4%E6%8E%A8%E7%90%86%E8%83%BD%E5%8A%9B%E7%9A%84%E5%AE%9E%E8%AF%81%E5%88%86%E6%9E%90/" class="post-nav-link">
       <div class="title">
@@ -930,7 +913,7 @@
             <div class="post-img-box">
               <a href="/2025/03/07/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DMM-EGO%EF%BC%9A%E8%BF%88%E5%90%91%E6%9E%84%E5%BB%BA%E4%BB%A5%E8%87%AA%E6%88%91%E4%B8%BA%E4%B8%AD%E5%BF%83%E7%9A%84%E5%A4%9A%E6%A8%A1%E6%80%81LLMS/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -951,7 +934,7 @@
             <div class="post-img-box">
               <a href="/2025/03/06/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSCoRe%EF%BC%9A%E9%80%9A%E8%BF%87%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%AE%A9LLM%E5%AD%A6%E4%BC%9A%E8%87%AA%E6%88%91%E7%BA%A0%E6%AD%A3/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -972,7 +955,7 @@
             <div class="post-img-box">
               <a href="/2025/03/06/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DS%C2%B2R%EF%BC%9A%E9%80%9A%E8%BF%87%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%95%99%E4%BC%9A%20LLM%20%E8%87%AA%E6%88%91%E9%AA%8C%E8%AF%81%E5%92%8C%E8%87%AA%E6%88%91%E4%BF%AE%E6%AD%A3/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -993,7 +976,7 @@
             <div class="post-img-box">
               <a href="/2025/03/05/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSpatialRGPT%EF%BC%9A%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E4%B8%AD%E8%90%BD%E5%9C%B0%E7%A9%BA%E9%97%B4%E6%8E%A8%E7%90%86/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1014,7 +997,7 @@
             <div class="post-img-box">
               <a href="/2025/03/05/%5B%E6%A6%82%E8%BF%B0%E5%AD%A6%E4%B9%A0%5D%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%9C%A8%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E5%8D%9A%E5%BC%88%E4%B8%AD%E7%9A%84%E6%8E%A8%E7%90%86%E8%83%BD%E5%8A%9B/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -1264,7 +1247,7 @@
       this.setFishColor(); this.setParameters(), this.reconstructMethods(), this.setup(), this.bindEvent(), this.render()
     },
     setFishColor: function () {
-      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
       if (isDark) {
         this.FISH_COLOR = '#222'; // 暗黑色，有时间把这整成一个变量
       } else {
@@ -1449,7 +1432,7 @@
 <script defer>
   $(function() {
     // 初始化暗黑模式状态
-    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
     updateDarkModeIcon(isDark);
   });
 
@@ -1885,7 +1868,7 @@
   var utteranceComment = {};
 
   function check_utterance() {
-    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
     if (isDark) {
       utteranceComment.Theme = 'github-dark';
     } else {
