@@ -606,11 +606,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 2,931 |
+            <i class="fas fa-file-text-o"></i> 字数统计: 2,470 |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 10分钟 |
+            <i class="fas fa-clock"></i> 阅读时长: 9分钟 |
           </span>
   
           
@@ -681,16 +681,6 @@
 <p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501261442350.png" class="lazyload placeholder" data-srcset="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202501261442350.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20250126144253255"></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>​        VSI-Bench为评估和改进MLLMs的视觉空间智能提供了一个全新的视角。通过这项研究，我们不仅看到了MLLMs在视觉空间智能方面的 现有优势（例如，突出的感知、时间和语言能力）以及瓶颈（例如，自我中心-他者中心转换和关系推理）。</p>
 <p>​        未来的研究可以进一步探索如何通过任务特定的微调、自监督学习目标或专门的视觉空间提示技术来提升MLLMs的空间智能。</p>
-<h2 id="IDEA🤓☝"><a href="#IDEA🤓☝" class="headerlink" title="IDEA🤓☝"></a>IDEA🤓☝</h2><p>​        受斯坦福小镇启发，在MLLM中引入一种动态空间记忆机制，用于提升模型对视频内容的空间推理能力。</p>
-<p>​        就是在MLLM识别视频的过程中，根据每一帧内容获取局部空间的记忆，之后随着视频推移，不断获取每个地方的局部空间记忆，在获取新记忆的同时不断叠加到记忆内容中去，最后形成全局的空间记忆。并且这个空间记忆拥有独特的文件存储机制。通过局部空间记忆逐帧捕捉视频中每个区域的空间信息，并逐步叠加形成全局空间记忆。最后将记忆融入推理回答即可。</p>
-<p><strong>局部空间记忆采集</strong></p>
-<p>​        固定帧视频作为输入，模型提取物体内容、位置、方向、大小、以及该物体周围内容信息等空间信息。</p>
-<p>​        额外的，可以结合局部坐标系，记录当前帧中所有已观察到物体的相对位置与关系。</p>
-<p><strong>空间叠加机制</strong></p>
-<p>​        随着视频推移，固定一帧的新信息会叠加到记忆中，更新现有物体的位置，并整合新发现的物体。</p>
-<p><strong>全局空间记忆</strong></p>
-<p>​        最终的全局记忆以固定物体/统一坐标系表示，能够准确反映整个视频中的空间布局。最后存储到文件中，如JSON文件，或者利用树状结构文件进行存储，其中文件还包括时间戳、物体类别、位置关系等信息，为后续任务提供准确的记忆检索支持。</p>
-<p>​        这样就可以支持以自我中心或环境中心转换，进而更好的回溯视频内容，执行空间推理任务。</p>
 
       </div>
       <div class="post-tags-categories">
@@ -911,7 +901,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0-VSI-Bench-%E5%A4%9A%E6%A8%A1%E6%80%81%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%A6%82%E4%BD%95%E8%A7%82%E5%AF%9F%E3%80%81%E8%AE%B0%E5%BF%86%E5%92%8C%E5%9B%9E%E5%BF%86%E7%A9%BA%E9%97%B4"><span class="toc-text">[论文学习]VSI-Bench:多模态大型语言模型如何观察、记忆和回忆空间</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%84%E6%96%99"><span class="toc-text">资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VSI-Bench%E8%AE%BE%E7%BD%AE%E8%83%8C%E6%99%AF"><span class="toc-text">VSI-Bench设置背景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%86%E8%A7%89%E7%A9%BA%E9%97%B4%E6%99%BA%E8%83%BD"><span class="toc-text">视觉空间智能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VSI-Bench%E6%95%B0%E6%8D%AE%E5%86%85%E5%AE%B9"><span class="toc-text">VSI-Bench数据内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VSI-Bench%E8%AF%84%E4%BC%B0%E4%B8%8E%E7%BB%93%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="toc-text">VSI-Bench评估与结果展示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VSI-Bench%E6%8E%A2%E7%B4%A2%E6%8F%90%E9%AB%98"><span class="toc-text">VSI-Bench探索提高</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E6%88%91%E8%A7%A3%E9%87%8A%E6%8E%A8%E7%90%86%EF%BC%88Self-Explanations%EF%BC%89"><span class="toc-text">自我解释推理（Self-Explanations）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%9D%E7%BB%B4%E9%93%BE%EF%BC%88Cot%EF%BC%89"><span class="toc-text">思维链（Cot）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A4%E7%9F%A5%E5%9C%B0%E5%9B%BE%EF%BC%88Cognitive-Maps%EF%BC%89"><span class="toc-text">认知地图（Cognitive Maps）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E8%AE%A4%E7%9F%A5%E5%9C%B0%E5%9B%BE%E5%AE%9E%E7%8E%B0%E6%9B%B4%E4%BC%98%E7%9A%84%E8%B7%9D%E7%A6%BB%E6%8E%A8%E7%90%86"><span class="toc-text">通过认知地图实现更优的距离推理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IDEA%F0%9F%A4%93%E2%98%9D"><span class="toc-text">IDEA🤓☝</span></a></li></ol></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0-VSI-Bench-%E5%A4%9A%E6%A8%A1%E6%80%81%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%A6%82%E4%BD%95%E8%A7%82%E5%AF%9F%E3%80%81%E8%AE%B0%E5%BF%86%E5%92%8C%E5%9B%9E%E5%BF%86%E7%A9%BA%E9%97%B4"><span class="toc-text">[论文学习]VSI-Bench:多模态大型语言模型如何观察、记忆和回忆空间</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%84%E6%96%99"><span class="toc-text">资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VSI-Bench%E8%AE%BE%E7%BD%AE%E8%83%8C%E6%99%AF"><span class="toc-text">VSI-Bench设置背景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%86%E8%A7%89%E7%A9%BA%E9%97%B4%E6%99%BA%E8%83%BD"><span class="toc-text">视觉空间智能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VSI-Bench%E6%95%B0%E6%8D%AE%E5%86%85%E5%AE%B9"><span class="toc-text">VSI-Bench数据内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VSI-Bench%E8%AF%84%E4%BC%B0%E4%B8%8E%E7%BB%93%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="toc-text">VSI-Bench评估与结果展示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VSI-Bench%E6%8E%A2%E7%B4%A2%E6%8F%90%E9%AB%98"><span class="toc-text">VSI-Bench探索提高</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E6%88%91%E8%A7%A3%E9%87%8A%E6%8E%A8%E7%90%86%EF%BC%88Self-Explanations%EF%BC%89"><span class="toc-text">自我解释推理（Self-Explanations）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%9D%E7%BB%B4%E9%93%BE%EF%BC%88Cot%EF%BC%89"><span class="toc-text">思维链（Cot）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A4%E7%9F%A5%E5%9C%B0%E5%9B%BE%EF%BC%88Cognitive-Maps%EF%BC%89"><span class="toc-text">认知地图（Cognitive Maps）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E8%AE%A4%E7%9F%A5%E5%9C%B0%E5%9B%BE%E5%AE%9E%E7%8E%B0%E6%9B%B4%E4%BC%98%E7%9A%84%E8%B7%9D%E7%A6%BB%E6%8E%A8%E7%90%86"><span class="toc-text">通过认知地图实现更优的距离推理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
