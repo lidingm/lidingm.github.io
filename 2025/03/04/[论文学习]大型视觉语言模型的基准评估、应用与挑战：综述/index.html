@@ -1,0 +1,236 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>[论文学习]大型视觉语言模型的基准评估、应用与挑战：综述 | 碎碎念的博客</title><meta name="author" content="Dingming Li"><meta name="copyright" content="Dingming Li"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="[论文学习]大型视觉语言模型的基准评估、应用与挑战：综述 转载自最新综述 | 大型视觉语言模型的基准评估、应用与挑战：综述 - 知乎  资料 论文：[2501.02189] Benchmark Evaluations, Applications, and Challenges of Large Vision Language Models: A Survey 代码：zli12321&#x2F;VLM-sur">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[论文学习]大型视觉语言模型的基准评估、应用与挑战：综述">
+<meta property="og:url" content="http://example.com/2025/03/04/[%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0]%E5%A4%A7%E5%9E%8B%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%9F%BA%E5%87%86%E8%AF%84%E4%BC%B0%E3%80%81%E5%BA%94%E7%94%A8%E4%B8%8E%E6%8C%91%E6%88%98%EF%BC%9A%E7%BB%BC%E8%BF%B0/index.html">
+<meta property="og:site_name" content="碎碎念的博客">
+<meta property="og:description" content="[论文学习]大型视觉语言模型的基准评估、应用与挑战：综述 转载自最新综述 | 大型视觉语言模型的基准评估、应用与挑战：综述 - 知乎  资料 论文：[2501.02189] Benchmark Evaluations, Applications, and Challenges of Large Vision Language Models: A Survey 代码：zli12321&#x2F;VLM-sur">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2025-03-04T15:08:08.000Z">
+<meta property="article:modified_time" content="2025-03-08T03:41:22.083Z">
+<meta property="article:author" content="Dingming Li">
+<meta property="article:tag" content="VLM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "[论文学习]大型视觉语言模型的基准评估、应用与挑战：综述",
+  "url": "http://example.com/2025/03/04/[%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0]%E5%A4%A7%E5%9E%8B%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%9F%BA%E5%87%86%E8%AF%84%E4%BC%B0%E3%80%81%E5%BA%94%E7%94%A8%E4%B8%8E%E6%8C%91%E6%88%98%EF%BC%9A%E7%BB%BC%E8%BF%B0/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2025-03-04T15:08:08.000Z",
+  "dateModified": "2025-03-08T03:41:22.083Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Dingming Li",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/03/04/[%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0]%E5%A4%A7%E5%9E%8B%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%9F%BA%E5%87%86%E8%AF%84%E4%BC%B0%E3%80%81%E5%BA%94%E7%94%A8%E4%B8%8E%E6%8C%91%E6%88%98%EF%BC%9A%E7%BB%BC%E8%BF%B0/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '[论文学习]大型视觉语言模型的基准评估、应用与挑战：综述',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">碎碎念的博客</span></a><a class="nav-page-title" href="/"><span class="site-name">[论文学习]大型视觉语言模型的基准评估、应用与挑战：综述</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">[论文学习]大型视觉语言模型的基准评估、应用与挑战：综述</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-03-04T15:08:08.000Z" title="发表于 2025-03-04 23:08:08">2025-03-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-03-08T03:41:22.083Z" title="更新于 2025-03-08 11:41:22">2025-03-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0/">论文学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="论文学习-大型视觉语言模型的基准评估、应用与挑战：综述"><a href="#论文学习-大型视觉语言模型的基准评估、应用与挑战：综述" class="headerlink" title="[论文学习]大型视觉语言模型的基准评估、应用与挑战：综述"></a>[论文学习]大型视觉语言模型的基准评估、应用与挑战：综述</h1><blockquote>
+<p>转载自<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/20051316906">最新综述 | 大型视觉语言模型的基准评估、应用与挑战：综述 - 知乎</a></p>
+</blockquote>
+<h2 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h2><blockquote>
+<p>论文：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2501.02189">[2501.02189] Benchmark Evaluations, Applications, and Challenges of Large Vision Language Models: A Survey</a></p>
+<p>代码：<a target="_blank" rel="noopener" href="https://github.com/zli12321/VLM-surveys">zli12321/VLM-surveys: A most Frontend Collection and survey of vision-language model papers, and models GitHub repository</a></p>
+</blockquote>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>​        VLMs已成为计算机视觉与自然语言处理交叉领域的一项变革性技术，使机器能够通过视觉和文本两种模态来感知和推理世界。例如，CLIP、Claude和GPT-4V等模型在视觉和文本数据上展现出强大的推理和理解能力，并在零样本分类任务中超越了传统的单模态视觉模型。尽管VLMs在研究领域取得了快速进展，并在应用领域日益受到欢迎，但关于VLMs现有研究的全面综述却明显不足，特别是对于旨在将VLMs应用于特定领域的研究人员而言。</p>
+<p>​        为此，文章从以下几个方面对VLMs进行了系统概述：</p>
+<ul>
+<li>1）过去五年（2019-2024年）开发的主要VLMs的模型信息；</li>
+<li>2）这些VLMs的主要架构和训练方法；</li>
+<li>3）VLMs流行基准测试和评估指标的总结与分类；</li>
+<li>4）VLMs的应用，包括实体agent、机器人和视频生成；</li>
+<li>5）当前VLMs面临的挑战和问题，如幻觉、公平性和安全性。</li>
+</ul>
+<h2 id="SOTA-VLMS"><a href="#SOTA-VLMS" class="headerlink" title="SOTA VLMS"></a>SOTA VLMS</h2><ul>
+<li><strong>视觉语言相关性（Vision-Language Correlation）</strong>研究的是训练目标或架构设计如何促进多模态融合。例如，对比学习等训练目标可以通过SimCLR等方法来实现，SimCLR原本是为自监督视觉任务开发的，通过拉近嵌入空间中成对图像和文本的距离，同时推开未配对的样本，从而很好地适应多模态设置。视觉语言架构（Vision-Language Architecture）则研究模型设计中的结构选择如何促进或限制多模态融合。早期的架构方法主要是从头开始训练模型（如CLIP），而更新的方法（如LLaMA 3.2-vision）则利用预训练大型语言模型（LLM）的强大功能作为骨干，以提高视觉和语言的相关性理解能力，从而更好地理解视觉内容。</li>
+<li><strong>基准测试和评估（Benchmarks and Evaluation）</strong>主要关注设计、收集和生成多模态数据，主要以问答（QA）的形式，用于在各种任务（如视觉文本理解、图表理解、视频理解）上测试VLMs。</li>
+<li><strong>VLMs的应用（Applications of VLMs）</strong>则侧重于将VLM模型部署到现实场景中。虚拟应用通常涉及控制个人设备屏幕或模拟agent游戏。同时，VLMs的物理应用则主要关注与现实世界中物理对象的交互，如机器人与人交互或自动驾驶。</li>
+</ul>
+<p>这三个方向为分析、比较和指导视觉语言建模这一快速发展领域的未来进步提供了结构化框架。根据以上三个主要研究方向，2019年至2024年底的SoTA VLMs被列在下表中。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503042351648.png" alt="image-20250304235104504"></p>
+<h2 id="积木搭建与训练方法"><a href="#积木搭建与训练方法" class="headerlink" title="积木搭建与训练方法"></a>积木搭建与训练方法</h2><p>​        视觉语言模型的架构正在从从头开始预训练转变为使用预先训练好的LLM作为主干来对齐视觉和文本信息（如上表）。然而，基本组件仍然大体不变。文章总结了VLM中最基础且广泛采用的架构组件，并解释了流行的预训练和对齐方法。</p>
+<h3 id="通用架构组件"><a href="#通用架构组件" class="headerlink" title="通用架构组件"></a>通用架构组件</h3><p>​        视觉编码器在将视觉组件投影为与来自大语言模型（LLMs）的嵌入特征相匹配的嵌入特征方面发挥着至关重要的作用，这对于文本或图像生成等任务至关重要。它被训练用于从图像或视频数据中提取丰富的视觉特征，从而实现与语言表示的融合。</p>
+<p>​        许多视觉语言模型（VLMs）中使用的视觉编码器是在大规模多模态或图像数据上进行预训练的：这些编码器在图像-文本对上进行联合训练，使它们能够有效地捕捉视觉和语言之间的关系。典型的例子包括CLIP，它通过对比学习将图像和文本嵌入进行对齐，以及BLIP，它利用自举预训练来实现稳健的语言-图像对齐。在大规模ImageNet或类似数据集上进行预训练：这些编码器在大量标记的视觉数据上进行训练或通过自监督训练，使它们能够捕捉特定领域的视觉特征。虽然这些编码器最初是单模态的，如ResNet或视觉Transformer（ViTs），但它们可以适应多模态任务。它们擅长提取有意义的对象级特征，并为视觉语言模型提供了坚实的基础。许多当前最优的视觉语言模型（SoTA VLMs），如Qwen2-VL和LLaVA，通常都融入了预训练的视觉编码器。这些编码器不仅提供了稳健且有意义的视觉表示，而且在迁移学习方面也非常有效。它们通过利用在其训练领域学到的视觉知识，优于随机初始化的编码器。</p>
+<p>​        文本编码器将分词后的文本序列投影到嵌入空间中，这与视觉编码器处理图像的方式类似。CLIP、BLIP和ALIGN等模型既使用图像编码器也使用文本编码器。这些模型利用对比学习在共享潜在空间中对齐图像和文本的嵌入，有效地捕捉跨模态关系。然而，更新的模型，如LLaVA，通常不包括专门的文本编码器。相反，它们依赖大型语言模型（LLMs）（如LLaMA、Vicuna）进行文本理解，并通过投影层或交叉注意力机制整合视觉输入。这一转变表明，在更多样化和更高级的多模态推理和生成任务中，使用LLMs的能力正逐渐超过视觉组件。</p>
+<p>​        文本解码器利用LLMs作为主要文本生成器，同时使用视觉编码器投影图像特征。GPT-4V、Flamingo和Kosmos-2采用了这种方法。这些模型通常使用最小的视觉投影机制，从而允许强大的语言解码器生成上下文丰富的输出。VisualBERT和VilBERT为多模态预训练的解码器架构提供了基础。从头开始训练VLMs通常需要单独的文本解码器，而使用LLMs作为主干时，则通常使用LLM的原始解码器（如图）。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503042358193.png" alt="image-20250304235837024"></p>
+<p>​        交叉注意力机制允许一种模态（视觉）中的token影响另一种模态（文本）中的token，从而实现视觉和文本特征之间的动态交互。交叉注意力层通常通过计算每对视觉和文本token之间的注意力得分来整合跨模态的信息。并非所有模型都使用交叉注意力机制。例如，VisualBERT和Flamingo都具备交叉注意力机制，而CLIP则没有。</p>
+<h3 id="构建从零开始训练的模块"><a href="#构建从零开始训练的模块" class="headerlink" title="构建从零开始训练的模块"></a>构建从零开始训练的模块</h3><p>​        与以大型语言模型（LLM）为骨干相比，从零开始训练视觉语言模型（VLM）通常使用不同的训练目标和方法。自监督学习（SSL）可以在不需要人类标注数据的情况下进行预训练，从而实现预训练规模的扩大。SSL技术的变种包括掩码图像建模、对比学习和图像变换预测。这里我们将深入探讨对比学习，这是一种常见的预训练过程，用于扩大从零开始训练VLM的规模。</p>
+<p>​        对比学习涉及为视觉和文本输入使用单独的编码器，这些编码器被训练成将各自模态映射到一个共享的嵌入空间。视觉编码器处理图像，从卷积神经网络（CNN）或视觉transformer（ViT）等模型中生成特征嵌入。文本编码器将文本输入处理成嵌入。对比学习通过最小化相关图像-文本对在共享空间中视觉和文本嵌入之间的距离，同时最大化不相关对嵌入之间的距离，来对齐这些对。CLIP、BLIP和ALIGN等开创性模型利用这种方法，在大规模图像-文本数据集上进行预训练，从而为下游任务开发稳健、可迁移的表示。</p>
+<h3 id="构建以LLMS作为主干的模块"><a href="#构建以LLMS作为主干的模块" class="headerlink" title="构建以LLMS作为主干的模块"></a>构建以LLMS作为主干的模块</h3><p>​        大语言模型（LLMs）在视觉语言模型（VLMs）中充当文本生成组件，该组件处理编码后的视觉和文本输入，以自回归方式生成文本输出。在VLMs的背景下，LLMs包括其原始文本解码器。这里我们列出了两种将视觉特征和预训练的LLM文本特征对齐的常见方法。</p>
+<p>​        投影器（Projector）将视觉编码器提取的视觉特征映射到与LLM文本嵌入对齐的共享嵌入空间中。它通常包含多层感知器（MLP）层，这些层将高维视觉表示转换为与文本模态兼容的紧凑嵌入token。投影器可以与模型的其他部分联合训练，以优化跨模态目标，或者冻结模型的某些部分（如LLM），以保留预训练知识。当代的示例大多包括LLaVA、QWen2-VL、Nvidia VLM、Baichuan Ocean-mini、Emu3和Pixtral（多模态解码器）等。</p>
+<p>​        联合训练（Joint Training）是一种端到端的方法，它并行更新模型所有组件的权重，而不冻结任何权重，包括LLM和投影器层。这种方法已在Flamingo等模型中使用。</p>
+<p>​        冻结训练（Freeze Training Stages）涉及在训练过程中选择性地冻结模型组件，以在适应新任务的同时保留预训练知识。常见策略包括冻结预训练的视觉编码器，同时微调投影器层，以及实现组件的逐步解冻，或者冻结LLM层，而仅更新视觉编码器的权重。</p>
+<h3 id="新型架构"><a href="#新型架构" class="headerlink" title="新型架构"></a>新型架构</h3><p>​        近期的研究工作主要聚焦于提升视觉和文本特征的融合。将所有模态都视为token是一种较新的方法，该方法将视觉输入（图像和视频）读取并编码为与文本token类似的token。Emu3使用SBER-MoVQGAN将视觉输入编码为token，并使用特殊分隔符（如[SOT]和[EOV]）来标记视觉token的开始和结束。</p>
+<p>​        它仍然保留了如Llama等大型语言模型（LLMs）的架构，但扩展了嵌入层，以适应离散的视觉token（均方根层归一化层和多查询注意力）。此外，它将视觉和文本输出的生成视为统一多模态表示中的token预测任务。</p>
+<p>​        Transfusion在一个单一的Transformer架构内同时处理不同的模态。该方法通过引入策略断点，并行处理离散的文本token和连续的图像向量。尽管尚未完善，但这种方法显示出开发能够处理多种输入类型的更统一的多模态模型的潜力。</p>
+<h2 id="基准与评估"><a href="#基准与评估" class="headerlink" title="基准与评估"></a>基准与评估</h2><p>​        自2022年以来，随着新型视觉语言模型（VLMs）的快速发展，VLM基准测试的数量也迅速增长。全面基准测试对于评估模型性能以及确保在不同能力（如数学推理、场景识别等方面）上的稳健训练至关重要。现代VLM基准测试已经超越了基本视觉问答等简单任务，纳入了更广泛的测试，以从更多方面更好地评估模型的多模态能力。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503050001070.png" alt="image-20250305000122009"></p>
+<p>​        这里我们总结和分类了现有的38个用于评估VLMs的视觉语言基准测试，包括图像-文本和视频-文本基准测试。然后，总结了这些基准测试常用的评价指标、创建基准数据集的典型方法，以及当前基准测试和评估实践的优缺点。我们强调了大多数基准测试如何优先考虑数据的多样性和数量，而往往忽视了评估质量的提升，这阻碍了对VLMs的有效评估。基准测试分类。基准测试是根据特定的测试目标设计的，我们将其分为十大类（如下表）。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503050002214.png" alt="image-20250305000202151"></p>
+<h3 id="基准数据是如何收集的"><a href="#基准数据是如何收集的" class="headerlink" title="基准数据是如何收集的"></a>基准数据是如何收集的</h3><p>​        基准数据集通常通过以下三种常见的数据收集流程之一来创建：完全由人类标注的数据集；通过合成数据生成进行扩展并部分由人类验证的部分人类标注数据集；以及通过合成数据进行扩展并完全由人类验证的部分人类标注数据集。</p>
+<h3 id="Evaluation-Metrics"><a href="#Evaluation-Metrics" class="headerlink" title="Evaluation Metrics"></a>Evaluation Metrics</h3><p>基准测试（Benchmarks）旨在进行评估，并在其创建过程中建立相应的评估指标。视觉语言模型（VLM）的评估指标是自动化的，以支持大规模重复使用，并且它们通常会影响基准测试中采用的问题格式。我们展示了在我们调查的基准测试中常用的评估指标（如图2b、3所示）。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503050003896.png" alt="image-20250305000312797"></p>
+<p>​        答案匹配被广泛应用于开放式和封闭式问题类型，这两类问题的答案可以是短格式的实体、长格式的答案、数字或是是非题。与抽取式大型语言模型（LLMs）和视觉语言模型（VLMs）相比，生成式VLMs更加冗长，它们通常会生成冗长但正确的答案。在评估中，更常用且更实用的版本是包含精确匹配（containment exact match），这种方法包括去除预测答案中的冠词和空格，并检查规范化后的预测答案是否被包含在规范化后的标准答案中。然而，精确匹配往往召回率较高，这常常无法体现出标准答案和预测答案之间的语义等价性，因此经常误判人类可接受的正确答案为错误答案，并且对于寻求长格式答案的基准测试来说，精确匹配变得不再适用。在LLM时代指令遵循成功之前，人们使用标准令牌重叠分数（如F1、ROUGE、BLEU）来衡量标准答案和预测答案之间的相似度分数，但当生成模型生成更复杂多样但正确的答案时，这些方法就开始失效了。</p>
+<p>​        因此，当答案是长格式且需要语义理解来判断正确性时，一些基准测试（如MM-Vet）采用LLMs来评估生成的回答。研究表明，LLM评估与人类评估的相关性最高，但它们也面临着随着模型内部更新或提示指令改变而产生一致输出的挑战。虽然目前没有完美的答案匹配评估方法，但与开放式问题相比，是非题最容易评估。因此，大多数基准测试都依赖于多项选择题的形式来评估VLMs（如图2b所示）。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/lidingm/blog_img/img/202503050004292.png" alt="image-20250305000452233"></p>
+<p>​        多项选择题格式涉及从包括干扰项在内的一组选项中选择一个答案来回答给定的视觉问题。这种格式提供了确定的答案，并且评估起来相对容易，因为它衡量的是视觉语言模型（VLM）正确回答问题的百分比。然而，大语言模型（LLMs）已经展现出一种不同寻常的能力，即使无法访问实际问题，也能选择出正确答案。由于VLM包含用于生成响应的LLM组件，因此需要进一步的研究来评估当前VLM基准测试的稳健性和可靠性。</p>
+<p>​        在图像生成基准测试（如T2ICompBench、GenEval）中，图像/文本相似度分数常用于评估生成的图像与其对应的文本描述之间的一致性。它们通常依赖于诸如CLIPScore（用于图像-文本对齐）或ROUGE（用于字幕匹配）等指标来评估输出与参考之间的语义和词汇相似性。</p>
+<p>​        综上所述，VLM基准测试涵盖了广泛的问题类型、专业领域和任务，仅MMLU就涵盖了57个不同的任务。然而，流行的评估方法仍然主要局限于简单的答案匹配或多项选择题格式，远未达到图灵测试对通用智能的广义定义。</p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>​        视觉语言模型（VLMs）被广泛应用于各种任务，从虚拟世界应用（如虚拟化身agent）到现实世界应用（如机器人技术和自动驾驶）。</p>
+<h3 id="具身视觉语言模型agent"><a href="#具身视觉语言模型agent" class="headerlink" title="具身视觉语言模型agent"></a>具身视觉语言模型agent</h3><p>​        视觉问答（VQA）是一项基础任务，涉及根据视觉和文本内容来回答问题。它要求从图像或视频序列中提取有意义的信息，如识别物体、场景和活动。在实践中，具身化视觉语言模型agent是VQA的一种流行应用，范围从具身化个人设备聊天机器人辅助到为视力低下用户提供的视觉图表解读和图表生成。</p>
+<p>​        具身化agent是拥有虚拟或物理身体、能够与周围环境进行交互的人工智能模型。像Apple Intelligence这样的纯文本agent可以通过将用户请求转换为可执行代码来控制手机应用程序，从而处理、推理和执行用户请求，但它们缺乏视觉推理能力。在此背景下，特别关注具有虚拟身体的具身化agent，以及它们在个人辅助和无障碍应用方面与VQA模型的应用关系。</p>
+<p>​        作为辅助应用和无障碍目标的具身化视觉语言模型agent旨在帮助用户在设备上执行操作或提供屏幕上的答案，以协助视力低下者。最近的发展包括：ScreenAI专门用于理解用户界面（UI）组件并回答有关屏幕元素的问题。智能手机助手通过使用端到端VLM扩展了这一功能，该VLM直接读取视觉屏幕输入和用户请求，并将其转换为可执行代码序列以满足用户请求的操作。与智能手机助手类似，ScreenAgent采用三步法（规划、执行、反思）来处理用户请求。它首先通过自然语言描述理解UI组件，然后将用户请求分解为子任务，最后以函数调用格式生成鼠标和键盘操作来在用户屏幕上执行动作。此外，这些VLMagent中的一些可能还需要图表理解或生成能力来告诉用户图形、图表或图示的内容。VLM通常容易出现幻觉，尤其是在图表理解方面，经常会提取出错误的数字。ChartLLaMA经过专门微调，用于更准确地理解和提取各种图表或绘图视觉输入中的数字并进行解释。尽管如此，这些VLM应用作为助手，帮助用户自动执行操作而无需用户参与，并帮助残疾人更好地访问和理解UI页面，从而提高无障碍性。</p>
+<p>​        尽管具身化虚拟VLM-agent取得了进步，但它们依赖于语言模型，通常将视觉作为辅助角色，而不是将这两种模态完全融合，这是它们的局限性。这些模型通常以语言推理为主要驱动力，视觉输入起次要作用，导致视觉理解不足，无法有效地为决策提供依据。除了虚拟应用外，具身化VLMagent还用于执行真实的物理世界应用，如手术规划和模拟以降低风险。</p>
+<h3 id="Generative-Visual-Media-Applications"><a href="#Generative-Visual-Media-Applications" class="headerlink" title="Generative Visual Media Applications"></a>Generative Visual Media Applications</h3><p>​        生成式视觉语言模型（VLM），包括生成对抗网络（GAN）、扩散模型以及像Transfusion这样的新型框架，在媒体应用中被广泛应用，以辅助艺术和内容的创作。生成式VLM模型的一个显著应用是在模因（一种网络通用语言）的创作上。像Supermeme.ai这样的平台使用VLM模型生成超过110种语言的定制化模因，使用户能够通过幽默或引人入胜的视觉内容有效地表达情感或想法。此外，生成式VLM模型还被应用于电影制作和视觉特效中。例如，MovieGen允许用户根据输入将静态图像转换成视觉上令人惊叹的视频特效，从而创作出动态的电影场景。</p>
+<h3 id="机器人学与具身人工智能"><a href="#机器人学与具身人工智能" class="headerlink" title="机器人学与具身人工智能"></a>机器人学与具身人工智能</h3><p>​        将视觉语言模型与机器人技术相结合是一个热门话题，它连接了网络空间和物理世界中的基础模型。近年来，涌现出大量研究工作，聚焦于利用视觉语言模型（VLMs）在视觉推理、复杂场景理解、跨操纵、导航、人机交互、多机器人协同、运动规划、奖励函数设计等多种任务上的规划能力。该领域的革命性发展引发了机器人学领域众多未探索的研究问题，受到广泛关注，同时也揭示了实施过程中存在的许多潜在局限性。</p>
+<h3 id="Manipulation"><a href="#Manipulation" class="headerlink" title="Manipulation"></a>Manipulation</h3><p>​        视觉语言模型（VLM）在机器人操纵任务中的应用主要聚焦于提升机器人利用语言先验知识来操纵非领域特定对象或执行更复杂、成本更高的动作规划的能力。VIMA设计了一个基于Transformer的机器人agent，该agent能够处理这些提示并以自回归方式输出动作指令。Instruct2Act则利用大型语言模型（LLM）生成Python程序，这些程序构成了机器人任务中感知、规划和动作的完整循环。RoboVQA提出了一种高效收集机器人数据的方法，包括一个用于机器人视觉问答的大型多样化数据集，以及一个具有具身推理能力的单一模型。Robotool提出了一个系统，该系统通过整合基础模型，使机器人能够使用创造性工具。RT系列则提出了一种视觉语言动作模型，该模型能够编码视觉观测和文本提示，并计算出机器人操纵任务中的目标位置和方向。尽管当前的VLM在机器人领域的应用在操纵任务的视觉推理和场景理解方面展现出了令人印象深刻的能力，但鉴于机器人操纵器的多样性，其能力仍受到泛化水平的限制。</p>
+<h3 id="Navigation"><a href="#Navigation" class="headerlink" title="Navigation"></a>Navigation</h3><p>​        将视觉语言模型（VLMs）融入机器人导航任务主要聚焦于开放世界的零样本或少样本目标导航或语义线索驱动的导航。ZSON利用多模态语义嵌入空间对agent进行图像目标导航训练，从而实现了从自然语言指令到零样本ObjectNav的转换，并能稳健地泛化到复杂、推断出的指令。LOC-ZSON引入了一种语言驱动的对象中心图像表示和基于大型语言模型（LLM）的增强技术，用于零样本对象导航。LM-Nav是一个机器人导航系统，它结合了预训练模型，能够在真实世界的室外环境中实现基于自然语言的长距离导航，而无需微调或语言注释数据。NaVILA为腿式机器人在复杂且杂乱的场景下的导航提出了一个视觉-语言-动作（VLA）模型。VLFM根据深度观测构建占据图以识别边界，并利用RGB观测和预训练的视觉语言模型生成基于语言的值图，以确定最有希望的边界并探索以找到给定的目标对象。LFG-Nav利用语言模型将存储在语言模型中的语义知识作为规划搜索启发式方法，从而引导对新颖真实世界环境的探索。虽然许多现有工作遵循任务与运动规划（TAMP）流程，该框架便于将整个任务分割成可由低级规划器执行的可行子目标，但其适应性受到规划器的限制，并且在处理意外情况时缺乏灵活性。</p>
+<h3 id="人机交互"><a href="#人机交互" class="headerlink" title="人机交互"></a>人机交互</h3><p>​        人机交互（HRI）是一个要求认知与适应能力的子领域，同时也需要具备在现实中解读人类意图并据此采取行动的能力。基于视觉语言模型（VLM）的人机交互在交互过程中展现出了更强的人类意图理解能力和适应性。MUTEX是一种基于Transformer的方法，用于从多模态任务规范中学习策略和进行人机交互协作，使机器人能够解读和执行跨越六种模态（视频、图像、文本和语音等）的任务。LaMI通过实现直观、以指导为驱动的机器人行为调控，动态协调动作和表达以协助人类，同时简化了传统的状态和流程设计过程，从而革新了多模态人机交互。Wang等人设计了一条pipeline，该pipeline使用视觉语言模型来解读人类演示视频，并通过整合关键帧选择、视觉感知和视觉语言模型推理来生成机器人任务计划，在各类别中的长时程抓取放置任务上表现出了卓越性能。VLM-Social-Nav利用视觉语言模型来检测社会实体，并在以人类为中心的环境中引导机器人动作，从而实现符合社交规范的导航。</p>
+<h3 id="自动驾驶"><a href="#自动驾驶" class="headerlink" title="自动驾驶"></a>自动驾驶</h3><p>​        自动驾驶是机器人技术中一个研究密集型的领域，而涉及非领域内物体和交通事件的长尾特例一直是该领域长期存在的问题。用于自动驾驶的车载视觉语言模型（VLM）agent已展现出克服这两个问题的能力，在物体识别、导航与规划以及决策制定方面表现出更强的能力。VLPD利用自监督分割和对比学习，在不添加额外注释的情况下，对诸如小型或被遮挡的行人等明确的语义上下文进行建模。MotionLM通过将多智能体运动预测重新定义为语言建模任务，使用离散运动标记和自回归解码，实现了高效且时间上具有因果关系的联合轨迹预测。DiLU结合了推理和反思模块，使系统能够基于常识知识进行决策制定，并在交通环境中持续进化。最近，人们更加致力于开发端到端的自动驾驶模型，这些模型能够直接从视觉语言模型中产生动作，而无需生成中间任务。VLP引入了一个视觉-语言-规划框架，该框架集成了语言模型，以增强自动驾驶中的推理、上下文理解和泛化能力。DriveGPT4提出了首个可解释性的端到端自动驾驶系统，该系统利用多模态大型语言模型，能够处理视频输入、文本查询，并预测车辆控制信号。</p>
+<h3 id="Human-Centered-AI"><a href="#Human-Centered-AI" class="headerlink" title="Human-Centered AI"></a>Human-Centered AI</h3><p>​        视觉语言模型（VLMs）的一个重要且有前景的应用是利用其理解和推理能力来分析人类与AI agent交互过程中的人类意图和行为。大型视觉语言模型（LVLMs）有助于在多个应用中执行情感分析、预测人类意图，以及辅助人类与现实世界的交互，这些应用旨在促进社会的福祉，如AI4Science、农业、教育、无障碍访问、医疗健康、气候变化等领域。视觉语言模型在这些领域都展现出了惊人的潜力，并助力广泛的人工智能变革对社会各个角落产生深远影响。</p>
+<h2 id="挑战"><a href="#挑战" class="headerlink" title="挑战"></a>挑战</h2><p>​        这里重点关注视觉语言模型（VLM）评估中的三个具有挑战性的领域：幻觉（误导性生成）、安全性和公平性。尽管近期的改进使得VLM能够不断达到最优性能，但了解其误用带来的风险对于评估和防止对终端用户（尤其是边缘化群体）造成伤害至关重要。以下讨论旨在强调当前存在的局限性以及正在进行的研究，以确保VLM的可靠和伦理使用。</p>
+<h3 id="幻觉"><a href="#幻觉" class="headerlink" title="幻觉"></a>幻觉</h3><p>​        “幻觉”指的是视觉语言模型（VLM）倾向于引用相关图像中未出现的物体和/或人造物品。尽管VLM的性能已达到标杆水平，但幻觉问题仍然普遍存在，特别是在视觉-文本应用任务中。研究人员已提出数据集和指标来量化幻觉现象，早期的尝试往往需要人工标注。在图像字幕生成方面，Rohrbach等人提出了CHAIR指标，该指标基于真实字幕计算生成的词汇中出现在图像中的比例。CHAIR包含两种变体：逐实例（per-instance）变体，用于衡量产生幻觉的实例比例；逐句（per-sentence）变体，用于衡量包含幻觉物体的句子比例。Li等人开发了POPE，通过一系列关于存在和不存在物体的“是/否”问题来评估幻觉的程度。Gunjal等人发布了M-HalDetect，这是一个包含16,000个样本的视觉问答细粒度标注数据集，可用于训练VLM检测并防止幻觉。后续研究对幻觉进行了更细致的研究。Halle-Switch从数据量、质量和粒度的角度评估幻觉，结合了上下文和参数知识来控制幻觉，而非直接移除。Hallu-Pi包含11种物体类型的1260张图像及详细标注，用于检测扰动输入中发生的各种幻觉类型。Guan等人提出了HallusionBench，通过依赖性问题来研究VLM的视觉推理能力，这些问题在没有视觉内容的情况下无法获得肯定答案，涉及不同主题（如食物、数学、迷因）和图像格式（如标志、海报、图表），以检测幻觉。</p>
+<p>​        更复杂的大型语言模型（LLM）的出现也推动了该领域更大规模基准数据集的发展。GAIVE使用GPT-4生成了400,000个开放式指令样本，涵盖16个视觉和语言任务。这些样本考虑了幻觉的各种语义层次，如不存在物体的操作和知识操作。Jiang等人使用GPT-4构建了Hal-Eval，通过诱导细粒度幻觉和为200万个图像-字幕样本对定制提示来实现。另一方面，AMBER是一个无需LLM的多维度基准，专为生成性和判别性任务设计，并对4种幻觉类型进行了标注。</p>
+<p>​        鉴于视觉语言模型（VLMs）具有极高的通用性，防止其被不道德和有害地使用变得尤为重要。恶意行为者可能会通过“越狱”（定义为“故意绕过模型的伦理和操作界限”）来利用VLMs产生有害影响，这对VLMs及其在机器人技术等下游任务中的应用都可能造成危害。Yinbg等人提出了SafeBench，这是一个包含由大型语言模型（LLMs）生成的23种风险场景下的有害查询数据集，以及一个使用多个LLMs协作框架的陪审团审议协议。类似地，MM-Safetybench是另一个基准数据集，它使用与恶意文本配对的图像查询来评估VLMs在不安全场景下的行为。</p>
+<p>​        Luo等人发布了JailbreakV，其中包含28,000个恶意查询，作为VLMs不应响应的基于图像的攻击。该数据集还能够验证越狱攻击在不同模型之间的可转移性。Shi等人开发了SHIELD，它使用真假查询来评估VLMs在零样本和少样本设置下面部欺骗和伪造检测的性能。其他研究则探索了能够逆转先前将模型对准伦理使用方面努力的攻击。例如，Li等人提出的HADES利用梯度更新和对抗性方法来隐藏和放大基于图像的有害性，并破坏多模态对齐。Niu等人提出了imgJP，它使用特定图像而非提示来绕过拒绝防护栏。imgJP已被证明在广泛的VLMs中具有高度可转移性。</p>
+<h3 id="公平性"><a href="#公平性" class="headerlink" title="公平性"></a>公平性</h3><p>​        大量文献已讨论了大型语言模型（LLMs）和视觉语言模型（VLMs）所传播的不平等现象。与单模态的大型语言模型类似，视觉语言模型在下游应用中，尤其是针对某些边缘化群体时，也表现出了不同的性能。Janghorbani和Gerard介绍了MMBias，这是一个基于目标概念（宗教、国籍、残疾、性取向）的人类标注图像数据集，并根据愉悦度进行了二分法分组。Wu等人提出了FMBench框架，该框架使用标注的医疗图像进行直接和单选视觉问答，以衡量在性别、肤色和年龄方面的偏见。同样在医疗领域，Luo等人发布了Harvard-FairVL数据集，该数据集包含具有人口统计学属性的SLO眼底图像与临床记录配对。在CLIP和BLIP2上的实证结果显示，与其他属性相比，模型更偏好亚洲、男性和非西班牙裔群体。Jin等人的FairmedFM整合了17个医疗图像数据集，以评估下游任务中分类和分割的公平性。在其他方面，Nayak等人构建了CulturalVQA，该数据集包含2,378个图像-问题对，每个问题都有来自不同文化的多个人类标注答案，结果显示，模型在北美文化上的表现更好，而在非洲和伊斯兰文化上的表现较差。</p>
+<h3 id="多模态对齐"><a href="#多模态对齐" class="headerlink" title="多模态对齐"></a>多模态对齐</h3><p>​        多模态模型中的对齐问题指的是不同模态之间的上下文偏差。视觉语言模型（VLMs）的对齐不当可能会导致幻觉现象。为了缓解这一问题，已经做出了许多努力，要么利用VLMs的推理能力进行自我反思，要么设计投影器来连接不同的模态。SIMA通过自我提升，使用自我生成的响应和具有视觉指标的上下文内自我批判机制，增强了大型视觉语言模型（LVLMs）中视觉和语言模态之间的对齐。SAIL引入了一个高效的迁移学习框架，该框架使预训练的单模态视觉和语言模型对齐于视觉语言任务，增强了视觉编码器的语言兼容性，从而提升了多模态大型语言模型的表现。Ex-MCR通过将一个模态的空间扩展到另一个模态，引入了一种训练效率高且无需配对数据的多模态对比表征（MCR）方法，实现了扩展模态之间的新兴语义对齐。OneLLM是一个统一的多模态大型语言模型（MLLM），它通过统一的编码器和渐进式多模态对齐，将八种模态与语言对齐。</p>
+<h3 id="高效训练和微调"><a href="#高效训练和微调" class="headerlink" title="高效训练和微调"></a>高效训练和微调</h3><p>​        视觉语言模型的高效训练和微调一直是备受关注的研究热点，因为当前大规模视觉语言模型的训练和成本都很高。越来越多的近期研究开始关注视觉语言模型的预训练过程，试图探究不同设置对模块或监督的影响，以及这些因素如何最终影响视觉语言模型的性能。</p>
+<p>​        同时，需要应用视觉语言模型的具体任务并不一定要求模型具备多任务处理能力，而可能只需要在某一或某两个特定任务上表现出色。通常，低秩适应（LoRa）方法通过改变较少的参数和降低计算资源来帮助调整大型视觉语言模型。此外，结合人类或其他大型视觉语言模型的知识到微调过程中的方法，如结合人类或AI反馈的强化学习（RLHF），也在视觉语言模型的微调中被广泛使用。</p>
+<h3 id="高质量数据集稀缺"><a href="#高质量数据集稀缺" class="headerlink" title="高质量数据集稀缺"></a>高质量数据集稀缺</h3><p>​        视觉语言模型（VLMs）的能力和可靠性在很大程度上依赖于训练数据集的可获得性和多样性。然而，当前先进视觉语言模型的庞大规模以及高质量训练数据集的稀缺，增加了未来持续提升VLMs性能的难度。缓解这一问题的一种潜在方法是使用自监督学习（SSL），它可以从未标记的数据集中自动学习表示。另一个主要方向是使用根据某些规则生成或利用某些第三方工具生成的合成数据。在专为物理世界相关应用设计的VLM中，如机器人或网络agent，另一种选择是从与物理模拟器或世界模型的交互中收集数据集。尽管在这三个方向上已经做出了很多努力，但考虑到Ilya Sutskever的名言“我们所知的预训练将毫无疑问地结束”，我们仍然期待在LVLMs大规模训练的突破以及互联网规模数据的替代方案方面获得更多见解。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">Dingming Li</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/03/04/[%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0]%E5%A4%A7%E5%9E%8B%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%9F%BA%E5%87%86%E8%AF%84%E4%BC%B0%E3%80%81%E5%BA%94%E7%94%A8%E4%B8%8E%E6%8C%91%E6%88%98%EF%BC%9A%E7%BB%BC%E8%BF%B0/">http://example.com/2025/03/04/[%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0]%E5%A4%A7%E5%9E%8B%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%9F%BA%E5%87%86%E8%AF%84%E4%BC%B0%E3%80%81%E5%BA%94%E7%94%A8%E4%B8%8E%E6%8C%91%E6%88%98%EF%BC%9A%E7%BB%BC%E8%BF%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">碎碎念的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/VLM/">VLM</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/03/04/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSpatialCoT%EF%BC%9A%E5%9F%BA%E4%BA%8E%E5%9D%90%E6%A0%87%E5%AF%B9%E9%BD%90%E5%92%8C%E6%80%9D%E6%83%B3%E9%93%BE%E7%9A%84%E5%85%B7%E8%BA%AB%E4%BB%BB%E5%8A%A1%E8%A7%84%E5%88%92/" title="[论文学习]SpatialCoT：基于坐标对齐和思想链的具身任务规划"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">[论文学习]SpatialCoT：基于坐标对齐和思想链的具身任务规划</div></div><div class="info-2"><div class="info-item-1">[论文学习]SpatialCoT：基于坐标对齐和思想链的具身任务规划资料 主页：SpatialCoT: Advancing Spatial Reasoning through Coordinate Alignment and Chain-of-Thought for Embodied Task Planning 论文：[2501.10074] SpatialCoT: Advancing Spatial Reasoning through Coordinate Alignment and Chain-of-Thought for Embodied Task Planning  简介​       ...</div></div></div></a><a class="pagination-related" href="/2025/03/05/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5D%E8%AF%AD%E8%A8%80%E7%AD%96%E7%95%A5%E7%9A%84%E5%8D%9A%E5%BC%88%E8%AE%BA%E6%96%B0%E5%A2%83%E7%95%8C%EF%BC%9A%E4%BB%8E%E5%AF%B9%E8%AF%9D%E5%88%B0%E5%B9%B3%E8%A1%A1%E2%80%94%E2%80%94%E5%A4%A7%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%8D%9A%E5%BC%88%E8%A7%A3%E6%9E%84%E4%B8%8E%E5%89%8D%E7%9E%BB/" title="[论文学习]语言策略的博弈论新境界：从对话到平衡——大语言模型的博弈解构与前瞻"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">[论文学习]语言策略的博弈论新境界：从对话到平衡——大语言模型的博弈解构与前瞻</div></div><div class="info-2"><div class="info-item-1">[论文学习]语言策略的博弈论新境界：从对话到平衡——大语言模型的博弈解构与前瞻 转载自语言策略的博弈论新境界：从对话到平衡——大语言模型的博弈解构与前瞻-CSDN博客  资料 论文：[2402.01704] Steering Language Models with Game-Theoretic Solvers 代码：open_spiel/open_spiel/python/games/chat_game.py at master · google-deepmind/open_spiel  ​        在人工智能日新月异的发展中，我们常见到一台台大语言模型（LLM）在聊天、问答与创作中大放异彩。然而，在这些机智回答的背后，却隐藏着一个尚未充分挖掘的秘密：对话不仅仅是文字的堆砌，更是一场复杂的多主体战略博弈。最新研究《States as Strings as Strategies: Steering Language Models with Game-Theoretic...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/01/22/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DVSI-Bench%E5%A4%9A%E6%A8%A1%E6%80%81%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%A6%82%E4%BD%95%E8%A7%82%E5%AF%9F%E3%80%81%E8%AE%B0%E5%BF%86%E5%92%8C%E5%9B%9E%E5%BF%86%E7%A9%BA%E9%97%B4/" title="[论文学习]VSI-Bench:多模态大型语言模型如何观察、记忆和回忆空间"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-22</div><div class="info-item-2">[论文学习]VSI-Bench:多模态大型语言模型如何观察、记忆和回忆空间</div></div><div class="info-2"><div class="info-item-1">[论文学习]VSI-Bench:多模态大型语言模型如何观察、记忆和回忆空间资料 论文： Thinking in Space: How Multimodal Large Language Models See, Remember, and Recall Spaces 代码：vision-x-nyu/thinking-in-space: Official repo and evaluation implementation of VSI-Bench 数据集：nyu-visionx/VSI-Bench · Datasets at Hugging Face  简介​       ...</div></div></div></a><a class="pagination-related" href="/2025/03/07/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DMM-EGO%EF%BC%9A%E8%BF%88%E5%90%91%E6%9E%84%E5%BB%BA%E4%BB%A5%E8%87%AA%E6%88%91%E4%B8%BA%E4%B8%AD%E5%BF%83%E7%9A%84%E5%A4%9A%E6%A8%A1%E6%80%81LLMS/" title="[论文学习]MM-EGO：迈向构建以自我为中心的多模态LLMS"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-07</div><div class="info-item-2">[论文学习]MM-EGO：迈向构建以自我为中心的多模态LLMS</div></div><div class="info-2"><div class="info-item-1">[论文学习]MM-EGO：迈向构建以自我为中心的多模态LLMS资料 论文：[2410.07177] MM-Ego: Towards Building Egocentric Multimodal LLMs  简介​        本文提出了一种面向第一人称视频理解的多模态基础模型——MM-EGO，旨在提升模型对长时第一人称视频的复杂理解能力。研究从数据、基准和模型设计三个方面展开：  开发了一个数据引擎，利用人类旁白自动生成700万条第一人称问答样本，构建了目前最大的第一人称问答数据集； 提出了EgoMemoria基准测试，包含629个视频和7026个问题，用于评估模型对视频细节的记忆和理解能力； 设计了MM-EGO模型，通过“记忆指针提示”机制，先对视频进行全局概览，再聚焦关键视觉信息以生成回答。  ​        实验表明，MM-EGO在第一人称视频理解任务中表现出色，同时在去偏评估中展现出更强的真实理解能力。该研究为第一人称视频理解领域提供了重要的数据资源、评估标准和模型架构，推动了多模态大语言模型在该方向的发展。 “以自我为中心的QA”数据引擎​       ...</div></div></div></a><a class="pagination-related" href="/2025/03/04/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSpatialCoT%EF%BC%9A%E5%9F%BA%E4%BA%8E%E5%9D%90%E6%A0%87%E5%AF%B9%E9%BD%90%E5%92%8C%E6%80%9D%E6%83%B3%E9%93%BE%E7%9A%84%E5%85%B7%E8%BA%AB%E4%BB%BB%E5%8A%A1%E8%A7%84%E5%88%92/" title="[论文学习]SpatialCoT：基于坐标对齐和思想链的具身任务规划"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-04</div><div class="info-item-2">[论文学习]SpatialCoT：基于坐标对齐和思想链的具身任务规划</div></div><div class="info-2"><div class="info-item-1">[论文学习]SpatialCoT：基于坐标对齐和思想链的具身任务规划资料 主页：SpatialCoT: Advancing Spatial Reasoning through Coordinate Alignment and Chain-of-Thought for Embodied Task Planning 论文：[2501.10074] SpatialCoT: Advancing Spatial Reasoning through Coordinate Alignment and Chain-of-Thought for Embodied Task Planning  简介​       ...</div></div></div></a><a class="pagination-related" href="/2025/03/05/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSpatialRGPT%EF%BC%9A%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E4%B8%AD%E8%90%BD%E5%9C%B0%E7%A9%BA%E9%97%B4%E6%8E%A8%E7%90%86/" title="[论文学习]SpatialRGPT：视觉语言模型中落地空间推理"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-05</div><div class="info-item-2">[论文学习]SpatialRGPT：视觉语言模型中落地空间推理</div></div><div class="info-2"><div class="info-item-1">[论文学习]SpatialRGPT：视觉语言模型中落地空间推理资料 主页：SpatialRGPT: Grounded Spatial Reasoning in Vision-Language Models 代码：AnjieCheng/SpatialRGPT: [NeurIPS’24] This repository is the implementation of “SpatialRGPT: Grounded Spatial Reasoning in Vision Language Models” 论文：[2406.01584] SpatialRGPT: Grounded Spatial Reasoning in Vision Language Models  简介​       ...</div></div></div></a><a class="pagination-related" href="/2025/03/03/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5D%E5%A4%A7%E5%9E%8B%E5%A4%9A%E6%A8%A1%E6%80%81%E6%A8%A1%E5%9E%8B%E7%A9%BA%E9%97%B4%E6%8E%A8%E7%90%86%E8%83%BD%E5%8A%9B%E7%9A%84%E5%AE%9E%E8%AF%81%E5%88%86%E6%9E%90/" title="[论文学习]大型多模态模型空间推理能力的实证分析"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-03</div><div class="info-item-2">[论文学习]大型多模态模型空间推理能力的实证分析</div></div><div class="info-2"><div class="info-item-1">[论文学习]大型多模态模型空间推理能力的实证分析资料 论文：[2411.06048] An Empirical Analysis on Spatial Reasoning Capabilities of Large Multimodal Modelshttps://arxiv.org/abs/2402.00253) 代码：FatemehShiri/Spatial-MM  简介​        本文旨在深入研究大型多模态模型（LMMs）的空间推理能力。作者构建了一个新的视觉问答（VQA）数据集 Spatial-MM，包含两个子集：Spatial-Obj 和 Spatial-CoT，分别用于评估 LMMs 对图像中物体空间关系的理解以及多跳推理能力。 ​        研究发现，边界框和场景图（尤其是合成的场景图）能够显著提升 LMMs 的空间推理性能，但在处理从人类视角提出的问题时，LMMs 的表现明显不如从相机视角。此外，传统的链式推理CoT提示在多跳空间推理任务中效果有限，而场景图在多跳推理中更为有效。通过扰动分析，作者还发现 LMMs...</div></div></div></a><a class="pagination-related" href="/2025/03/03/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5D%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%B9%BB%E8%A7%89%E7%BB%BC%E8%BF%B0/" title="[论文学习]视觉语言大模型幻觉综述"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-03</div><div class="info-item-2">[论文学习]视觉语言大模型幻觉综述</div></div><div class="info-2"><div class="info-item-1">[论文学习]视觉语言大模型幻觉综述资料 论文：[2402.00253] A Survey on Hallucination in Large Vision-Language Models 代码：LVLM-Hallucinations-Survey: This is the first released survey paper on hallucinations of large vision-language models (LVLMs). To keep track of this field and continuously update our survey, we maintain this repository of relevant references.  简介​        本文是一篇关于LVLMs中幻觉现象的综述研究，探讨了LVLMs在视觉与语言任务中生成与事实不符内容的“幻觉”问题。文章定义了LVLMs中幻觉的概念，即指的是视觉输入（事实）与LVLM文本输出之间的矛盾。并且幻觉症状可以从认知和视觉语义的角度进行分类，包括对象、属性和关系的错误。 ​   ...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Dingming Li</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0-%E5%A4%A7%E5%9E%8B%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%9F%BA%E5%87%86%E8%AF%84%E4%BC%B0%E3%80%81%E5%BA%94%E7%94%A8%E4%B8%8E%E6%8C%91%E6%88%98%EF%BC%9A%E7%BB%BC%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">[论文学习]大型视觉语言模型的基准评估、应用与挑战：综述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%84%E6%96%99"><span class="toc-number">1.1.</span> <span class="toc-text">资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.2.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SOTA-VLMS"><span class="toc-number">1.3.</span> <span class="toc-text">SOTA VLMS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%AF%E6%9C%A8%E6%90%AD%E5%BB%BA%E4%B8%8E%E8%AE%AD%E7%BB%83%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.</span> <span class="toc-text">积木搭建与训练方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E6%9E%B6%E6%9E%84%E7%BB%84%E4%BB%B6"><span class="toc-number">1.4.1.</span> <span class="toc-text">通用架构组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E8%AE%AD%E7%BB%83%E7%9A%84%E6%A8%A1%E5%9D%97"><span class="toc-number">1.4.2.</span> <span class="toc-text">构建从零开始训练的模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E4%BB%A5LLMS%E4%BD%9C%E4%B8%BA%E4%B8%BB%E5%B9%B2%E7%9A%84%E6%A8%A1%E5%9D%97"><span class="toc-number">1.4.3.</span> <span class="toc-text">构建以LLMS作为主干的模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E5%9E%8B%E6%9E%B6%E6%9E%84"><span class="toc-number">1.4.4.</span> <span class="toc-text">新型架构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E5%87%86%E4%B8%8E%E8%AF%84%E4%BC%B0"><span class="toc-number">1.5.</span> <span class="toc-text">基准与评估</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E5%87%86%E6%95%B0%E6%8D%AE%E6%98%AF%E5%A6%82%E4%BD%95%E6%94%B6%E9%9B%86%E7%9A%84"><span class="toc-number">1.5.1.</span> <span class="toc-text">基准数据是如何收集的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Evaluation-Metrics"><span class="toc-number">1.5.2.</span> <span class="toc-text">Evaluation Metrics</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8"><span class="toc-number">1.6.</span> <span class="toc-text">应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B7%E8%BA%AB%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8Bagent"><span class="toc-number">1.6.1.</span> <span class="toc-text">具身视觉语言模型agent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generative-Visual-Media-Applications"><span class="toc-number">1.6.2.</span> <span class="toc-text">Generative Visual Media Applications</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%AD%A6%E4%B8%8E%E5%85%B7%E8%BA%AB%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD"><span class="toc-number">1.6.3.</span> <span class="toc-text">机器人学与具身人工智能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Manipulation"><span class="toc-number">1.6.4.</span> <span class="toc-text">Manipulation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Navigation"><span class="toc-number">1.6.5.</span> <span class="toc-text">Navigation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%BA%E6%9C%BA%E4%BA%A4%E4%BA%92"><span class="toc-number">1.6.6.</span> <span class="toc-text">人机交互</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E9%A9%BE%E9%A9%B6"><span class="toc-number">1.6.7.</span> <span class="toc-text">自动驾驶</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Human-Centered-AI"><span class="toc-number">1.6.8.</span> <span class="toc-text">Human-Centered AI</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%91%E6%88%98"><span class="toc-number">1.7.</span> <span class="toc-text">挑战</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%BB%E8%A7%89"><span class="toc-number">1.7.1.</span> <span class="toc-text">幻觉</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AC%E5%B9%B3%E6%80%A7"><span class="toc-number">1.7.2.</span> <span class="toc-text">公平性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E6%A8%A1%E6%80%81%E5%AF%B9%E9%BD%90"><span class="toc-number">1.7.3.</span> <span class="toc-text">多模态对齐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E6%95%88%E8%AE%AD%E7%BB%83%E5%92%8C%E5%BE%AE%E8%B0%83"><span class="toc-number">1.7.4.</span> <span class="toc-text">高效训练和微调</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E8%B4%A8%E9%87%8F%E6%95%B0%E6%8D%AE%E9%9B%86%E7%A8%80%E7%BC%BA"><span class="toc-number">1.7.5.</span> <span class="toc-text">高质量数据集稀缺</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/07/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DMM-EGO%EF%BC%9A%E8%BF%88%E5%90%91%E6%9E%84%E5%BB%BA%E4%BB%A5%E8%87%AA%E6%88%91%E4%B8%BA%E4%B8%AD%E5%BF%83%E7%9A%84%E5%A4%9A%E6%A8%A1%E6%80%81LLMS/" title="[论文学习]MM-EGO：迈向构建以自我为中心的多模态LLMS">[论文学习]MM-EGO：迈向构建以自我为中心的多模态LLMS</a><time datetime="2025-03-07T10:46:14.000Z" title="发表于 2025-03-07 18:46:14">2025-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/06/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSCoRe%EF%BC%9A%E9%80%9A%E8%BF%87%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%AE%A9LLM%E5%AD%A6%E4%BC%9A%E8%87%AA%E6%88%91%E7%BA%A0%E6%AD%A3/" title="[论文学习]SCoRe：通过强化学习让LLM学会自我纠正">[论文学习]SCoRe：通过强化学习让LLM学会自我纠正</a><time datetime="2025-03-06T11:14:51.000Z" title="发表于 2025-03-06 19:14:51">2025-03-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/06/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DS%C2%B2R%EF%BC%9A%E9%80%9A%E8%BF%87%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%95%99%E4%BC%9A%20LLM%20%E8%87%AA%E6%88%91%E9%AA%8C%E8%AF%81%E5%92%8C%E8%87%AA%E6%88%91%E4%BF%AE%E6%AD%A3/" title="[论文学习]S²R：通过强化学习教会 LLM 自我验证和自我修正">[论文学习]S²R：通过强化学习教会 LLM 自我验证和自我修正</a><time datetime="2025-03-06T09:24:35.000Z" title="发表于 2025-03-06 17:24:35">2025-03-06</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/05/%5B%E8%AE%BA%E6%96%87%E5%AD%A6%E4%B9%A0%5DSpatialRGPT%EF%BC%9A%E8%A7%86%E8%A7%89%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E4%B8%AD%E8%90%BD%E5%9C%B0%E7%A9%BA%E9%97%B4%E6%8E%A8%E7%90%86/" title="[论文学习]SpatialRGPT：视觉语言模型中落地空间推理">[论文学习]SpatialRGPT：视觉语言模型中落地空间推理</a><time datetime="2025-03-05T14:23:16.000Z" title="发表于 2025-03-05 22:23:16">2025-03-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/03/05/%5B%E6%A6%82%E8%BF%B0%E5%AD%A6%E4%B9%A0%5D%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%9C%A8%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E5%8D%9A%E5%BC%88%E4%B8%AD%E7%9A%84%E6%8E%A8%E7%90%86%E8%83%BD%E5%8A%9B/" title="[概述学习]语言模型在多智能体博弈中的推理能力">[概述学习]语言模型在多智能体博弈中的推理能力</a><time datetime="2025-03-05T08:13:45.000Z" title="发表于 2025-03-05 16:13:45">2025-03-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By Dingming Li</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
